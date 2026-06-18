@@ -1,0 +1,2587 @@
+import React, { useState, useEffect, useRef } from 'react';
+
+// Custom SVG Icons for high-fidelity social networks with branding hover effects
+const SunIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+);
+
+const MoonIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+);
+
+const MapIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+);
+
+const CalendarIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 3V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+);
+
+const UsersIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+);
+
+const GlobeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+);
+
+const CodeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+);
+
+const SearchIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+);
+
+const CloseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+);
+
+const MenuIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+);
+
+const SendIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+);
+
+const ShieldIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+);
+
+const EyeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+);
+
+const SparklesIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-yellow-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+);
+
+const LoadingIcon = () => (
+  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+);
+
+// High-Fidelity Custom Brand SVG Icons (Connect Globally)
+const LinkedInIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
+  </svg>
+);
+
+const GitHubIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+  </svg>
+);
+
+const WhatsAppIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 11.966.01c3.182.001 6.176 1.24 8.433 3.497 2.257 2.256 3.493 5.253 3.493 8.433-.004 6.618-5.34 11.955-11.91 11.955-2.005-.001-3.973-.505-5.717-1.465L0 24zm6.59-4.846c1.6-.95 3.162-1.458 4.795-1.457h.004c5.179 0 9.39-4.21 9.393-9.394 0-2.515-.98-4.88-2.758-6.66C16.3 1.867 13.93 .887 11.42.887 6.245.887 2.035 5.1 2.032 10.271c-.001 1.705.447 3.371 1.3 4.823l-.999 3.648 3.73-.979zm11.231-5.188c-.287-.144-1.697-.838-1.958-.934-.26-.096-.45-.144-.64.144-.19.288-.737.934-.903 1.125-.166.19-.331.216-.618.072-1.246-.622-2.126-1.085-2.983-1.872-.257-.234-.383-.497-.13-.815.158-.2.287-.336.43-.504.143-.168.19-.288.287-.48.096-.192.048-.36-.024-.504-.072-.144-.64-1.536-.877-2.112-.23-.556-.464-.48-.64-.488l-.546-.008c-.19 0-.5-.072-.76.192-.26.264-1 .976-1 2.38s1.025 2.76 1.166 2.952c.143.192 2.017 3.08 4.89 4.32.684.296 1.218.473 1.636.605.688.219 1.314.188 1.81.114.551-.082 1.697-.694 1.936-1.366.24-.672.24-1.248.167-1.368-.073-.12-.265-.192-.552-.336z" clipRule="evenodd" />
+  </svg>
+);
+
+const MediumIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42s-3.38-2.88-3.38-6.42 1.51-6.42 3.38-6.42 3.38 2.88 3.38 6.42zm3.04 0c0 3.03-.43 5.5-1 5.5s-1-2.47-1-5.5.43-5.5 1-5.5 1 2.47 1 5.5z" clipRule="evenodd" />
+  </svg>
+);
+
+const EnvelopeIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+);
+
+// High-fidelity dynamic list of 12 real Pakistan-focused GIS and Remote Sensing projects
+// Enhanced with masonry statistics, explicit GeoAI categories, star weights and custom badges
+const PROJECTS_DATA = [
+  {
+    id: "lulc-punjab",
+    title: "Land Use & Land Cover (LULC) Mapping for Punjab Region",
+    category: "Machine Learning",
+    date: "July 2024",
+    client: "Punjab Environmental Agency",
+    stars: 124,
+    views: "2.4k",
+    type: "Professional Agency",
+    summary: "High-resolution LULC classification using Sentinel-2 and Random Forest Machine Learning in ArcGIS Pro to monitor agricultural-to-urban sprawl.",
+    description: "The provincial environmental agency needed updated land use data to monitor agricultural conversion to urban development and assess environmental impact for policy planning. Previous data was from 2018. This project processed 2,500 km² of Punjab using Sentinel-2 imagery (10m resolution) from Copernicus Data Space for July 2024.",
+    tech: ["ArcGIS Pro", "Python", "Sentinel-2", "Random Forest", "Supervised Classification"],
+    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Data Acquisition: Downloaded Sentinel-2 Level-2A imagery (10m resolution) from Copernicus Data Space for July 2024.",
+      "PreProcessing: Applied atmospheric correction, masked clouds, clipped to study area boundary.",
+      "Feature Engineering: Computed spectral indices (NDVI, NDWI, NDBI) to enhance separation between urban and vegetation zones.",
+      "Training Samples: Collected 450 training polygons across 5 distinct classes (Urban, Agriculture, Water, Forest, Bare Soil).",
+      "Model Execution: Ran Random Forest Classifier with 100 trees, evaluating OOB error dynamically.",
+      "Validation: Performed confusion matrix accuracy assessment using 150 independent validation points, achieving 91.2% Overall Accuracy."
+    ]
+  },
+  {
+    id: "indus-glacier",
+    title: "Karakoram Glacier Change Detection Modeling",
+    category: "Google Earth Engine",
+    date: "March 2025",
+    client: "Glaciology Research Syndicate",
+    stars: 89,
+    views: "1.8k",
+    type: "Research Project",
+    summary: "Multi-temporal satellite monitoring of Karakoram glacier fronts, calculating water equivalent changes using Landsat legacy data.",
+    description: "Tracking climate impacts on the Upper Indus Basin glacier systems to anticipate future water supply shortages. Analyzed change patterns over 20 years of Landsat and Sentinel-1 data using automated NDGI index pipelines.",
+    tech: ["Google Earth Engine", "Landsat 5/8/9", "Sentinel-1", "NDGI Index", "Python"],
+    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Secured historic Landsat 5, Landsat 8, and Sentinel-1 radar datasets spanning 2005 to 2025.",
+      "Automated cloud masking and topographic correction in Google Earth Engine using SRTM DEM.",
+      "Calculated Normalized Difference Glacier Index (NDGI) to map glacier outlines automatically.",
+      "Integrated Sentinel-1 dual-polarization SAR data to identify wet snow zones and glacier boundaries in cloudy periods.",
+      "Computed front retreat and advance metrics to show localized glacial stabilization alongside widespread thinning."
+    ]
+  },
+  {
+    id: "karachi-heat-island",
+    title: "Karachi Urban Heat Island (UHI) Thermal Analysis",
+    category: "Geospatial Analysis",
+    date: "October 2024",
+    client: "Sindh Urban Planning & Green Initiatives",
+    stars: 56,
+    views: "1.2k",
+    type: "Urban Study",
+    summary: "Thermal mapping of Karachi metropolitan region using Landsat-8 TIRS sensor to identify extreme surface heat islands.",
+    description: "Determined high-stress thermal zones in Karachi to inform municipal 'urban forestry' interventions and combat intense heatwave impacts on vulnerable populations.",
+    tech: ["QGIS", "Landsat 8 TIRS", "Saga GIS", "Thermal Band Calibration", "Urban Forestry Planning"],
+    image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Imported Landsat-8 Thermal Infrared Sensor (TIRS) Band 10.",
+      "Converted Top of Atmosphere (TOA) spectral radiance into Brightness Temperature.",
+      "Extracted Land Surface Emissivity (LSE) calculated from NDVI threshold methods.",
+      "Derived final Land Surface Temperature (LST) and mapped anomalous zones relative to rural baseline.",
+      "Correlated LST values with NDBI (Urban Density) showing an average 4.2°C temperature elevation in dense concrete centers."
+    ]
+  },
+  {
+    id: "punjab-drought",
+    title: "Agricultural Drought Risk Assessment in South Punjab",
+    category: "Research Projects",
+    date: "November 2024",
+    client: "Pakistan Agricultural Research Council",
+    stars: 45,
+    views: "950",
+    type: "Climate Intelligence",
+    summary: "Spatiotemporal agricultural drought modeling using MODIS-derived Vegetation Health Index (VHI).",
+    description: "Evaluated historical agricultural drought vulnerability across crucial growing cycles in South Punjab's wheat belt to empower responsive irrigation schemas.",
+    tech: ["QGIS", "MODIS", "R Statistics", "VHI Index", "Time-series Analysis"],
+    image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Acquired weekly MODIS LST and NDVI time-series spanning 15 crop seasons.",
+      "Calculated Vegetation Condition Index (VCI) and Temperature Condition Index (TCI).",
+      "Combined indices into the integrated Vegetation Health Index (VHI).",
+      "Drafted spatial drought recurrence maps indicating hyper-vulnerable districts in Multan and Bahawalpur.",
+      "Formulated localized drought mitigation strategies for water-stressed agricultural sectors."
+    ]
+  },
+  {
+    id: "rawalpindi-flood",
+    title: "Flash Flood Susceptibility Mapping: Rawalpindi Basin",
+    category: "Geospatial Analysis",
+    date: "January 2025",
+    client: "National Disaster Management Authority",
+    stars: 73,
+    views: "1.5k",
+    type: "Risk Assessment",
+    summary: "AHP-based multi-criteria spatial modeling to delineate high-risk flash flood zones along Nullah Lai Basin.",
+    description: "Modeled flood vulnerability pathways in urban Rawalpindi using high-resolution LiDAR DEMs and socio-economic vulnerability indicators.",
+    tech: ["ArcGIS Pro", "LiDAR DEM", "AHP (Analytical Hierarchy Process)", "Hydrological Modeling"],
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Extracted 5m hydrological DEM parameters (slope, curvature, flow accumulation, drainage density).",
+      "Integrated regional rainfall precipitation layers, soil permeability, and modern LULC variables.",
+      "Applied Analytical Hierarchy Process (AHP) weightings derived from hydrologists and historical incidents.",
+      "Mapped extreme, high, medium, and low flash flood susceptibility zones around Nullah Lai.",
+      "Provided action-ready evacuation boundary recommendations for municipal authorities."
+    ]
+  },
+  {
+    id: "margalla-forest",
+    title: "Margalla Hills National Park Deforestation Monitoring",
+    category: "GeoAI",
+    date: "February 2025",
+    client: "Himalayan Wildlife Foundation",
+    stars: 112,
+    views: "2.1k",
+    type: "Open Source",
+    summary: "High-cadence forest canopy loss tracking using Sentinel-2 and planetary computer cloud computing.",
+    description: "Developed automated scripts to detect illegal logging activities and trail expansion impacts within the delicate Margalla Hills ecosystem.",
+    tech: ["Python", "Jupyter Notebooks", "Sentinel-2", "NDVI Differencing", "Planetary Computer"],
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Wrote Python pipeline exploiting Planetary Computer STAC API to gather seasonal cloud-free imagery.",
+      "Computed bi-monthly NDVI maps for 2021-2025 timeframes.",
+      "Applied image differencing techniques with adaptive statistical thresholding to extract micro-deforestation hotspots.",
+      "Correlated encroachment polygons against known trail networks and local village margins.",
+      "Delivered clean GeoJSON alerts directly to ranger patrol mobile applications."
+    ]
+  },
+  {
+    id: "karachi-coastal",
+    title: "Karachi Coastal Mangroves Vulnerability Modeling",
+    category: "Research Projects",
+    date: "December 2024",
+    client: "Sindh Forest Department",
+    stars: 38,
+    views: "840",
+    type: "Environmental",
+    summary: "Determining coastal erosion, industrial pollution stress, and mangrove cover change dynamics using multi-spectral analysis.",
+    description: "Evaluated historical degradation patterns of Indus Delta mangroves near Karachi, detailing shoreline recession rates across three decades.",
+    tech: ["Google Earth Engine", "Landsat Legacy", "NDVI Time-Series", "DSAS (Digital Shoreline Analysis System)"],
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Consolidated historical Landsat MSS, TM, ETM+, and OLI datasets from 1994 to 2024.",
+      "Isolated mangrove canopy pixels via specialized band ratios and NDVI thresholds.",
+      "Calculated landward/seaward shoreline variation rates using the USGS DSAS extension.",
+      "Highlighted major degradation vectors adjacent to industrial ports and chemical runoff channels.",
+      "Synthesized critical conservation corridor recommendations for marine wildlife protection."
+    ]
+  },
+  {
+    id: "pk-solar-suitability",
+    title: "Solar Power Plant Suitability Mapping for Balochistan",
+    category: "Geospatial Analysis",
+    date: "April 2025",
+    client: "Balochistan Renewable Energy Board",
+    stars: 62,
+    views: "1.1k",
+    type: "Renewables",
+    summary: "Multi-Criteria Decision Analysis (MCDA) in GIS to pinpoint optimal territories for utility-scale solar arrays.",
+    description: "Evaluated solar irradiance, grid proximity, slope, protected land, and dust storms to determine highly productive regions for solar investments.",
+    tech: ["QGIS", "MCDA", "PVGIS Satellite Solar Data", "Grid Network Analysis", "Weighted Overlay"],
+    image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Compiled Global Horizontal Irradiation (GHI) and Direct Normal Irradiation (DNI) datasets.",
+      "Modeled slope and orientation limits using ALOS PALSAR high-res DEM data.",
+      "Created dynamic proximity buffers around primary high-voltage transmission lines and road networks.",
+      "Excluded state parks, ecologically fragile environments, and highly populated centers.",
+      "Executed GIS multi-criteria weighted overlay to outline top suitability zones in Quetta and Chagai districts."
+    ]
+  },
+  {
+    id: "gop-interactive-web",
+    title: "Interactive Web GIS: Islamabad Municipal Assets",
+    category: "Open Source",
+    date: "May 2025",
+    client: "Capital Development Authority (CDA)",
+    stars: 94,
+    views: "1.9k",
+    type: "Web GIS",
+    summary: "Interactive Leaflet-based municipal assets cataloging system supporting live field update hooks.",
+    description: "Engineered a lightweight, client-facing web map displaying zoning data, emergency resources, and critical civic infrastructure for public administrative teams.",
+    tech: ["Leaflet", "Tailwind CSS", "GeoJSON", "Mapbox Styles", "JavaScript", "HTML5"],
+    image: "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Styled lightweight raster map tiles using custom corporate-green styles.",
+      "Optimized 50,000 municipal facility records into streamlined, categorized GeoJSON payloads.",
+      "Configured Leaflet layer groups with customized search search filters and reactive popup information overlays.",
+      "Built touch-optimized custom UI controls to enable tablet operation by field surveyors in Islamabad.",
+      "Implemented seamless dynamic legend filters rendering real-time statistics based on the current map bounding box."
+    ]
+  },
+  {
+    id: "kp-landslide-hazard",
+    title: "Landslide Hazard Zonation in Khyber Pakhtunkhwa",
+    category: "GeoAI",
+    date: "June 2025",
+    client: "KP Disaster Management Cell",
+    stars: 81,
+    views: "1.4k",
+    type: "Risk Assessment",
+    summary: "Delineating landslide risk hotspots along Karakoram Highway corridors using historical slides data and geology.",
+    description: "Provided KP administrative offices with localized predictive maps to establish early structural alerts in zones susceptible to rainfall-triggered mass wasting.",
+    tech: ["ArcGIS Pro", "Slope Stability Models", "Geological Lithology", "Machine Learning Regression"],
+    image: "https://images.unsplash.com/photo-1541356665065-22676f35dd40?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Mapped historic landslide events catalog using remote visual sensing verification and local news database extraction.",
+      "Pre-processed geological lithology layers, fault lines, rainfall, and vegetation cover layers.",
+      "Calculated Slope, Aspect, and Elevation variables from raw satellite terrain indices.",
+      "Run Logistic Regression analysis correlating environmental conditions with historical slides.",
+      "Delivered updated zonation GIS database detailing hazardous sectors on critical communication routes."
+    ]
+  },
+  {
+    id: "pakistan-ndvi-viewer",
+    title: "Pakistan Vegetation Health Engine (NDVI Analytics)",
+    category: "Data Visualization",
+    date: "August 2025",
+    client: "Pakistan Environment Research Forum",
+    stars: 105,
+    views: "2.2k",
+    type: "Open Source",
+    summary: "Custom interactive map visualizer displaying spatial crop health and vegetation density across Pakistan.",
+    description: "Allows agricultural stakeholders to visualize vegetation health indices (NDVI) across major districts with interactive toggles.",
+    tech: ["Leaflet", "GeoJSON", "NDVI Visualizations", "Web Mapping APIs", "Tailwind CSS"],
+    image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Aggregated provincial crop health indices into lightweight vector polygons.",
+      "Configured responsive Leaflet Map layer integration with interactive visual overlays.",
+      "Programmed real-time color range rendering indicating crop productivity levels.",
+      "Created customized info panels showing live regional statistical analysis.",
+      "Secured mobile-first compatibility for offline-cached rural map reviews."
+    ]
+  },
+  {
+    id: "lahore-air-quality",
+    title: "Lahore PM2.5 Spatial Interpolation Mapping",
+    category: "Data Visualization",
+    date: "February 2025",
+    client: "Lahore Clean Air Initiative",
+    stars: 77,
+    views: "1.6k",
+    type: "IoT Analytics",
+    summary: "Employing Kriging spatial interpolation on IoT air monitor nodes to compute citywide smog intensity.",
+    description: "Created daily, accurate spatial estimates of hazardous particulate matter (PM2.5) across Lahore during the winter smog seasons.",
+    tech: ["QGIS", "Kriging Interpolation", "Air Quality IoT Sensor Data", "Spatial Statistics"],
+    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80",
+    methodology: [
+      "Collected real-time PM2.5 sensor readings from 35 metropolitan IoT air quality nodes.",
+      "Executed Semivariogram modeling in GIS to verify spatial autocorrelation patterns.",
+      "Applied Ordinary Kriging interpolation to output smooth citywide concentration rasters.",
+      "Identified critical microclimate stagnation areas close to industrial zones.",
+      "Distributed clear hazard heatmaps to public health bodies recommending targeted traffic shutdowns."
+    ]
+  }
+];
+
+// Helper method to implement Exponential Backoff fetch for Gemini LLM API
+const executeGeminiCall = async (promptText, systemPromptText = "") => {
+  const apiKey = ""; // Provided automatically in runtime environment, keep empty as specified
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+  
+  const payload = {
+    contents: [{ parts: [{ text: promptText }] }]
+  };
+  if (systemPromptText) {
+    payload.systemInstruction = { parts: [{ text: systemPromptText }] };
+  }
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const backoffDelays = [1000, 2000, 4000, 8000, 16000];
+  let lastError = null;
+
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Gemini API Response Code: ${response.status}`);
+      }
+
+      const json = await response.json();
+      const extractedText = json.candidates?.[0]?.content?.parts?.[0]?.text;
+      
+      if (extractedText) {
+        return extractedText;
+      } else {
+        throw new Error("Invalid structure returned from Gemini response payload.");
+      }
+    } catch (err) {
+      lastError = err;
+      await wait(backoffDelays[attempt]);
+    }
+  }
+  throw lastError || new Error("Failed to reach Gemini after maximum attempts.");
+};
+
+// High-Performance Interactive GeoAI Satellite Simulation Component
+function InteractiveSatelliteBackground({ darkMode }) {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    // Particle nodes representing telemetry/GIS global connectivity (cyan and emerald)
+    const particles = [];
+    const particleCount = Math.min(35, Math.floor(width / 35));
+    const maxLineDist = 130;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1,
+        pulseSpeed: 0.02 + Math.random() * 0.03,
+        pulseVal: Math.random() * Math.PI,
+        colorType: Math.random() > 0.5 ? 'cyan' : 'emerald'
+      });
+    }
+
+    // Satellite setup
+    const satellite = {
+      angle: 0,
+      orbitRadiusX: Math.min(width * 0.42, 350),
+      orbitRadiusY: Math.min(height * 0.28, 140),
+      centerX: width * 0.72,
+      centerY: height * 0.45,
+      speed: 0.0035,
+      scale: 1,
+    };
+
+    // GeoAI rising coordinates/telemetry tickers
+    const geoTickers = [];
+    const tickerCount = 5;
+    for (let i = 0; i < tickerCount; i++) {
+      geoTickers.push({
+        x: Math.random() * (width * 0.8),
+        y: Math.random() * height,
+        text: `${(30 + Math.random() * 5).toFixed(4)}° N, ${(71 + Math.random() * 4).toFixed(4)}° E`,
+        speed: 0.2 + Math.random() * 0.25,
+        opacity: Math.random() * 0.4 + 0.1,
+      });
+    }
+
+    const resizeHandler = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+      satellite.centerX = width * 0.72;
+      satellite.centerY = height * 0.45;
+      satellite.orbitRadiusX = Math.min(width * 0.42, 350);
+      satellite.orbitRadiusY = Math.min(height * 0.28, 140);
+    };
+
+    window.addEventListener('resize', resizeHandler);
+
+    const drawSimulation = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Draw Globe Silhouette Representation (Earth center)
+      const earthRadius = Math.min(width * 0.14, 110);
+      const earthGradient = ctx.createRadialGradient(
+        satellite.centerX,
+        satellite.centerY,
+        0,
+        satellite.centerX,
+        satellite.centerY,
+        earthRadius
+      );
+      
+      const themeColor1 = 'rgba(0, 200, 83, 0.12)'; // Emerald Green
+      const themeColor2 = 'rgba(0, 229, 255, 0.22)'; // Neon Cyan
+      
+      earthGradient.addColorStop(0, themeColor2);
+      earthGradient.addColorStop(0.6, themeColor1);
+      earthGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+      ctx.beginPath();
+      ctx.arc(satellite.centerX, satellite.centerY, earthRadius * 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = earthGradient;
+      ctx.fill();
+
+      // Earth Wireframe Lines
+      ctx.strokeStyle = darkMode ? 'rgba(0, 229, 255, 0.05)' : 'rgba(30, 136, 229, 0.1)';
+      ctx.lineWidth = 1;
+      for (let r = 20; r <= earthRadius; r += 20) {
+        ctx.beginPath();
+        ctx.arc(satellite.centerX, satellite.centerY, r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // 2. Draw Connection Nodes & Spatial Tensors
+      particles.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Bounce boundaries
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        p.pulseVal += p.pulseSpeed;
+        const opacity = (Math.sin(p.pulseVal) + 1) / 2 * 0.35 + 0.15;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.colorType === 'cyan' 
+          ? `rgba(0, 229, 255, ${opacity})`
+          : `rgba(0, 200, 83, ${opacity})`;
+        ctx.fill();
+
+        // Draw connections
+        for (let j = idx + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < maxLineDist) {
+            const lineAlpha = (1 - dist / maxLineDist) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = darkMode 
+              ? `rgba(0, 229, 255, ${lineAlpha})` 
+              : `rgba(30, 136, 229, ${lineAlpha * 1.5})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      });
+
+      // 3. Draw Orbit Track Line (Elliptical projection)
+      ctx.beginPath();
+      ctx.ellipse(
+        satellite.centerX,
+        satellite.centerY,
+        satellite.orbitRadiusX,
+        satellite.orbitRadiusY,
+        Math.PI * 0.08, // Subtle orbital tilt
+        0,
+        Math.PI * 2
+      );
+      ctx.strokeStyle = darkMode ? 'rgba(0, 229, 255, 0.08)' : 'rgba(30, 136, 229, 0.1)';
+      ctx.setLineDash([4, 6]);
+      ctx.stroke();
+      ctx.setLineDash([]); // Reset line dash
+
+      // 4. Calculate Satellite Position
+      satellite.angle += satellite.speed;
+      const angleTilt = Math.PI * 0.08;
+      const rawX = Math.cos(satellite.angle) * satellite.orbitRadiusX;
+      const rawY = Math.sin(satellite.angle) * satellite.orbitRadiusY;
+
+      // Project tilted 2D coordinates
+      const satX = satellite.centerX + rawX * Math.cos(angleTilt) - rawY * Math.sin(angleTilt);
+      const satY = satellite.centerY + rawX * Math.sin(angleTilt) + rawY * Math.cos(angleTilt);
+
+      // 5. Draw Active Satellite Scanning Beam / Sensor Swath
+      const beamGrad = ctx.createRadialGradient(satX, satY, 5, satX, satY + 120, 180);
+      beamGrad.addColorStop(0, 'rgba(0, 200, 83, 0.18)');
+      beamGrad.addColorStop(0.5, 'rgba(0, 229, 255, 0.05)');
+      beamGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+      ctx.beginPath();
+      ctx.moveTo(satX, satY);
+      ctx.lineTo(satX - 80, satY + 220);
+      ctx.lineTo(satX + 80, satY + 220);
+      ctx.closePath();
+      ctx.fillStyle = beamGrad;
+      ctx.fill();
+
+      // Laser scanning dynamic target reticle
+      ctx.beginPath();
+      ctx.arc(satX, satY + 210, 4, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0, 229, 255, 0.4)';
+      ctx.stroke();
+
+      // 6. Draw Detailed Stylized Satellite Node
+      ctx.fillStyle = '#00C853';
+      ctx.beginPath();
+      ctx.arc(satX, satY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Satellite Solar Panels (Side rects)
+      ctx.fillStyle = '#1E88E5';
+      ctx.fillRect(satX - 16, satY - 2, 9, 4);
+      ctx.fillRect(satX + 7, satY - 2, 9, 4);
+
+      // Panel wire outlines
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(satX - 16, satY - 2, 9, 4);
+      ctx.strokeRect(satX + 7, satY - 2, 9, 4);
+
+      // Central Antenna Core
+      ctx.beginPath();
+      ctx.moveTo(satX, satY);
+      ctx.lineTo(satX, satY + 7);
+      ctx.strokeStyle = '#00C853';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Satellite Halo Pulse
+      ctx.beginPath();
+      ctx.arc(satX, satY, 18 + Math.sin(Date.now() * 0.005) * 4, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0, 229, 255, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // 7. Render Geospatial Coord Tickers (Rising coordinates)
+      ctx.font = '9px monospace';
+      ctx.fillStyle = darkMode ? 'rgba(0, 229, 255, 0.25)' : 'rgba(30, 136, 229, 0.35)';
+      geoTickers.forEach((t) => {
+        t.y -= t.speed;
+        if (t.y < -15) {
+          t.y = height + 15;
+          t.x = Math.random() * (width * 0.8);
+        }
+        ctx.fillText(t.text, t.x, t.y);
+      });
+
+      animationFrameId = requestAnimationFrame(drawSimulation);
+    };
+
+    drawSimulation();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, [darkMode]);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full -z-10 opacity-70 transition-opacity" />;
+}
+
+export default function App() {
+  const [view, setView] = useState('home'); // 'home' | 'about' | 'projects' | 'project-detail' | 'contact' | 'ai-lab'
+  const [selectedProjectId, setSelectedProjectId] = useState('lulc-punjab');
+  const [darkMode, setDarkMode] = useState(true); // Default to gorgeous dark mode matching premium cyber theme
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Search and Filter State
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  // Contact Form State
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactMessage, setContactMessage] = useState('');
+  const [contactCategory, setContactCategory] = useState('GIS Consultation');
+  const [formStatus, setFormStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+
+  // Interactive Live Map States (For Web GIS Live Demo component)
+  const mapContainerRef = useRef(null);
+  const [activeMapLayer, setActiveMapLayer] = useState('ndvi'); // 'ndvi' | 'urban' | 'water'
+  const [mapDetails, setMapDetails] = useState({
+    title: "Punjab/KPK Border Vegetation Index (NDVI)",
+    location: "Rawalpindi & Islamabad Environs",
+    coordinates: "33.60° N, 73.04° E"
+  });
+
+  // Keep track of Leaflet instance
+  const mapInstanceRef = useRef(null);
+  const [leafletLoaded, setLeafletLoaded] = useState(false);
+
+  // Gemini AI Laboratory States
+  const [aiLabLocation, setAiLabLocation] = useState('Swat Valley & Margalla Hills');
+  const [aiLabGoal, setAiLabGoal] = useState('NDVI Deforestation Analysis');
+  const [aiLabPlatform, setAiLabPlatform] = useState('Google Earth Engine (JavaScript)');
+  const [aiLabCustomDetail, setAiLabCustomDetail] = useState('');
+  const [aiLabStatus, setAiLabStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [aiLabResult, setAiLabResult] = useState('');
+  const [aiLabError, setAiLabError] = useState('');
+
+  // Project-Specific AI Pipeline Generation States
+  const [projectAiStatus, setProjectAiStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [projectAiCode, setProjectAiCode] = useState('');
+  const [projectAiError, setProjectAiError] = useState('');
+
+  // Load Leaflet assets dynamically from CDNs
+  useEffect(() => {
+    // Inject CSS
+    if (!document.getElementById('leaflet-css')) {
+      const link = document.createElement('link');
+      link.id = 'leaflet-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(link);
+    }
+
+    // Inject JS
+    if (!document.getElementById('leaflet-js')) {
+      const script = document.createElement('script');
+      script.id = 'leaflet-js';
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.onload = () => setLeafletLoaded(true);
+      document.head.appendChild(script);
+    } else {
+      setLeafletLoaded(true);
+    }
+  }, []);
+
+  // Initialize and Update Interactive Map when on Home Page or Projects Page
+  useEffect(() => {
+    if (!leafletLoaded || !window.L || !mapContainerRef.current) return;
+
+    // Destroy existing map if initialized
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
+    }
+
+    const L = window.L;
+
+    // Standard map configuration centered at Rawalpindi/Islamabad
+    const map = L.map(mapContainerRef.current, {
+      center: [33.6007, 73.0415],
+      zoom: 11,
+      scrollWheelZoom: false
+    });
+
+    mapInstanceRef.current = map;
+
+    // Base satellite tiles
+    const baseTile = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    // Overlay colors & markers based on active layer
+    if (activeMapLayer === 'ndvi') {
+      setMapDetails({
+        title: "Vegetation & Forest Canopy Analysis (NDVI)",
+        location: "Margalla Hills & Islamabad Parks",
+        coordinates: "33.68° N, 73.03° E"
+      });
+
+      // Add green simulated forest canopy polygon over Margalla Hills
+      const margallaForest = L.polygon([
+        [33.72, 72.95],
+        [33.74, 73.05],
+        [33.71, 73.15],
+        [33.68, 73.08],
+        [33.69, 72.97]
+      ], {
+        color: '#00C853',
+        fillColor: '#00C853',
+        fillOpacity: 0.6,
+        weight: 2
+      }).addTo(map);
+
+      margallaForest.bindPopup("<div class='p-1'><strong>Margalla Hills Forest Core</strong><br/>Average NDVI: 0.74<br/>Status: Rich Dense Canopy</div>");
+
+      // Set map focus
+      map.setView([33.71, 73.04], 12);
+
+    } else if (activeMapLayer === 'urban') {
+      setMapDetails({
+        title: "Urban Sprawl & Thermal Density (NDBI)",
+        location: "Rawalpindi Center & High-Density Zones",
+        coordinates: "33.59° N, 73.05° E"
+      });
+
+      // Draw red circle representing urban heat island intensity in Rawalpindi Saddar
+      const urbanHeat1 = L.circle([33.595, 73.054], {
+        color: '#FF5252',
+        fillColor: '#FF5252',
+        fillOpacity: 0.5,
+        radius: 1800
+      }).addTo(map);
+
+      const urbanHeat2 = L.circle([33.640, 73.075], {
+        color: '#FF5252',
+        fillColor: '#FF5252',
+        fillOpacity: 0.4,
+        radius: 1200
+      }).addTo(map);
+
+      urbanHeat1.bindPopup("<strong>Rawalpindi Core Thermal Island</strong><br/>Estimated LST: 38.4°C<br/>High Concrete Concentration.");
+      urbanHeat2.bindPopup("<strong>Islamabad I-8 Commercial Center</strong><br/>Estimated LST: 35.1°C<br/>Rapid urban infill.");
+
+      map.setView([33.61, 73.06], 11);
+
+    } else if (activeMapLayer === 'water') {
+      setMapDetails({
+        title: "Water Reservoir Boundaries (NDWI)",
+        location: "Rawal Lake National Park",
+        coordinates: "33.70° N, 73.12° E"
+      });
+
+      // Rawal Lake outline
+      const rawalLake = L.polygon([
+        [33.705, 73.115],
+        [33.708, 73.125],
+        [33.702, 73.135],
+        [33.696, 73.128],
+        [33.697, 73.118]
+      ], {
+        color: '#00E5FF',
+        fillColor: '#00E5FF',
+        fillOpacity: 0.7,
+        weight: 2
+      }).addTo(map);
+
+      rawalLake.bindPopup("<strong>Rawal Lake Reservoir</strong><br/>Surface Area: ~8.2 km²<br/>Status: Normal Level (Aug 2025)");
+
+      map.setView([33.702, 73.125], 13);
+    }
+
+    // Clean up on unmount or layer changes
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [leafletLoaded, activeMapLayer, view]);
+
+  // Triggered when dynamic prompt execution inside project detail is requested
+  const handleGenerateProjectPipeline = async (project) => {
+    setProjectAiStatus('loading');
+    setProjectAiError('');
+    setProjectAiCode('');
+
+    const systemPrompt = `You are an expert GIS & Remote Sensing programmer writing code pipelines specifically for Pakistan environments.
+    IMPORTANT formatting rules:
+    - Return a beautifully commented, production-ready, functional code snippet.
+    - Write mathematical formulas using clean LaTeX-style syntax ONLY. Never use unicode mathematical characters.
+    - Wrap all inline formulas in $ markers and block/display formulas in $$ markers.
+    - Make sure code comments cite standard spatial datasets (Sentinel-2, Landsat-8, SRTM, etc.) and explain band calculations mathematically using the requested LaTeX syntax (e.g. $NDVI = \\frac{NIR - Red}{NIR + Red}$).`;
+
+    const query = `Generate a comprehensive Python or Earth Engine processing script matching the following project details:
+    Project Title: "${project.title}"
+    Target Environment: Pakistan
+    Key Technologies: ${project.tech.join(', ')}
+    Project Summary: "${project.summary}"
+    
+    The script should:
+    1. Import standard geospatial packages.
+    2. Handle cloud masking.
+    3. Calculate the correct spectral formulas representing the project (explain formulas mathematically in the script comments using LaTeX notation).
+    4. Provide spatial exports of the results.`;
+
+    try {
+      const responseText = await executeGeminiCall(query, systemPrompt);
+      setProjectAiCode(responseText);
+      setProjectAiStatus('success');
+    } catch (err) {
+      setProjectAiError(err.message || 'Error communicating with Gemini model.');
+      setProjectAiStatus('error');
+    }
+  };
+
+  // Triggered inside the Interactive AI Lab Tab
+  const handleGenerateLabMethodology = async (e) => {
+    e.preventDefault();
+    setAiLabStatus('loading');
+    setAiLabError('');
+    setAiLabResult('');
+
+    const systemPrompt = `You are a Senior Geospatial Scientist and Satellite Remote Sensing Advisor.
+    IMPORTANT formatting rules:
+    - Respond in highly organized scientific markdown.
+    - Detail exact satellite band operations and math indices.
+    - Always express mathematical formulas using LaTeX-style syntax (e.g., $NDVI = \\frac{B_8 - B_4}{B_8 + B_4}$ for Sentinel-2). Do NOT use raw Unicode for complex formulas.
+    - Outline custom implementation code suitable for the selected platform.`;
+
+    const query = `Create a custom, professional GIS & Remote Sensing methodology blueprint for this specified setup:
+    - Study Region of Interest: "${aiLabLocation}"
+    - Objective / Target Analysis: "${aiLabGoal}"
+    - Development Platform Choice: "${aiLabPlatform}"
+    - Additional custom specification notes: "${aiLabCustomDetail || 'None provided'}"
+    
+    Please provide:
+    1. **Regional Overview**: Specific geographical factors for ${aiLabLocation} related to ${aiLabGoal}.
+    2. **Satellite Platform & Band Mathematics**: Recommended bands (e.g., Sentinel-2 or Landsat 8/9) and equations written in LaTeX syntax.
+    3. **Operational Step-by-Step Methodology**: 5 clear, reproducible scientific steps.
+    4. **Custom Code Blueprint**: A structured, functional code template in ${aiLabPlatform} that handles the cloud filtering, calculations, and visual rendering.`;
+
+    try {
+      const responseText = await executeGeminiCall(query, systemPrompt);
+      setAiLabResult(responseText);
+      setAiLabStatus('success');
+    } catch (err) {
+      setAiLabError(err.message || 'Unable to establish communication with the Gemini model.');
+      setAiLabStatus('error');
+    }
+  };
+
+  // Handle Form Submission
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    if (!contactName || !contactEmail || !contactMessage) {
+      setFormStatus('error');
+      return;
+    }
+    setFormStatus('submitting');
+    setTimeout(() => {
+      setFormStatus('success');
+      // Reset values
+      setContactName('');
+      setContactEmail('');
+      setContactMessage('');
+    }, 1500);
+  };
+
+  // Toggle Dark Mode
+  const handleThemeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // Redesigned Project Showcase Categories
+  const categories = ["All", "Google Earth Engine", "Geospatial Analysis", "Machine Learning", "GeoAI", "Data Visualization", "Open Source", "Research Projects"];
+
+  // Filtered projects
+  const filteredProjects = PROJECTS_DATA.filter(project => {
+    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          project.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          project.tech.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory = activeCategory === 'All' || project.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const activeProject = PROJECTS_DATA.find(p => p.id === selectedProjectId) || PROJECTS_DATA[0];
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 font-sans ${darkMode ? 'bg-[#0A192F] text-gray-100' : 'bg-gray-50 text-gray-800'}`}>
+      
+      {/* HEADER & NAVIGATION */}
+      <header className={`sticky top-0 z-50 transition-colors border-b ${darkMode ? 'bg-[#0A192F]/95 border-gray-800' : 'bg-white/95 border-gray-200'} backdrop-blur-md`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          
+          {/* Logo Name */}
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setView('home')}>
+            <div className="p-2 rounded-lg bg-gradient-to-tr from-[#00C853] to-[#1E88E5] text-white shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <span className="font-bold text-lg tracking-tight block text-white">NAVEED ALI</span>
+              <span className="text-[10px] uppercase tracking-widest text-[#00E5FF] font-bold block -mt-1">GIS & GeoAI Engineer</span>
+            </div>
+          </div>
+
+          {/* Desktop Nav links */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium">
+            <button 
+              onClick={() => { setView('home'); window.scrollTo(0, 0); }} 
+              className={`hover:text-[#00E5FF] transition-colors py-1 border-b-2 ${view === 'home' ? 'border-[#00E5FF] text-[#00E5FF]' : 'border-transparent'}`}
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => { setView('about'); window.scrollTo(0, 0); }} 
+              className={`hover:text-[#00E5FF] transition-colors py-1 border-b-2 ${view === 'about' ? 'border-[#00E5FF] text-[#00E5FF]' : 'border-transparent'}`}
+            >
+              About
+            </button>
+            <button 
+              onClick={() => { setView('projects'); window.scrollTo(0, 0); }} 
+              className={`hover:text-[#00E5FF] transition-colors py-1 border-b-2 ${view === 'projects' || view === 'project-detail' ? 'border-[#00E5FF] text-[#00E5FF]' : 'border-transparent'}`}
+            >
+              Projects
+            </button>
+            <button 
+              onClick={() => { setView('ai-lab'); window.scrollTo(0, 0); }} 
+              className={`hover:text-[#00E5FF] transition-colors py-1 border-b-2 ${view === 'ai-lab' ? 'border-[#00E5FF] text-[#00E5FF]' : 'border-transparent'} flex items-center space-x-1`}
+            >
+              <span>AI Spatial Lab</span>
+              <span className="px-1.5 py-0.2 bg-[#00E5FF]/10 text-[#00E5FF] text-[10px] font-bold rounded animate-pulse">✨</span>
+            </button>
+            <button 
+              onClick={() => { setView('contact'); window.scrollTo(0, 0); }} 
+              className={`hover:text-[#00E5FF] transition-colors py-1 border-b-2 ${view === 'contact' ? 'border-[#00E5FF] text-[#00E5FF]' : 'border-transparent'}`}
+            >
+              Contact
+            </button>
+          </nav>
+
+          {/* Utility Buttons */}
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handleThemeToggle}
+              className={`p-2 rounded-full transition-colors ${darkMode ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+              aria-label="Toggle theme mode"
+            >
+              {darkMode ? <SunIcon /> : <MoonIcon />}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+            >
+              {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
+            
+            <button 
+              onClick={() => setView('ai-lab')}
+              className="hidden lg:inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-[#00C853] to-[#00E5FF] hover:opacity-90 rounded-lg transition-all shadow-[0_0_15px_rgba(0,229,255,0.3)] space-x-1"
+            >
+              <span>AI Lab Tools</span>
+              <span>✨</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className={`md:hidden border-t px-4 pt-3 pb-6 space-y-3 transition-colors ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-55 border-gray-200'}`}>
+            <button 
+              onClick={() => { setView('home'); setMobileMenuOpen(false); }} 
+              className={`block w-full text-left py-2 px-3 rounded-md font-semibold ${view === 'home' ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'hover:bg-gray-800'}`}
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => { setView('about'); setMobileMenuOpen(false); }} 
+              className={`block w-full text-left py-2 px-3 rounded-md font-semibold ${view === 'about' ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'hover:bg-gray-800'}`}
+            >
+              About Me
+            </button>
+            <button 
+              onClick={() => { setView('projects'); setMobileMenuOpen(false); }} 
+              className={`block w-full text-left py-2 px-3 rounded-md font-semibold ${view === 'projects' || view === 'project-detail' ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'hover:bg-gray-800'}`}
+            >
+              Projects Portfolio
+            </button>
+            <button 
+              onClick={() => { setView('ai-lab'); setMobileMenuOpen(false); }} 
+              className={`block w-full text-left py-2 px-3 rounded-md font-semibold ${view === 'ai-lab' ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'hover:bg-gray-800'}`}
+            >
+              ✨ AI Spatial Lab
+            </button>
+            <button 
+              onClick={() => { setView('contact'); setMobileMenuOpen(false); }} 
+              className={`block w-full text-left py-2 px-3 rounded-md font-semibold ${view === 'contact' ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'hover:bg-gray-800'}`}
+            >
+              Contact
+            </button>
+            <button 
+              onClick={() => { setView('ai-lab'); setMobileMenuOpen(false); }}
+              className="w-full text-center block py-2.5 px-4 bg-gradient-to-r from-[#00C853] to-[#00E5FF] text-white font-medium rounded-lg"
+            >
+              Launch AI Planner ✨
+            </button>
+          </div>
+        )}
+      </header>
+
+      {/* VIEWPORT CONTAINER */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {/* 1. HOMEPAGE VIEW */}
+        {view === 'home' && (
+          <div className="space-y-16 animate-fadeIn relative">
+            
+            {/* HERO SECTION WITH ANIMATED SATELLITE/EARTH BACKGROUND & PARALLAX OVERLAY */}
+            <div className="relative rounded-3xl overflow-hidden pt-8 pb-12 px-6 sm:px-10 lg:px-14 border border-transparent dark:border-gray-800/60 shadow-2xl transition-all duration-300">
+              
+              {/* Premium Interactive Background Element */}
+              <InteractiveSatelliteBackground darkMode={darkMode} />
+              
+              {/* Dark Overlay gradient (40-60% opacity) for high readability */}
+              <div className={`absolute inset-0 -z-20 transition-colors duration-300 ${darkMode ? 'bg-[#0A192F]/65 bg-gradient-to-r from-[#0A192F]/95 via-[#0A192F]/75 to-transparent' : 'bg-white/70 bg-gradient-to-r from-white/95 via-white/80 to-transparent'}`} />
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                <div className="lg:col-span-8 space-y-6 animate-slideUp">
+                  <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/20 text-[#00E5FF] font-bold text-xs uppercase tracking-wider">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#00E5FF] animate-ping"></span>
+                    <span>GeoAI & Climate Analytics Platform</span>
+                  </div>
+                  
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    GIS & Remote Sensing Specialist <br />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00E5FF] to-[#00C853] drop-shadow-sm">
+                      Transforming Satellite Data
+                    </span> <br />
+                    into Actionable Spatial Insights
+                  </h1>
+
+                  <p className={`text-base sm:text-lg max-w-2xl leading-relaxed font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                    I help organizations extract meaningful patterns from Earth observation data through advanced GIS analysis, remote sensing, and interactive web mapping. Specializing in land use classification, change detection, and environmental monitoring across Pakistan and South Asia.
+                  </p>
+
+                  {/* AI Showcase Highlight banner in Hero */}
+                  <div className={`p-4 rounded-xl border flex items-start space-x-3 bg-gradient-to-r from-[#00C853]/15 to-[#00E5FF]/15 backdrop-blur-sm max-w-xl transition-all hover:scale-102 ${darkMode ? 'border-cyan-500/20' : 'border-[#00C853]/30'}`}>
+                    <div className="p-2 rounded bg-yellow-500/10 text-yellow-500">
+                      <SparklesIcon />
+                    </div>
+                    <div className="text-xs">
+                      <span className="font-bold block text-green-300">Live Gemini-Powered Spatial Method Planner Active!</span>
+                      <span className={`block mt-0.5 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Use our integrated spatial LLM core to construct customized scientific satellite band models instantly.</span>
+                      <button 
+                        onClick={() => setView('ai-lab')} 
+                        className="mt-1.5 text-xs text-[#00E5FF] font-extrabold hover:underline block"
+                      >
+                        Launch AI Planner Workspace →
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
+                    <button 
+                      onClick={() => { setView('projects'); window.scrollTo(0,0); }}
+                      className="inline-flex items-center justify-center px-7 py-3.5 bg-gradient-to-r from-[#00C853] to-[#1E88E5] hover:opacity-90 text-white font-bold rounded-xl shadow-lg hover:shadow-green-500/20 transition-all transform hover:-translate-y-0.5"
+                    >
+                      Explore Projects
+                    </button>
+                    <button 
+                      onClick={() => { setView('ai-lab'); window.scrollTo(0,0); }}
+                      className={`inline-flex items-center justify-center px-7 py-3.5 font-bold rounded-xl border-2 backdrop-blur-sm transition-all hover:scale-103 space-x-1 ${darkMode ? 'border-gray-700 text-gray-100 hover:bg-white/5' : 'border-gray-300 text-gray-800 hover:bg-black/5'}`}
+                    >
+                      <span>Try AI Lab Tools</span>
+                      <span>✨</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right Column Dynamic Layer Map View */}
+                <div className="lg:col-span-4 relative animate-fadeIn">
+                  <div className={`p-4 rounded-2xl border shadow-xl backdrop-blur-md ${darkMode ? 'bg-[#050c21]/90 border-gray-800' : 'bg-white/95 border-gray-200'}`}>
+                    {/* Outer Map Panel UI Chrome */}
+                    <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800 mb-3">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-gray-400">spatial_swath.geojson</span>
+                    </div>
+
+                    {/* Leaflet map anchor */}
+                    <div className="h-64 rounded-xl relative overflow-hidden bg-gray-100 border dark:border-gray-800 z-10 shadow-inner">
+                      <div ref={mapContainerRef} className="h-full w-full"></div>
+                    </div>
+
+                    {/* Layers Select Control Panel */}
+                    <div className="mt-3 grid grid-cols-3 gap-1.5">
+                      <button 
+                        onClick={() => setActiveMapLayer('ndvi')} 
+                        className={`py-1 px-1.5 text-[11px] font-bold rounded-lg transition-all border ${activeMapLayer === 'ndvi' ? 'bg-[#00C853]/10 text-[#00C853] border-[#00C853]' : 'border-transparent text-gray-400 hover:bg-gray-100'}`}
+                      >
+                        NDVI Forest
+                      </button>
+                      <button 
+                        onClick={() => setActiveMapLayer('urban')} 
+                        className={`py-1 px-1.5 text-[11px] font-bold rounded-lg transition-all border ${activeMapLayer === 'urban' ? 'bg-red-500/10 text-red-500 border-red-500' : 'border-transparent text-gray-400 hover:bg-gray-100'}`}
+                      >
+                        UHI Heat
+                      </button>
+                      <button 
+                        onClick={() => setActiveMapLayer('water')} 
+                        className={`py-1 px-1.5 text-[11px] font-bold rounded-lg transition-all border ${activeMapLayer === 'water' ? 'bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]' : 'border-transparent text-gray-400 hover:bg-gray-100'}`}
+                      >
+                        NDWI Water
+                      </button>
+                    </div>
+
+                    <div className="mt-3 text-[11px] border-t pt-2 border-gray-150 dark:border-gray-800">
+                      <p className="font-bold text-gray-400 uppercase tracking-widest">Active Sentinel-2 Layer:</p>
+                      <p className="font-bold text-xs mt-0.5">{mapDetails.title}</p>
+                      <p className="text-gray-500">{mapDetails.location} • <span className="font-mono text-[10px]">{mapDetails.coordinates}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* THREE STAT CARDS */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className={`p-6 rounded-xl border flex items-center space-x-4 shadow-sm transition-all hover:scale-102 hover:shadow-md ${darkMode ? 'bg-gradient-to-br from-[#050c21] to-[#0A192F] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+                <div className="p-3 bg-[#00C853]/10 text-[#00C853] rounded-lg shadow-[0_0_10px_rgba(0,200,83,0.2)]">
+                  <MapIcon />
+                </div>
+                <div>
+                  <h3 className="text-3xl font-extrabold text-[#00C853]">20+</h3>
+                  <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">Geospatial Projects Completed</p>
+                </div>
+              </div>
+
+              <div className={`p-6 rounded-xl border flex items-center space-x-4 shadow-sm transition-all hover:scale-102 hover:shadow-md ${darkMode ? 'bg-gradient-to-br from-[#050c21] to-[#0A192F] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+                <div className="p-3 bg-[#00E5FF]/10 text-[#00E5FF] rounded-lg shadow-[0_0_10px_rgba(0,229,255,0.2)]">
+                  <CalendarIcon />
+                </div>
+                <div>
+                  <h3 className="text-3xl font-extrabold text-[#00E5FF]">5 Years</h3>
+                  <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">Professional GIS Experience</p>
+                </div>
+              </div>
+
+              <div className={`p-6 rounded-xl border flex items-center space-x-4 shadow-sm transition-all hover:scale-102 hover:shadow-md ${darkMode ? 'bg-gradient-to-br from-[#050c21] to-[#0A192F] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+                <div className="p-3 bg-[#1E88E5]/10 text-[#1E88E5] rounded-lg shadow-[0_0_10px_rgba(30,136,229,0.2)]">
+                  <UsersIcon />
+                </div>
+                <div>
+                  <h3 className="text-3xl font-extrabold text-[#1E88E5]">15+</h3>
+                  <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">Global Agency Clients</p>
+                </div>
+              </div>
+            </div>
+
+            {/* REDESIGNED FUTURISTIC SKILLS SECTION */}
+            <div className="space-y-8 pt-8">
+              <div className="text-center max-w-3xl mx-auto space-y-3">
+                <div className="inline-flex items-center space-x-1 bg-[#00E5FF]/10 text-[#00E5FF] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-[#00E5FF]/20">
+                  <span>🛰️ Competence Stack</span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Geospatial Intelligence & GeoAI Systems</h2>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Combining advanced automation pipelines, spatiotemporal mathematics, and modern machine learning classification models to parse complex Earth observations.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                {/* 1. TECHNICAL SKILLS CARD */}
+                <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6 hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] hover:border-[#00E5FF]/30 hover:-translate-y-1 transition-all duration-500 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00E5FF]/10 to-transparent rounded-bl-full pointer-events-none transition-all group-hover:scale-110" />
+                  <div className="flex items-center space-x-3 border-b border-white/10 pb-4">
+                    <div className="p-2.5 bg-[#00E5FF]/10 text-[#00E5FF] rounded-lg shadow-[0_0_10px_rgba(0,229,255,0.2)]">
+                      <CodeIcon />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">Technical Skills</h3>
+                      <p className="text-[10px] text-gray-400 font-mono tracking-widest">GeoAI & Development</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Python (GeoPandas, Rasterio, Leafmap)</span>
+                        <span className="text-[#00E5FF] font-mono">85%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00E5FF] rounded-full" style={{ width: '85%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Google Earth Engine (GEE API)</span>
+                        <span className="text-[#00E5FF] font-mono">80%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00E5FF] rounded-full" style={{ width: '80%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>ArcGIS Pro, ArcMap & AGOL</span>
+                        <span className="text-[#00E5FF] font-mono">90%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00E5FF] rounded-full" style={{ width: '90%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>QGIS Open Source Platform</span>
+                        <span className="text-[#00E5FF] font-mono">85%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00E5FF] rounded-full" style={{ width: '85%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Machine Learning (Scikit-Learn, RF)</span>
+                        <span className="text-[#00E5FF] font-mono">75%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00E5FF] rounded-full" style={{ width: '75%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Remote Sensing & Image Processing</span>
+                        <span className="text-[#00E5FF] font-mono">88%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00E5FF] rounded-full" style={{ width: '88%' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. RESEARCH SKILLS CARD */}
+                <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6 hover:shadow-[0_0_30px_rgba(0,200,83,0.15)] hover:border-[#00C853]/30 hover:-translate-y-1 transition-all duration-500 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00C853]/10 to-transparent rounded-bl-full pointer-events-none transition-all group-hover:scale-110" />
+                  <div className="flex items-center space-x-3 border-b border-white/10 pb-4">
+                    <div className="p-2.5 bg-[#00C853]/10 text-[#00C853] rounded-lg shadow-[0_0_10px_rgba(0,200,83,0.2)]">
+                      <GlobeIcon />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">Research Skills</h3>
+                      <p className="text-[10px] text-gray-400 font-mono tracking-widest">Academic & Scientific</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Spatial Data Analysis</span>
+                        <span className="text-[#00C853] font-mono">92%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '92%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Statistical Analysis</span>
+                        <span className="text-[#00C853] font-mono">82%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '82%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Scientific Writing</span>
+                        <span className="text-[#00C853] font-mono">80%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '80%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Research Methodology</span>
+                        <span className="text-[#00C853] font-mono">85%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '85%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Ground Truthing</span>
+                        <span className="text-[#00C853] font-mono">78%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '78%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Prompt Engineering (Spatial Agents)</span>
+                        <span className="text-[#00C853] font-mono">84%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '84%' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. PROFESSIONAL SKILLS CARD */}
+                <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6 hover:shadow-[0_0_30px_rgba(30,136,229,0.15)] hover:border-[#1E88E5]/30 hover:-translate-y-1 transition-all duration-500 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#1E88E5]/10 to-transparent rounded-bl-full pointer-events-none transition-all group-hover:scale-110" />
+                  <div className="flex items-center space-x-3 border-b border-white/10 pb-4">
+                    <div className="p-2.5 bg-[#1E88E5]/10 text-[#1E88E5] rounded-lg shadow-[0_0_10px_rgba(30,136,229,0.2)]">
+                      <UsersIcon />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">Professional Skills</h3>
+                      <p className="text-[10px] text-gray-400 font-mono tracking-widest">Leadership & Strategy</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Leadership</span>
+                        <span className="text-[#1E88E5] font-mono">85%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '85%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Team Collaboration</span>
+                        <span className="text-[#1E88E5] font-mono">90%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '90%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Problem Solving</span>
+                        <span className="text-[#1E88E5] font-mono">92%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '92%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Critical Thinking</span>
+                        <span className="text-[#1E88E5] font-mono">88%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '88%' }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold text-gray-200">
+                        <span>Communication</span>
+                        <span className="text-[#1E88E5] font-mono">90%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853] rounded-full" style={{ width: '90%' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* HIGH-END REDESIGNED PROJECTS SHOWCASE SECTION */}
+            <div className="space-y-8 pt-8">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center space-x-1 bg-[#00C853]/10 text-[#00C853] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-[#00C853]/20 mb-2">
+                    <span>🔬 Spatial Geodatabases</span>
+                  </div>
+                  <h2 className="text-3xl font-extrabold text-white">Geospatial Web Map & Analysis Showcase</h2>
+                  <p className="text-gray-400 mt-1">Filter and audit active operational change detection pipelines, GEE scripts, and GeoAI machine learning models.</p>
+                </div>
+                <button 
+                  onClick={() => { setView('projects'); window.scrollTo(0,0); }}
+                  className="text-sm text-[#00E5FF] font-bold flex items-center space-x-1 group hover:underline whitespace-nowrap"
+                >
+                  <span>Explore All 12 Spatial Audits</span>
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </button>
+              </div>
+
+              {/* Filtering Controls */}
+              <div className="flex flex-wrap gap-2 pb-2">
+                {categories.slice(0, 5).map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all border ${activeCategory === cat ? 'bg-gradient-to-r from-[#00C853] to-[#1E88E5] border-transparent text-white shadow-[0_0_12px_rgba(0,200,83,0.25)]' : 'border-white/10 hover:border-white/20 text-gray-400 bg-white/5'}`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* 3 Featured Projects Redesigned as Glassmorphism Cards with Statistics */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {PROJECTS_DATA.slice(0, 3).map((project) => (
+                  <div 
+                    key={project.id} 
+                    className="backdrop-blur-md bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_25px_rgba(0,229,255,0.15)] rounded-2xl overflow-hidden transition-all duration-500 flex flex-col h-full group"
+                  >
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-transparent to-transparent z-10" />
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                        loading="lazy"
+                      />
+                      
+                      {/* Animated Badge */}
+                      <span className="absolute top-4 left-4 bg-gradient-to-r from-[#00C853] to-[#1E88E5] text-white text-[10px] font-bold px-3 py-1 rounded-md shadow-[0_0_10px_rgba(0,200,83,0.3)] tracking-widest uppercase z-20">
+                        {project.category}
+                      </span>
+
+                      {/* Floating Statistics overlay */}
+                      <div className="absolute bottom-3 right-4 flex items-center space-x-3 text-white text-xs font-bold z-20 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                        <span className="flex items-center space-x-1 text-yellow-400">
+                          <span>⭐</span>
+                          <span>{project.stars}</span>
+                        </span>
+                        <span className="text-white/40">|</span>
+                        <span className="flex items-center space-x-1 text-[#00E5FF]">
+                          <span>👁️</span>
+                          <span>{project.views}</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                      <div className="space-y-2">
+                        <h3 className="font-extrabold text-lg text-white leading-snug tracking-tight group-hover:text-[#00E5FF] transition-colors line-clamp-1">
+                          {project.title}
+                        </h3>
+                        <div className="flex items-center justify-between text-[11px] font-bold tracking-widest text-[#00C853] uppercase">
+                          <span>{project.client}</span>
+                          <span className="text-gray-500 font-mono text-[10px]">{project.type}</span>
+                        </div>
+                        <p className="text-xs text-gray-300 line-clamp-2 leading-relaxed font-medium">
+                          {project.summary}
+                        </p>
+                      </div>
+
+                      <div className="space-y-4 border-t border-white/5 pt-4">
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tech.slice(0, 3).map((t, idx) => (
+                            <span key={idx} className="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/15">
+                              {t}
+                            </span>
+                          ))}
+                          {project.tech.length > 3 && (
+                            <span className="text-[10px] font-bold text-gray-500 px-1 py-0.5">+{project.tech.length - 3}</span>
+                          )}
+                        </div>
+
+                        <button 
+                          onClick={() => { setSelectedProjectId(project.id); setView('project-detail'); window.scrollTo(0,0); }}
+                          className="w-full py-2.5 bg-white/5 hover:bg-gradient-to-r hover:from-[#00C853] hover:to-[#00E5FF] border border-white/10 hover:border-transparent text-white hover:text-black font-extrabold text-xs rounded-xl transition-all duration-300 shadow-md flex items-center justify-center space-x-2"
+                        >
+                          <span>Analyze Methodology & GEE Code</span>
+                          <span>✨</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* QUICK SKILLS PREVIEW (PRESERVED) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-8">
+              <div className="lg:col-span-5 space-y-4">
+                <h2 className="text-3xl font-extrabold">Professional Competence</h2>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Combining rigorous geospatial science with advanced technical capabilities in machine learning, automation, and programming. Specialized tools power clean map outputs and accurate earth-monitoring datasets.
+                </p>
+                <button 
+                  onClick={() => { setView('about'); window.scrollTo(0,0); }}
+                  className="inline-flex items-center space-x-2 text-sm text-[#1E88E5] font-semibold hover:underline"
+                >
+                  <span>Check detailed technologies list</span>
+                  <span>→</span>
+                </button>
+              </div>
+
+              <div className={`lg:col-span-7 p-6 rounded-xl border space-y-5 ${darkMode ? 'bg-[#050c21]/90 border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+                {/* ArcGIS Pro Progress */}
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
+                    <span>ArcGIS Pro (Advanced Geospatial Analysis)</span>
+                    <span className="text-[#00C853]">70%</span>
+                  </div>
+                  <div className="h-2.5 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853]" style={{ width: '70%' }}></div>
+                  </div>
+                </div>
+
+                {/* QGIS Progress */}
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
+                    <span>QGIS Open Source Platform</span>
+                    <span className="text-[#00C853]">60%</span>
+                  </div>
+                  <div className="h-2.5 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853]" style={{ width: '60%' }}></div>
+                  </div>
+                </div>
+
+                {/* Python Gdal/GeoPandas Progress */}
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
+                    <span>Python Spatial Automation (GeoPandas, GDAL)</span>
+                    <span className="text-[#00C853]">55%</span>
+                  </div>
+                  <div className="h-2.5 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853]" style={{ width: '55%' }}></div>
+                  </div>
+                </div>
+
+                {/* Google Earth Engine Progress */}
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
+                    <span>Google Earth Engine (Javascript/Python APIs)</span>
+                    <span className="text-[#00C853]">50%</span>
+                  </div>
+                  <div className="h-2.5 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#1E88E5] to-[#00C853]" style={{ width: '50%' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FINAL CTA SECTION */}
+            <div className="bg-gradient-to-r from-[#00C853] to-[#1E88E5] rounded-2xl p-8 md:p-12 text-white text-center space-y-6 relative overflow-hidden shadow-lg">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent pointer-events-none"></div>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Ready to transform your spatial data into actionable insights?</h2>
+              <p className="max-w-2xl mx-auto text-green-100 text-sm md:text-base leading-relaxed">
+                Whether you need satellite deforestation analysis in Northern Pakistan, custom web maps for administrative reporting, or remote sensing machine learning pipelines, let's build reproducible solutions.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button 
+                  onClick={() => { setView('contact'); window.scrollTo(0,0); }}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-white text-green-800 font-bold text-base rounded-lg shadow-md transition-transform hover:-translate-y-0.5"
+                >
+                  Start a Project
+                </button>
+                <button 
+                  onClick={() => { setView('ai-lab'); window.scrollTo(0,0); }}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-[#1E88E5] hover:bg-blue-700 text-white font-bold text-base rounded-lg shadow-md transition-transform hover:-translate-y-0.5 flex items-center justify-center space-x-1"
+                >
+                  <span>Launch AI Lab Tools</span>
+                  <span>✨</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        )}
+
+        {/* 2. ABOUT ME VIEW */}
+        {view === 'about' && (
+          <div className="space-y-16 animate-fadeIn">
+            
+            {/* BIO SECTION */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
+              <div className="lg:col-span-4 flex justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-[#00C853] rounded-2xl rotate-3 scale-102 -z-10 opacity-20"></div>
+                  {/* High Quality Spatial Headshot placeholder avatar */}
+                  <div className="w-72 h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800 bg-gray-100 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-40 w-40 text-green-700/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="absolute -bottom-3 -right-3 bg-[#1E88E5] text-white py-1 px-3.5 text-xs font-bold rounded-lg shadow-sm">
+                    Based in Rawalpindi, PK
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-8 space-y-6">
+                <h1 className="text-3xl sm:text-4xl font-extrabold">Professional Bio</h1>
+                <div className={`space-y-4 text-sm sm:text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p>
+                    I am a GIS & Remote Sensing professional based in Rawalpindi, Pakistan, with 5 years of experience transforming spatial data into decision-ready insights. My work bridges the gap between satellite imagery and real-world applications in environmental monitoring, urban planning, and agricultural analysis.
+                  </p>
+                  <p>
+                    My expertise spans ArcGIS Pro, QGIS, Google Earth Engine, Python automation, and web GIS development using Leaflet and Mapbox. I've completed 20+ projects for clients including government agencies, NGOs, and research institutions, delivering map products that drive measurable outcomes.
+                  </p>
+                  <p>
+                    What sets me apart is my dual focus on technical depth and communication clarity. I don't just produce maps—I document my methodology, cite my data sources, and explain findings in terms that stakeholders understand. This reproducibility builds trust and enables clients to build on my work.
+                  </p>
+                  <p>
+                    I'm particularly passionate about using GIS for environmental conservation in South Asia, from tracking deforestation in the Himalayas to monitoring water resources in the Punjab region. When I'm not analyzing satellite imagery, I'm contributing to open-source GIS communities, writing tutorials, or hiking for field data collection.
+                  </p>
+                  <p className="font-semibold text-[#00E5FF] dark:text-cyan-400 border-l-4 border-[#00C853] pl-3">
+                    Let's connect if you need: land use mapping, satellite change detection, interactive web maps, or spatial analysis for environmental/agricultural projects.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* TIMELINE OF JOURNEY */}
+            <div className="space-y-8">
+              <h2 className="text-3xl font-extrabold text-center">My Spatial GIS Journey</h2>
+              <div className="relative max-w-4xl mx-auto">
+                {/* Horizontal / Vertical Line */}
+                <div className="absolute md:top-1/2 md:-translate-y-1/2 left-4 md:left-0 right-0 h-full md:h-1 w-1 md:w-full bg-gray-200 dark:bg-gray-800 -z-10"></div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                  
+                  {/* Timeline 1 */}
+                  <div className={`p-5 rounded-xl border shadow-sm relative ${darkMode ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-100'}`}>
+                    <span className="text-[#00C853] font-extrabold text-lg block mb-1">2021</span>
+                    <h4 className="font-bold text-sm">Graduated BSc & studies</h4>
+                    <p className="text-xs text-gray-500 mt-1 leading-relaxed">Completed BSc Geography with a GIS focus, deep diving into spatial structures and mapping techniques.</p>
+                  </div>
+
+                  {/* Timeline 2 */}
+                  <div className={`p-5 rounded-xl border shadow-sm relative ${darkMode ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-100'}`}>
+                    <span className="text-[#1E88E5] font-extrabold text-lg block mb-1">2023</span>
+                    <h4 className="font-bold text-sm">First Agency Project</h4>
+                    <p className="text-xs text-gray-500 mt-1 leading-relaxed">Executed spatial flood risk analysis and zoning projects for provincial environmental agencies.</p>
+                  </div>
+
+                  {/* Timeline 3 */}
+                  <div className={`p-5 rounded-xl border shadow-sm relative ${darkMode ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-100'}`}>
+                    <span className="text-[#00C853] font-extrabold text-lg block mb-1">2024</span>
+                    <h4 className="font-bold text-sm">Remote Sensing Specialization</h4>
+                    <p className="text-xs text-gray-500 mt-1 leading-relaxed">Integrated machine learning classification classifiers (RF, SVM) into satellite image analysis.</p>
+                  </div>
+
+                  {/* Timeline 4 */}
+                  <div className={`p-5 rounded-xl border shadow-sm relative ${darkMode ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-100'}`}>
+                    <span className="text-[#1E88E5] font-extrabold text-lg block mb-1">2026</span>
+                    <h4 className="font-bold text-sm">Independent Consultant</h4>
+                    <p className="text-xs text-gray-500 mt-1 leading-relaxed">Providing highly custom geospatial data modelling and interactive web GIS systems worldwide.</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            {/* EDUCATION & CERTIFICATIONS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className={`p-6 rounded-xl border space-y-4 ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+                <h3 className="text-2xl font-extrabold flex items-center space-x-2">
+                  <span>Education</span>
+                </h3>
+                <div className="border-l-2 border-[#00C853] pl-4 space-y-4">
+                  <div>
+                    <span className="text-xs text-[#00C853] font-bold block">2017 - 2021</span>
+                    <h4 className="font-bold text-base text-gray-900 dark:text-white">BSc Geography with Special GIS Concentration</h4>
+                    <p className="text-sm text-gray-500">University of the Punjab, Lahore</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`p-6 rounded-xl border space-y-4 ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+                <h3 className="text-2xl font-extrabold flex items-center space-x-2">
+                  <span>Professional Credentials</span>
+                </h3>
+                <div className="space-y-3.5">
+                  <div className="flex items-center space-x-3 text-sm">
+                    <span className="px-2 py-1 bg-green-500/10 text-[#00C853] rounded text-xs font-bold">ESRI</span>
+                    <div>
+                      <span className="font-bold block">ArcGIS Pro Advanced Professional</span>
+                      <span className="text-xs text-gray-500">Esri International • 2024</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-3 text-sm">
+                    <span className="px-2 py-1 bg-[#1E88E5]/10 text-[#1E88E5] rounded text-xs font-bold">COURSERA</span>
+                    <div>
+                      <span className="font-bold block">Google Earth Engine Specialist Certification</span>
+                      <span className="text-xs text-gray-500">Coursera GIS Analytics Hub • 2023</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-3 text-sm">
+                    <span className="px-2 py-1 bg-indigo-500/10 text-indigo-550 rounded text-xs font-bold">UGISS</span>
+                    <div>
+                      <span className="font-bold block">GISP (GIS Professional) Accreditation</span>
+                      <span className="text-xs text-gray-500">UGISS Global Assembly • 2025</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        )}
+
+        {/* 3. PROJECTS GRID VIEW */}
+        {view === 'projects' && (
+          <div className="space-y-8 animate-fadeIn">
+            
+            {/* Header Title */}
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold">Geospatial Projects & Satellite Audits</h1>
+              <p className="text-gray-500 mt-1">Explore all 12 highly detailed Pakistan and South Asian analytical maps, modeling products, and remote sensing classification engines.</p>
+            </div>
+
+            {/* Filters and Search Bar Container */}
+            <div className={`p-4 rounded-xl border space-y-4 ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+                
+                {/* Search Bar */}
+                <div className="lg:col-span-5 relative">
+                  <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                    <SearchIcon />
+                  </span>
+                  <input 
+                    type="text" 
+                    placeholder="Search by project name, tech (Python, Sentinels, QGIS...)"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className={`w-full pl-10 pr-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-950 border-gray-800 focus:border-[#00E5FF] text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                  />
+                </div>
+
+                {/* Info Text */}
+                <div className="lg:col-span-7 lg:text-right text-xs font-semibold text-gray-400">
+                  Showing {filteredProjects.length} of {PROJECTS_DATA.length} geospatial projects
+                </div>
+
+              </div>
+
+              {/* Badges/Category Select */}
+              <div className="flex flex-wrap gap-2">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all border ${activeCategory === cat ? 'bg-[#00C853] border-[#00C853] text-white shadow-[0_0_10px_rgba(0,200,83,0.3)]' : `border-gray-200 dark:border-gray-800 ${darkMode ? 'hover:bg-gray-800 text-gray-350 bg-white/5' : 'hover:bg-gray-200 text-gray-600 bg-white'}`}`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+            </div>
+
+            {/* Zero results placeholder */}
+            {filteredProjects.length === 0 && (
+              <div className="text-center py-12 border border-dashed rounded-xl border-gray-300 dark:border-gray-800">
+                <p className="text-gray-500 font-semibold text-lg">No geospatial projects fit your current parameters.</p>
+                <button 
+                  onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}
+                  className="mt-3 px-4 py-2 bg-[#00C853] text-white text-xs font-bold rounded-lg hover:bg-green-700"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            )}
+
+            {/* Redesigned Glassmorphism Projects Showcase Grid (12 Projects) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project) => (
+                <div 
+                  key={project.id} 
+                  className="backdrop-blur-md bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_25px_rgba(0,229,255,0.15)] rounded-2xl overflow-hidden transition-all duration-500 flex flex-col h-full group"
+                >
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-transparent to-transparent z-10" />
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    
+                    {/* Category Badge */}
+                    <span className="absolute top-4 left-4 bg-gradient-to-r from-[#00C853] to-[#1E88E5] text-white text-[10px] font-bold px-3 py-1 rounded-md shadow-lg tracking-widest uppercase z-20">
+                      {project.category}
+                    </span>
+
+                    {/* Visual Stats overlay */}
+                    <div className="absolute bottom-3 right-4 flex items-center space-x-3 text-white text-xs font-bold z-20 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-lg animate-pulse">
+                      <span className="flex items-center space-x-1 text-yellow-400">
+                        <span>⭐</span>
+                        <span>{project.stars}</span>
+                      </span>
+                      <span className="text-white/40">|</span>
+                      <span className="flex items-center space-x-1 text-[#00E5FF]">
+                        <span>👁️</span>
+                        <span>{project.views}</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="font-extrabold text-lg text-white leading-snug tracking-tight group-hover:text-[#00E5FF] transition-colors line-clamp-1">
+                        {project.title}
+                      </h3>
+                      <div className="flex items-center justify-between text-[11px] font-bold tracking-widest text-[#00C853] uppercase">
+                        <span>{project.client}</span>
+                        <span className="text-gray-500 font-mono text-[10px]">{project.type}</span>
+                      </div>
+                      <p className="text-xs text-gray-300 line-clamp-2 leading-relaxed font-medium font-sans">
+                        {project.summary}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4 border-t border-white/5 pt-4">
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tech.map((t, idx) => (
+                          <span key={idx} className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/15">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <button 
+                        onClick={() => { setSelectedProjectId(project.id); setView('project-detail'); window.scrollTo(0,0); }}
+                        className="w-full py-2.5 bg-white/5 hover:bg-gradient-to-r hover:from-[#00C853] hover:to-[#00E5FF] border border-white/10 hover:border-transparent text-white hover:text-black font-extrabold text-xs rounded-xl transition-all duration-300 shadow-md flex items-center justify-center space-x-2"
+                      >
+                        <span>Analyze Details & AI Lab</span>
+                        <span>✨</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        )}
+
+        {/* 4. PROJECT DETAIL PAGE VIEW */}
+        {view === 'project-detail' && (
+          <div className="space-y-10 animate-fadeIn">
+            
+            {/* Back to list controller */}
+            <div>
+              <button 
+                onClick={() => setView('projects')} 
+                className="text-xs font-bold uppercase tracking-wider text-[#00C853] hover:underline flex items-center space-x-1"
+              >
+                <span>← Back to Projects Portfolio</span>
+              </button>
+            </div>
+
+            {/* PROJECT HEADER CARD */}
+            <div className={`p-6 sm:p-8 rounded-2xl border ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-55 border-gray-200'}`}>
+              <div className="flex flex-wrap gap-2 items-center mb-4">
+                <span className="px-3 py-1 bg-[#00C853] text-white text-xs font-bold rounded-lg shadow-sm">
+                  {activeProject.category}
+                </span>
+                <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">
+                  Delivered on {activeProject.date}
+                </span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-4">
+                {activeProject.title}
+              </h1>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold uppercase tracking-wider border-t pt-4 border-gray-200 dark:border-gray-800">
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Agency Client</span>
+                  <span className="text-gray-800 dark:text-gray-200">{activeProject.client}</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Primary Tech Stack</span>
+                  <span className="text-gray-800 dark:text-gray-200">{activeProject.tech[0]}</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Author Consultant</span>
+                  <span className="text-gray-800 dark:text-gray-200">Naveed Ali</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Region Scope</span>
+                  <span className="text-gray-800 dark:text-gray-200">Pakistan / South Asia</span>
+                </div>
+              </div>
+            </div>
+
+            {/* LAYOUT BODY */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column Content details */}
+              <div className="lg:col-span-8 space-y-8">
+                
+                {/* Main Hero Visual of the project */}
+                <div className="h-80 md:h-96 rounded-2xl overflow-hidden border shadow-sm dark:border-gray-800">
+                  <img 
+                    src={activeProject.image} 
+                    alt={activeProject.title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Problem Statement */}
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-extrabold text-[#00C853]">1. Problem Statement</h3>
+                  <p className={`text-sm sm:text-base leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {activeProject.description}
+                  </p>
+                </div>
+
+                {/* Action-Ready Step-by-Step Methodology */}
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-extrabold text-[#00C853]">2. Structured Methodology</h3>
+                  <div className="space-y-3">
+                    {activeProject.methodology.map((step, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`p-4 rounded-xl border flex items-start space-x-3 ${darkMode ? 'bg-gray-955 border-gray-800' : 'bg-white border-gray-100'}`}
+                      >
+                        <span className="w-6 h-6 rounded-full bg-[#00C853]/10 text-[#00C853] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                          {idx + 1}
+                        </span>
+                        <p className={`text-xs sm:text-sm leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                          {step}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column Sidebar Metadata summary */}
+              <div className="lg:col-span-4 space-y-6">
+                
+                {/* ✨ GEMINI INTEGRATION: Project-Specific Custom Python Pipeline Generator */}
+                <div className="p-6 rounded-xl border bg-gradient-to-br from-[#00C853]/10 to-[#00E5FF]/10 border-green-500/20 space-y-4 shadow-sm">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xl">✨</span>
+                    <h4 className="font-extrabold text-sm uppercase tracking-wider text-[#00C853] dark:text-cyan-400 font-mono">Gemini GIS Code Lab</h4>
+                  </div>
+                  <p className="text-xs text-gray-350 leading-relaxed font-sans">
+                    Generate a customized, production-ready spatial automation script dynamically designed for the specific parameters of this project.
+                  </p>
+                  
+                  {projectAiStatus === 'idle' && (
+                    <button 
+                      onClick={() => handleGenerateProjectPipeline(activeProject)}
+                      className="w-full py-2.5 bg-gradient-to-r from-[#00C853] to-[#1E88E5] text-white font-bold text-xs rounded-lg shadow-md transition-all flex items-center justify-center space-x-2"
+                    >
+                      <span>✨ Generate Project Script</span>
+                    </button>
+                  )}
+
+                  {projectAiStatus === 'loading' && (
+                    <div className="w-full py-2.5 bg-gray-500/10 text-gray-500 font-bold text-xs rounded-lg flex items-center justify-center">
+                      <LoadingIcon />
+                      <span>Consulting Gemini LLM...</span>
+                    </div>
+                  )}
+
+                  {projectAiStatus === 'error' && (
+                    <div className="space-y-3">
+                      <div className="p-3 bg-red-500/10 text-red-500 text-xs rounded-lg font-semibold">
+                        {projectAiError}
+                      </div>
+                      <button 
+                        onClick={() => handleGenerateProjectPipeline(activeProject)}
+                        className="w-full py-2 bg-[#00C853] text-white text-xs font-bold rounded-lg hover:bg-green-700"
+                      >
+                        Retry Script Generation
+                      </button>
+                    </div>
+                  )}
+
+                  {projectAiStatus === 'success' && (
+                    <div className="space-y-2">
+                      <div className="p-2 bg-green-500/10 text-green-700 dark:text-green-400 text-xs rounded font-bold text-center">
+                        ✓ Script Generated Successfully
+                      </div>
+                      <button 
+                        onClick={() => handleGenerateProjectPipeline(activeProject)}
+                        className="w-full py-1.5 bg-gray-500/10 hover:bg-gray-500/20 text-xs font-semibold rounded-lg text-gray-400 transition-colors"
+                      >
+                        Re-generate Script ✨
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Tech specifications card */}
+                <div className={`p-6 rounded-xl border space-y-4 ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-55/35 border-gray-150'}`}>
+                  <h4 className="font-extrabold text-base border-b pb-2">Technical Summary</h4>
+                  
+                  <div className="space-y-2">
+                    <span className="text-xs text-gray-400 font-bold block">Keywords & Indexing</span>
+                    <div className="flex flex-wrap gap-1">
+                      {activeProject.tech.map((t, idx) => (
+                        <span key={idx} className="text-xs bg-[#00C853]/10 text-[#00C853] px-2.5 py-1 rounded-md font-semibold">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-800">
+                    <span className="text-xs text-gray-400 font-bold block">Verification Standard</span>
+                    <p className="text-xs text-gray-500 font-medium">91.2% Overall accuracy calculated using blind validation points & confusion matrices.</p>
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-800">
+                    <span className="text-xs text-gray-400 font-bold block">Data Sourcing & Licenses</span>
+                    <p className="text-xs text-gray-500 font-medium">ESA Copernicus Data Space, USGS Landsat Legacy products, NASA LP DAAC systems.</p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Expansive Result Display for Project AI Code */}
+            {projectAiStatus === 'success' && projectAiCode && (
+              <div className="mt-8 p-6 rounded-2xl border border-green-500/30 bg-[#050c21] text-gray-150 space-y-4 animate-slideUp">
+                <div className="flex items-center justify-between border-b border-gray-800 pb-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="w-3 h-3 rounded-full bg-[#00C853] shadow-[0_0_10px_rgba(0,200,83,0.5)]"></span>
+                    <span className="text-xs font-mono text-[#00C853] font-bold">✨ generated_spatial_pipeline.py</span>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Gemini-2.5-Flash</span>
+                </div>
+                <div className="max-h-96 overflow-y-auto font-mono text-xs leading-relaxed p-4 bg-black/60 rounded-xl space-y-2 select-text text-left">
+                  <pre className="whitespace-pre-wrap">{projectAiCode}</pre>
+                </div>
+                <p className="text-[10px] text-gray-400 italic">
+                  Note: The mathematical notations listed above are formulated dynamically using LaTeX format. Enclose in your own Markdown viewer to display fully formatted fractions, integrations, or indices formulas.
+                </p>
+              </div>
+            )}
+
+          </div>
+        )}
+
+        {/* 5. ✨ AI SPATIAL LAB & METHOD PLANNER (DEDICATED GEMINI TAB) */}
+        {view === 'ai-lab' && (
+          <div className="space-y-8 animate-fadeIn max-w-6xl mx-auto">
+            
+            {/* Header */}
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center space-x-1.5 bg-[#00E5FF]/10 text-[#00E5FF] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-[#00E5FF]/20 mb-2">
+                <span>✨ Live AI Simulation Workspace</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                ✨ Gemini Spatial Method Planner
+              </h1>
+              <p className="text-gray-400 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
+                An active client-facing workspace utilizing Gemini LLM parameters to draft GIS methodologies, calculate multi-spectral bands, and construct robust GEE/Python processing templates based on real-world constraints.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
+              
+              {/* Form Input Column */}
+              <div className="lg:col-span-5">
+                <form onSubmit={handleGenerateLabMethodology} className={`p-6 rounded-2xl border space-y-5 shadow-sm ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-55/40 border-gray-200'}`}>
+                  <h3 className="font-extrabold text-lg border-b pb-2 flex items-center space-x-2">
+                    <span>✨ Configure Parameters</span>
+                  </h3>
+
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Target Study Location (Pakistan / Global)</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={aiLabLocation}
+                      onChange={(e) => setAiLabLocation(e.target.value)}
+                      placeholder="e.g. Swat Valley Forest Reserves"
+                      className={`w-full px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-955 border-gray-800 focus:border-[#00E5FF] text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Geospatial / Remote Sensing Objective</label>
+                    <select
+                      value={aiLabGoal}
+                      onChange={(e) => setAiLabGoal(e.target.value)}
+                      className={`w-full px-4 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-955 border-gray-800 focus:border-[#00E5FF] text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                    >
+                      <option value="NDVI Deforestation Analysis">Vegetation Density & NDVI Deforestation Analysis</option>
+                      <option value="NDWI Water Indices Modeling">Surface Water Boundary Tracking (NDWI / MNDWI)</option>
+                      <option value="NDBI Urban Expansion Modeling">Urban Sprawl & Concrete Building Density (NDBI)</option>
+                      <option value="Thermal Island Heat Calibration">Thermal Heat Island (LST) Calibration</option>
+                      <option value="Rainfall landslide vulnerability">Rainfall-Triggered Landslide Hazard Risk Modeling</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Development Framework & Platform</label>
+                    <select
+                      value={aiLabPlatform}
+                      onChange={(e) => setAiLabPlatform(e.target.value)}
+                      className={`w-full px-4 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-955 border-gray-800 focus:border-[#00E5FF] text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                    >
+                      <option value="Google Earth Engine (JavaScript)">Google Earth Engine (JavaScript API)</option>
+                      <option value="Python Spatial (GeoPandas & Rasterio)">Python Spatial (GeoPandas, Rasterio, GDAL)</option>
+                      <option value="ArcGIS Notebook (ArcPy & Spatially Enabled DataFrames)">ArcGIS Pro Notebook (ArcPy & SEDF)</option>
+                      <option value="PostGIS Spatiotemporal SQL">PostgreSQL / PostGIS SQL Queries</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Custom Requirements / Study Specifics</label>
+                    <textarea 
+                      rows="3"
+                      value={aiLabCustomDetail}
+                      onChange={(e) => setAiLabCustomDetail(e.target.value)}
+                      placeholder="e.g. Filter to Summer months only, calculate the statistical mean, output results in GeoTIFF..."
+                      className={`w-full px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-955 border-gray-800 focus:border-[#00E5FF] text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                    ></textarea>
+                  </div>
+
+                  <button 
+                    type="submit"
+                    disabled={aiLabStatus === 'loading'}
+                    className="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#00C853] to-[#00E5FF] hover:opacity-90 text-white font-bold text-sm rounded-lg shadow-md disabled:opacity-60 space-x-2"
+                  >
+                    {aiLabStatus === 'loading' ? (
+                      <>
+                        <LoadingIcon />
+                        <span>Generating Blueprint...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>✨ Formulate AI Spatial Blueprint</span>
+                      </>
+                    )}
+                  </button>
+
+                </form>
+              </div>
+
+              {/* Blueprint Output Column */}
+              <div className="lg:col-span-7">
+                
+                {aiLabStatus === 'idle' && (
+                  <div className="h-96 rounded-2xl border border-dashed border-gray-350 dark:border-gray-800 flex flex-col items-center justify-center text-center p-6 space-y-4">
+                    <div className="p-4 rounded-full bg-[#00E5FF]/10 text-[#00E5FF]">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="font-bold text-lg">No Blueprint Active</h4>
+                      <p className="text-xs text-gray-500 max-w-sm">Configure parameters on the left and click generate to launch the active Gemini-based method builder.</p>
+                    </div>
+                  </div>
+                )}
+
+                {aiLabStatus === 'loading' && (
+                  <div className="h-96 rounded-2xl border border-dashed border-gray-350 dark:border-gray-800 flex flex-col items-center justify-center text-center p-6 space-y-4">
+                    <div className="relative">
+                      <div className="w-16 h-16 rounded-full border-4 border-t-[#00E5FF] border-[#00E5FF]/20 animate-spin"></div>
+                      <span className="absolute inset-0 flex items-center justify-center text-lg">✨</span>
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="font-bold text-lg">Executing Spatial Intelligence Queries</h4>
+                      <p className="text-xs text-gray-550 max-w-sm">Gemini is structuring the band mathematics, researching local datasets, and writing spatial logic routines...</p>
+                    </div>
+                  </div>
+                )}
+
+                {aiLabStatus === 'error' && (
+                  <div className="p-6 rounded-2xl border border-red-500/20 bg-red-500/10 text-center space-y-4">
+                    <div className="text-4xl">⚠</div>
+                    <h4 className="font-bold text-lg text-red-600 dark:text-red-400">Consultation Error Encountered</h4>
+                    <p className="text-sm text-red-500 max-w-md mx-auto">{aiLabError}</p>
+                    <button 
+                      onClick={handleGenerateLabMethodology}
+                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-lg transition-colors"
+                    >
+                      Retry Formulation
+                    </button>
+                  </div>
+                )}
+
+                {aiLabStatus === 'success' && aiLabResult && (
+                  <div className="space-y-4 animate-slideUp">
+                    <div className="flex items-center justify-between border-b pb-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xl">📊</span>
+                        <h4 className="font-extrabold text-base">Methodology Output</h4>
+                      </div>
+                      <span className="px-2 py-1 bg-green-500/10 text-[#00C853] text-[10px] font-bold rounded">LaTeX Standard Compliant</span>
+                    </div>
+
+                    <div className={`p-6 rounded-2xl border max-h-[500px] overflow-y-auto leading-relaxed select-text text-left text-sm ${darkMode ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200'}`}>
+                      <div className="prose dark:prose-invert prose-xs max-w-none space-y-4">
+                        <pre className="whitespace-pre-wrap font-sans leading-relaxed">{aiLabResult}</pre>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs flex items-start space-x-2">
+                      <span className="text-lg">ℹ</span>
+                      <p className="leading-normal">
+                        Mathematical formulas (e.g. spectral indices) generated by the agent above are expressed using raw LaTeX format. Wrap with any standard equation reader to render complex fractions or integrations.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+        {/* 6. CONTACT FORM VIEW */}
+        {view === 'contact' && (
+          <div className="max-w-4xl mx-auto space-y-10 animate-fadeIn">
+            
+            {/* Header Title */}
+            <div className="text-center space-y-2">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white">Let's Work Together</h1>
+              <p className="text-gray-400 max-w-2xl mx-auto">Get in touch for GIS analysis, environmental modeling, satellite automation pipelines, or web mapping development.</p>
+            </div>
+
+            {/* Content Split: Form and details */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column Details */}
+              <div className="md:col-span-5 space-y-6">
+                
+                <div className={`p-6 rounded-xl border space-y-4 ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-55 border-gray-200'}`}>
+                  <h3 className="font-extrabold text-lg">Contact Details</h3>
+                  
+                  <div className="space-y-4 text-sm font-medium">
+                    <div className="flex items-center space-x-3">
+                      <span className="p-2 rounded bg-[#00C853]/10 text-[#00C853]">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                      </span>
+                      <div>
+                        <span className="text-xs text-gray-400 block">Primary Email</span>
+                        <a href="mailto:naveed.gis.pk@gmail.com" className="hover:underline text-gray-200">naveed.gis.pk@gmail.com</a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-3">
+                      <span className="p-2 rounded bg-[#00E5FF]/10 text-[#00E5FF]">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                      </span>
+                      <div>
+                        <span className="text-xs text-gray-400 block">WhatsApp Phone</span>
+                        <span className="font-mono text-gray-200">+92 (300) 1234567</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-3">
+                      <span className="p-2 rounded bg-[#1E88E5]/10 text-[#1E88E5]">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
+                      </span>
+                      <div>
+                        <span className="text-xs text-gray-400 block">Head Office</span>
+                        <span className="text-gray-200">Rawalpindi, Punjab, Pakistan</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Branded "Connect Globally" Section */}
+                <div className={`p-6 rounded-xl border space-y-4 ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-55 border-gray-150'}`}>
+                  <h4 className="font-extrabold text-sm uppercase tracking-widest text-gray-400">Connect Globally</h4>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <a 
+                      href="https://linkedin.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg bg-blue-600/10 hover:bg-[#0077B5] hover:text-white text-[#0077B5] duration-300"
+                      title="LinkedIn"
+                    >
+                      <LinkedInIcon />
+                    </a>
+                    <a 
+                      href="https://github.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg bg-gray-600/10 hover:bg-[#333] hover:text-white text-gray-700 dark:text-gray-300 dark:hover:bg-white dark:hover:text-[#111] duration-300"
+                      title="GitHub"
+                    >
+                      <GitHubIcon />
+                    </a>
+                    <a 
+                      href="https://wa.me/923001234567" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg bg-green-600/10 hover:bg-[#25D366] hover:text-white text-[#25D366] duration-300"
+                      title="WhatsApp"
+                    >
+                      <WhatsAppIcon />
+                    </a>
+                    <a 
+                      href="mailto:naveed.gis.pk@gmail.com" 
+                      className="p-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg bg-red-650/10 hover:bg-[#D32F2F] hover:text-white text-[#D32F2F] duration-300"
+                      title="Email"
+                    >
+                      <EnvelopeIcon />
+                    </a>
+                    <a 
+                      href="https://medium.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-3 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg bg-emerald-600/10 hover:bg-[#02B875] hover:text-white text-[#02B875] duration-300"
+                      title="Medium"
+                    >
+                      <MediumIcon />
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column Form with feedback mechanisms */}
+              <div className="md:col-span-7">
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  
+                  {/* Status indicators */}
+                  {formStatus === 'success' && (
+                    <div className="p-4 bg-green-500/15 text-green-700 dark:text-green-400 rounded-xl border border-green-500/20 text-sm font-semibold flex items-center space-x-2 animate-fadeIn">
+                      <span>✓ Inquiry transmitted! Naveed Ali will respond within 24 working hours.</span>
+                    </div>
+                  )}
+
+                  {formStatus === 'error' && (
+                    <div className="p-4 bg-red-500/15 text-red-700 dark:text-red-400 rounded-xl border border-red-500/20 text-sm font-semibold flex items-center space-x-2 animate-fadeIn">
+                      <span>⚠ Validation failure. Please ensure all input fields are populated correctly.</span>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Your Name</label>
+                      <input 
+                        type="text" 
+                        required
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-900 border-gray-800 focus:border-green-500 text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                        placeholder="John Doe"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Email Address</label>
+                      <input 
+                        type="email" 
+                        required
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-900 border-gray-800 focus:border-green-500 text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                        placeholder="johndoe@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Consultation Topic</label>
+                    <select
+                      value={contactCategory}
+                      onChange={(e) => setContactCategory(e.target.value)}
+                      className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-900 border-gray-800 focus:border-green-500 text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                    >
+                      <option value="GIS Consultation">GIS Consultation & Map Production</option>
+                      <option value="Remote Sensing Analysis">Remote Sensing & Satellite Automation</option>
+                      <option value="Interactive Web Mapping">Interactive Web GIS App Development</option>
+                      <option value="Research & Education">Research Project Partnership</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-1">Inquiry / Requirements Message</label>
+                    <textarea 
+                      rows="5"
+                      required
+                      value={contactMessage}
+                      onChange={(e) => setContactMessage(e.target.value)}
+                      className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 ${darkMode ? 'bg-gray-900 border-gray-800 focus:border-green-500 text-gray-100' : 'bg-white border-gray-300 focus:border-[#00C853]'}`}
+                      placeholder="Detail your region of study, data availability, required indices (NDVI, NDWI...), and end goals."
+                    ></textarea>
+                  </div>
+
+                  <button 
+                    type="submit"
+                    disabled={formStatus === 'submitting'}
+                    className="w-full inline-flex items-center justify-center px-6 py-3 bg-[#00C853] hover:bg-green-700 text-white font-bold text-sm rounded-lg shadow-md transition-all disabled:opacity-50"
+                  >
+                    <span>{formStatus === 'submitting' ? 'Transmitting Data...' : 'Submit Spatial Consultation Request'}</span>
+                    <span className="ml-2"><SendIcon /></span>
+                  </button>
+
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+      </main>
+
+      {/* FOOTER */}
+      <footer className={`border-t py-12 mt-20 transition-colors ${darkMode ? 'bg-[#050c21] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            
+            {/* Column 1 Logo Name */}
+            <div className="md:col-span-5 space-y-4">
+              <div className="flex items-center space-x-3 cursor-pointer" onClick={() => { setView('home'); window.scrollTo(0,0); }}>
+                <div className="p-2 rounded-lg bg-gradient-to-tr from-[#00C853] to-[#00E5FF] text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  </svg>
+                </div>
+                <span className="font-bold text-lg text-white tracking-tight">Naveed Ali</span>
+              </div>
+              <p className="text-xs text-gray-400 leading-relaxed max-w-sm">
+                Providing high-accuracy Satellite Remote Sensing, Land Cover classification systems, hydrological modeling, and customized interactive Leaflet map layers tailored to agency operations.
+              </p>
+            </div>
+
+            {/* Column 2 Navigation Links */}
+            <div className="md:col-span-3 space-y-3">
+              <h4 className="font-bold text-sm text-gray-400 uppercase tracking-widest">Navigation</h4>
+              <ul className="space-y-2 text-xs font-semibold text-gray-500">
+                <li>
+                  <button onClick={() => { setView('home'); window.scrollTo(0,0); }} className="hover:text-[#00E5FF]">Home Panel</button>
+                </li>
+                <li>
+                  <button onClick={() => { setView('about'); window.scrollTo(0,0); }} className="hover:text-[#00E5FF]">About Naveed</button>
+                </li>
+                <li>
+                  <button onClick={() => { setView('projects'); window.scrollTo(0,0); }} className="hover:text-[#00E5FF]">Projects Grid</button>
+                </li>
+                <li>
+                  <button onClick={() => { setView('ai-lab'); window.scrollTo(0,0); }} className="hover:text-[#00E5FF]">✨ AI Spatial Lab</button>
+                </li>
+                <li>
+                  <button onClick={() => { setView('contact'); window.scrollTo(0,0); }} className="hover:text-[#00E5FF]">Inquire & Contact</button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3 External Connect */}
+            <div className="md:col-span-4 space-y-4">
+              <h4 className="font-bold text-sm text-gray-400 uppercase tracking-widest">Connect Globally</h4>
+              
+              <div className="flex items-center gap-3">
+                <a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-lg transition-all hover:-translate-y-1 hover:shadow-lg bg-blue-600/10 hover:bg-[#0077B5] hover:text-white text-[#0077B5] duration-200"
+                  title="LinkedIn"
+                >
+                  <LinkedInIcon />
+                </a>
+                <a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-lg transition-all hover:-translate-y-1 hover:shadow-lg bg-gray-600/10 hover:bg-[#333] hover:text-white text-gray-700 dark:text-gray-300 dark:hover:bg-white dark:hover:text-[#111] duration-200"
+                  title="GitHub"
+                >
+                  <GitHubIcon />
+                </a>
+                <a 
+                  href="https://wa.me/923001234567" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-lg transition-all hover:-translate-y-1 hover:shadow-lg bg-green-600/10 hover:bg-[#25D366] hover:text-white text-[#25D366] duration-200"
+                  title="WhatsApp"
+                >
+                  <WhatsAppIcon />
+                </a>
+                <a 
+                  href="mailto:naveed.gis.pk@gmail.com" 
+                  className="p-2 rounded-lg transition-all hover:-translate-y-1 hover:shadow-lg bg-red-655/10 hover:bg-[#D32F2F] hover:text-white text-[#D32F2F] duration-200"
+                  title="Email"
+                >
+                  <EnvelopeIcon />
+                </a>
+                <a 
+                  href="https://medium.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-lg transition-all hover:-translate-y-1 hover:shadow-lg bg-emerald-600/10 hover:bg-[#02B875] hover:text-white text-[#02B875] duration-200"
+                  title="Medium"
+                >
+                  <MediumIcon />
+                </a>
+              </div>
+
+              <p className="text-[11px] text-gray-400 pt-1 leading-normal">Spatial operations and GeoAI consultancies hosted directly in Rawalpindi / Islamabad metropolitan belt.</p>
+            </div>
+
+          </div>
+
+          <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+            <span>© 2026 Naveed Ali. All rights reserved.</span>
+            <span className="mt-2 sm:mt-0">Reproducible GIS Standards • ISO 19115 Metadata Compliant</span>
+          </div>
+
+        </div>
+      </footer>
+
+    </div>
+  );
+}
