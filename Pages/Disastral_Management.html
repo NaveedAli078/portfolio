@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Management — Muhammad Naveed</title>
+  <meta name="description" content="GIS-based flood hazard mapping, susceptibility assessment, and disaster risk reduction research by Muhammad Naveed.">
+  <link rel="icon" type="image/png" href="../Logo.png">
+  <meta property="og:title" content="Disaster Management — Muhammad Naveed">
+  <meta property="og:description" content="Flood risk, SAR-based inundation detection, and GEE cloud processing for disaster management.">
+  <meta property="og:image" content="../Images/Pic_photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/subpage.css">
+  <script>(function(){var t=localStorage.getItem('portfolio-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<div id="sp-progress"></div>
+
+<nav class="sp-nav">
+  <a href="../index.html" class="sp-nav-logo">
+    <span class="dot"></span> M.Naveed
+  </a>
+  <a href="../index.html#research" class="sp-nav-back">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+  </a>
+  <div class="sp-nav-icons">
+    <button class="sp-icon-btn sp-theme-btn" id="sp-theme-btn" aria-label="Toggle theme">
+      <i class="fas fa-moon" id="sp-theme-icon"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="sp-hero">
+  <div class="sp-category"><i class="fas fa-water"></i> Research Topic</div>
+  <h1 class="sp-title">Disaster Management<br>&amp; Flood Risk</h1>
+  <div class="sp-meta">
+    <span><i class="fas fa-calendar-alt"></i> Last updated: Aug 2024</span>
+    <span><i class="fas fa-tag"></i> Remote Sensing · GEE · Machine Learning</span>
+    <span><i class="fas fa-map-marker-alt"></i> Pakistan Focus</span>
+  </div>
+</div>
+
+<div class="sp-cover sp-reveal">
+  <img src="Pakistan Floods 2022.webp" alt="Pakistan Floods 2022 — Satellite View">
+</div>
+
+<div class="sp-body">
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Overview</div>
+    <h2>Why Flood Risk Matters</h2>
+    <p>Pakistan is one of the world's most flood-prone countries, experiencing devastating events almost every year. The 2022 super-floods inundated one-third of the country, displacing 33 million people and causing over $30 billion in economic losses. Despite these recurrent disasters, comprehensive and high-resolution flood hazard maps remain scarce.</p>
+    <p>Geospatial technology — particularly satellite remote sensing and cloud computing on Google Earth Engine — has transformed how we detect, map, and assess flood risk at both regional and national scales.</p>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Key Facts</div>
+    <div class="sp-facts">
+      <div class="sp-fact">
+        <div class="sp-fact-num">33M</div>
+        <div class="sp-fact-label">People Displaced (2022)</div>
+      </div>
+      <div class="sp-fact">
+        <div class="sp-fact-num">$30B</div>
+        <div class="sp-fact-label">Economic Damage (2022)</div>
+      </div>
+      <div class="sp-fact">
+        <div class="sp-fact-num">30m</div>
+        <div class="sp-fact-label">Target Map Resolution</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Research Topics</div>
+    <h2>Areas of Investigation</h2>
+    <div class="sp-topics">
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🌊</div>
+        <div>
+          <h4>Flood Susceptibility Mapping</h4>
+          <p>Using ML classifiers (RF, SVM, XGBoost) with multi-source conditioning variables including DEM, slope, TWI, LULC, and rainfall.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🛰️</div>
+        <div>
+          <h4>SAR-based Inundation Detection</h4>
+          <p>Sentinel-1 SAR backscatter change detection to map flooded extents in near-real-time during active flood events.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">☁️</div>
+        <div>
+          <h4>GEE Cloud Processing</h4>
+          <p>Leveraging Google Earth Engine's petabyte-scale satellite archive to perform large-area flood mapping without local computing infrastructure.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">⚠️</div>
+        <div>
+          <h4>Risk &amp; Exposure Assessment</h4>
+          <p>Combining flood hazard maps with population, infrastructure, and agricultural exposure data to produce actionable risk indices.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Methodology</div>
+    <h2>Technical Approach</h2>
+    <p>My research workflow combines multi-source spatial data with machine learning pipelines to produce flood susceptibility and hazard maps at 30 m resolution:</p>
+    <div class="sp-quote">
+      "Integrating Sentinel-1 SAR, optical imagery, DEM derivatives, and climate data within a Google Earth Engine pipeline enables robust flood susceptibility mapping at spatial scales previously impossible with desktop GIS."
+    </div>
+    <p>Key methodological steps: (1) multi-source data preprocessing and normalization, (2) conditioning variable extraction — slope, aspect, TWI, NDVI, drainage density, (3) ML classifier training with field-validated flood inventory, (4) spatial cross-validation, (5) final susceptibility map generation.</p>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Tools &amp; Technologies</div>
+    <div class="sp-tools">
+      <span class="sp-tool">Google Earth Engine</span>
+      <span class="sp-tool">Python</span>
+      <span class="sp-tool">Sentinel-1 SAR</span>
+      <span class="sp-tool">scikit-learn</span>
+      <span class="sp-tool">QGIS</span>
+      <span class="sp-tool">ArcGIS Pro</span>
+      <span class="sp-tool">Random Forest</span>
+      <span class="sp-tool">XGBoost</span>
+      <span class="sp-tool">SRTM DEM</span>
+      <span class="sp-tool">GeoPandas</span>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Related Research</div>
+    <div class="sp-related">
+      <a href="Climate_change.html" class="sp-related-item">
+        <i class="fas fa-thermometer-half"></i> Climate Change Research
+      </a>
+      <a href="Nature_resoure.html" class="sp-related-item">
+        <i class="fas fa-leaf"></i> Natural Resources
+      </a>
+      <a href="urbanization.html" class="sp-related-item">
+        <i class="fas fa-city"></i> Urbanization Studies
+      </a>
+      <a href="Open_sourec.html" class="sp-related-item">
+        <i class="fas fa-code-branch"></i> Open Source GIS
+      </a>
+    </div>
+  </div>
+
+  <div class="sp-author sp-reveal">
+    <img src="../Images/Pic_photo.png" alt="Muhammad Naveed">
+    <div>
+      <div class="sp-author-role">GIS &amp; Remote Sensing Expert</div>
+      <div class="sp-author-name">Muhammad Naveed</div>
+      <div class="sp-author-bio">Researcher at IGEO, Arid Agriculture University. Specializing in geospatial data science, GeoAI, and Earth observation for disaster management and climate applications.</div>
+      <div class="sp-social" style="margin-top:10px">
+        <a href="mailto:naveedali786aziz@gmail.com" class="sp-social-btn"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/muhammadnaveed-gis" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-github"></i></a>
+        <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-medium"></i></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:20px 32px;max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+  <p style="font-size:.72rem;color:var(--text-faint)">© 2025 Muhammad Naveed</p>
+  <a href="../index.html" style="font-size:.72rem;color:var(--accent);display:flex;align-items:center;gap:6px">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+  </a>
+</footer>
+
+<script src="../Js/subpage.js" defer></script>
+</body>
+</html>

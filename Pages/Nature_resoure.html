@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Natural Resources — Muhammad Naveed</title>
+  <meta name="description" content="Wetland mapping, vegetation monitoring, and water body dynamics using GIS and remote sensing by Muhammad Naveed.">
+  <link rel="icon" type="image/png" href="../Logo.png">
+  <meta property="og:title" content="Natural Resources Management — Muhammad Naveed">
+  <meta property="og:description" content="Wetland mapping, NDVI monitoring, and surface water dynamics using Sentinel and GEE.">
+  <meta property="og:image" content="../Images/Pic_photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/subpage.css">
+  <script>(function(){var t=localStorage.getItem('portfolio-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<div id="sp-progress"></div>
+
+<nav class="sp-nav">
+  <a href="../index.html" class="sp-nav-logo">
+    <span class="dot"></span> M.Naveed
+  </a>
+  <a href="../index.html#research" class="sp-nav-back">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+  </a>
+  <div class="sp-nav-icons">
+    <button class="sp-icon-btn sp-theme-btn" id="sp-theme-btn" aria-label="Toggle theme">
+      <i class="fas fa-moon" id="sp-theme-icon"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="sp-hero">
+  <div class="sp-category"><i class="fas fa-leaf"></i> Research Topic</div>
+  <h1 class="sp-title">Natural Resources<br>Management</h1>
+  <div class="sp-meta">
+    <span><i class="fas fa-calendar-alt"></i> Last updated: May 2023</span>
+    <span><i class="fas fa-tag"></i> Wetlands · NDVI · Surface Water · GEE</span>
+    <span><i class="fas fa-map-marker-alt"></i> Pakistan &amp; South Asia</span>
+  </div>
+</div>
+
+<div class="sp-cover sp-reveal">
+  <img src="wetlands_.webp" alt="Wetlands and Natural Resources">
+</div>
+
+<div class="sp-body">
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Overview</div>
+    <h2>Protecting Critical Ecosystems</h2>
+    <p>Wetlands, forests, and water bodies are the foundations of healthy ecosystems — regulating water cycles, sequestering carbon, supporting biodiversity, and providing livelihoods for millions of people. Yet they are disappearing faster than at any point in human history.</p>
+    <p>Remote sensing provides the only cost-effective means to monitor natural resources continuously at large spatial scales. Spectral indices derived from multispectral satellite imagery can detect vegetation health, water extent, and land cover change with remarkable accuracy — enabling early warning systems and evidence-based conservation planning.</p>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Key Facts</div>
+    <div class="sp-facts">
+      <div class="sp-fact">
+        <div class="sp-fact-num">35%</div>
+        <div class="sp-fact-label">Global Wetland Loss Since 1970</div>
+      </div>
+      <div class="sp-fact">
+        <div class="sp-fact-num">6</div>
+        <div class="sp-fact-label">Ramsar Wetlands in Pakistan</div>
+      </div>
+      <div class="sp-fact">
+        <div class="sp-fact-num">10m</div>
+        <div class="sp-fact-label">Sentinel-2 Optical Resolution</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Research Topics</div>
+    <h2>Areas of Investigation</h2>
+    <div class="sp-topics">
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🌿</div>
+        <div>
+          <h4>Wetland Mapping</h4>
+          <p>Combining Sentinel-1 SAR and Sentinel-2 optical data to map wetland extent and monitor seasonal inundation dynamics.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">📈</div>
+        <div>
+          <h4>NDVI Time-Series</h4>
+          <p>Tracking vegetation health, phenology, and long-term greening or browning trends using Landsat and MODIS NDVI archives.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">💧</div>
+        <div>
+          <h4>Surface Water Dynamics</h4>
+          <p>JRC Global Surface Water dataset analysis and Sentinel-based NDWI/MNDWI classification to monitor water body area changes.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🌲</div>
+        <div>
+          <h4>Forest Cover Change</h4>
+          <p>Hansen Global Forest Change data combined with local Sentinel-2 analysis to detect deforestation and reforestation events.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Spectral Indices</div>
+    <h2>Remote Sensing Toolkit</h2>
+    <div class="sp-quote">
+      "Spectral indices — NDVI, NDWI, MNDWI, EVI — provide simple yet powerful proxies for vegetation, water, and land surface properties that can be computed from freely available satellite data at global scale."
+    </div>
+    <p>My workflow applies these indices within Google Earth Engine, enabling pixel-level change detection across years of cloud-filtered satellite composites without local computing bottlenecks.</p>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Tools &amp; Technologies</div>
+    <div class="sp-tools">
+      <span class="sp-tool">Google Earth Engine</span>
+      <span class="sp-tool">Sentinel-1 SAR</span>
+      <span class="sp-tool">Sentinel-2</span>
+      <span class="sp-tool">MODIS</span>
+      <span class="sp-tool">Landsat Archive</span>
+      <span class="sp-tool">NDVI · NDWI · MNDWI · EVI</span>
+      <span class="sp-tool">Python · Geemap</span>
+      <span class="sp-tool">QGIS · ArcGIS Pro</span>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Related Research</div>
+    <div class="sp-related">
+      <a href="Climate_change.html" class="sp-related-item">
+        <i class="fas fa-thermometer-half"></i> Climate Change
+      </a>
+      <a href="Disastral_Management.html" class="sp-related-item">
+        <i class="fas fa-water"></i> Disaster Management
+      </a>
+      <a href="urbanization.html" class="sp-related-item">
+        <i class="fas fa-city"></i> Urbanization
+      </a>
+      <a href="Open_sourec.html" class="sp-related-item">
+        <i class="fas fa-code-branch"></i> Open Source GIS
+      </a>
+    </div>
+  </div>
+
+  <div class="sp-author sp-reveal">
+    <img src="../Images/Pic_photo.png" alt="Muhammad Naveed">
+    <div>
+      <div class="sp-author-role">GIS &amp; Remote Sensing Expert</div>
+      <div class="sp-author-name">Muhammad Naveed</div>
+      <div class="sp-author-bio">Mapping and monitoring Earth's natural resources using satellite data. Interested in wetland conservation, vegetation dynamics, and water resource management applications.</div>
+      <div class="sp-social" style="margin-top:10px">
+        <a href="mailto:naveedali786aziz@gmail.com" class="sp-social-btn"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/muhammadnaveed-gis" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-github"></i></a>
+        <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-medium"></i></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:20px 32px;max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+  <p style="font-size:.72rem;color:var(--text-faint)">© 2025 Muhammad Naveed</p>
+  <a href="../index.html" style="font-size:.72rem;color:var(--accent);display:flex;align-items:center;gap:6px">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+  </a>
+</footer>
+
+<script src="../Js/subpage.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urbanization — Muhammad Naveed</title>
+  <meta name="description" content="Urban growth monitoring, LULC change detection, and urban heat island analysis using GIS and remote sensing.">
+  <link rel="icon" type="image/png" href="../Logo.png">
+  <meta property="og:title" content="Urbanization — Muhammad Naveed">
+  <meta property="og:description" content="LULC change detection, urban heat island analysis, and urban growth monitoring using Landsat & Sentinel-2.">
+  <meta property="og:image" content="../Images/Pic_photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/subpage.css">
+  <script>(function(){var t=localStorage.getItem('portfolio-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<div id="sp-progress"></div>
+
+<nav class="sp-nav">
+  <a href="../index.html" class="sp-nav-logo">
+    <span class="dot"></span> M.Naveed
+  </a>
+  <a href="../index.html#research" class="sp-nav-back">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+  </a>
+  <div class="sp-nav-icons">
+    <button class="sp-icon-btn sp-theme-btn" id="sp-theme-btn" aria-label="Toggle theme">
+      <i class="fas fa-moon" id="sp-theme-icon"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="sp-hero">
+  <div class="sp-category"><i class="fas fa-city"></i> Research Topic</div>
+  <h1 class="sp-title">Urbanization &amp;<br>LULC Change</h1>
+  <div class="sp-meta">
+    <span><i class="fas fa-calendar-alt"></i> Last updated: Aug 2024</span>
+    <span><i class="fas fa-tag"></i> Landsat · Sentinel-2 · GEE · ML</span>
+    <span><i class="fas fa-map-marker-alt"></i> Pakistan Cities</span>
+  </div>
+</div>
+
+<div class="sp-cover sp-reveal">
+  <img src="lulc_cover_.webp" alt="LULC Urbanization Map">
+</div>
+
+<div class="sp-body">
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Overview</div>
+    <h2>Cities Growing Faster Than Plans</h2>
+    <p>Urbanization is one of the most profound land-use transformations of the 21st century. In Pakistan, cities like Rawalpindi, Lahore, and Karachi are expanding at accelerating rates — converting agricultural land, wetlands, and green spaces into impervious built-up surfaces.</p>
+    <p>This unplanned sprawl creates cascading pressures on water availability, urban heat islands, green infrastructure, and ecosystem carbon storage. Understanding where, how fast, and at what cost cities are expanding is critical for sustainable land governance.</p>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Key Facts</div>
+    <div class="sp-facts">
+      <div class="sp-fact">
+        <div class="sp-fact-num">37%</div>
+        <div class="sp-fact-label">Pakistan Urban Population</div>
+      </div>
+      <div class="sp-fact">
+        <div class="sp-fact-num">3%</div>
+        <div class="sp-fact-label">Annual Urban Growth Rate</div>
+      </div>
+      <div class="sp-fact">
+        <div class="sp-fact-num">30m</div>
+        <div class="sp-fact-label">Landsat Pixel Resolution</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Research Topics</div>
+    <h2>Areas of Investigation</h2>
+    <div class="sp-topics">
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🏙️</div>
+        <div>
+          <h4>LULC Change Detection</h4>
+          <p>Multi-temporal Landsat and Sentinel-2 classification to quantify land cover transitions from 1990 to present across major Pakistani cities.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🌡️</div>
+        <div>
+          <h4>Urban Heat Island (UHI)</h4>
+          <p>Land Surface Temperature (LST) retrieval from Landsat thermal bands to map urban heat intensity and identify cooling deficit areas.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">🌳</div>
+        <div>
+          <h4>Green Space Loss</h4>
+          <p>Tracking the conversion of vegetation and agricultural land to impervious surfaces using NDVI time-series and change-vector analysis.</p>
+        </div>
+      </div>
+      <div class="sp-topic-card">
+        <div class="sp-topic-icon">💧</div>
+        <div>
+          <h4>Hydrological Impact</h4>
+          <p>Assessing how increasing impervious cover affects surface runoff, groundwater recharge, and flood risk in peri-urban areas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Methodology</div>
+    <h2>Technical Approach</h2>
+    <p>Urban growth analysis leverages the 40+ year Landsat archive available on Google Earth Engine. Using supervised classification (Random Forest, SVM) with ground-truth training samples, multi-class LULC maps are produced at 5-year intervals. Post-classification change detection matrices quantify class-to-class transitions.</p>
+    <div class="sp-quote">
+      "Satellite-based LULC change detection at decadal intervals provides the most spatially comprehensive and cost-effective method for tracking urban expansion, particularly in data-sparse environments like Pakistan."
+    </div>
+  </div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Tools &amp; Technologies</div>
+    <div class="sp-tools">
+      <span class="sp-tool">Google Earth Engine</span>
+      <span class="sp-tool">Landsat 5/7/8/9</span>
+      <span class="sp-tool">Sentinel-2</span>
+      <span class="sp-tool">Random Forest</span>
+      <span class="sp-tool">Python · GeoPandas</span>
+      <span class="sp-tool">QGIS · ArcGIS Pro</span>
+      <span class="sp-tool">NDVI · NDBI · NDBaI</span>
+      <span class="sp-tool">Rasterio</span>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-section sp-reveal">
+    <div class="sp-section-label">Related Research</div>
+    <div class="sp-related">
+      <a href="Climate_change.html" class="sp-related-item">
+        <i class="fas fa-thermometer-half"></i> Climate Change
+      </a>
+      <a href="Disastral_Management.html" class="sp-related-item">
+        <i class="fas fa-water"></i> Disaster Management
+      </a>
+      <a href="Nature_resoure.html" class="sp-related-item">
+        <i class="fas fa-leaf"></i> Natural Resources
+      </a>
+      <a href="Open_sourec.html" class="sp-related-item">
+        <i class="fas fa-code-branch"></i> Open Source GIS
+      </a>
+    </div>
+  </div>
+
+  <div class="sp-author sp-reveal">
+    <img src="../Images/Pic_photo.png" alt="Muhammad Naveed">
+    <div>
+      <div class="sp-author-role">GIS &amp; Remote Sensing Expert</div>
+      <div class="sp-author-name">Muhammad Naveed</div>
+      <div class="sp-author-bio">Passionate about using satellite data to understand how cities grow and change. Available for LULC, urbanization, and urban heat island research collaborations.</div>
+      <div class="sp-social" style="margin-top:10px">
+        <a href="mailto:naveedali786aziz@gmail.com" class="sp-social-btn"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/muhammadnaveed-gis" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-github"></i></a>
+        <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="sp-social-btn"><i class="fab fa-medium"></i></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:20px 32px;max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+  <p style="font-size:.72rem;color:var(--text-faint)">© 2025 Muhammad Naveed</p>
+  <a href="../index.html" style="font-size:.72rem;color:var(--accent);display:flex;align-items:center;gap:6px">
+    <i class="fas fa-arrow-left"></i> Back to Portfolio
+  </a>
+</footer>
+
+<script src="../Js/subpage.js" defer></script>
+</body>
+</html>

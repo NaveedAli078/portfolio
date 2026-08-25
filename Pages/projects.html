@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Muhammad Naveed | GIS & Remote Sensing</title>
+  <meta name="description" content="GIS, Remote Sensing, GeoAI and Machine Learning projects by Muhammad Naveed — featuring flood mapping, LULC analysis, Google Earth Engine scripts, and cartographic work.">
+  <meta name="author" content="Muhammad Naveed">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../Logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/wowchemy.css">
+  <link rel="stylesheet" href="../css/projects.css">
+
+  <!-- Theme flash prevention -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('portfolio-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ─── SCROLL PROGRESS ─── -->
+<div id="progress-bar"></div>
+
+<!-- ─── CUSTOM CURSOR ─── -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ─── BACK TO TOP ─── -->
+<button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <a href="../index.html#hero" class="nav-logo">
+    <img src="../Logo.png" alt="M.Naveed" class="nav-logo-img">
+    <span class="nav-logo-text">M.Naveed</span>
+  </a>
+
+  <div class="nav-links">
+    <a href="../index.html#about"         class="nav-link">About</a>
+    <a href="../index.html#experience"    class="nav-link">Experience</a>
+    <a href="projects.html"               class="nav-link active">Projects</a>
+    <a href="../index.html#research"      class="nav-link">Research</a>
+    <a href="../index.html#visualization" class="nav-link">Viz</a>
+    <a href="../index.html#contact"       class="nav-link">Contact</a>
+  </div>
+
+  <div class="nav-right">
+    <button class="nav-icon-btn theme-toggle" id="theme-toggle" aria-label="Toggle theme" data-tip="Toggle theme">
+      <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+    <a href="../Cv/M_Naveed_CV.pdf" download="M_Naveed_CV.pdf" class="nav-cv">
+      <i class="fas fa-download" style="font-size:.65rem"></i> CV
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html#about"         onclick="closeMobile()">About</a>
+  <a href="../index.html#experience"    onclick="closeMobile()">Experience</a>
+  <a href="projects.html"               onclick="closeMobile()">Projects</a>
+  <a href="../index.html#research"      onclick="closeMobile()">Research</a>
+  <a href="../index.html#visualization" onclick="closeMobile()">Viz</a>
+  <a href="../index.html#contact"       onclick="closeMobile()">Contact</a>
+  <a href="../Cv/M_Naveed_CV.pdf" download onclick="closeMobile()" style="color:var(--accent)">Download CV</a>
+  <div class="mobile-menu-divider"></div>
+  <div class="mobile-menu-theme">
+    <button onclick="document.getElementById('theme-toggle').click()" class="mobile-theme-btn">
+      <i class="fas fa-moon" id="mobile-theme-icon"></i>
+      <span id="mobile-theme-label">Dark Mode</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PAGE HERO
+═══════════════════════════════════════════════ -->
+<section class="proj-hero">
+  <div class="proj-hero-grid"></div>
+  <div class="proj-hero-glow"></div>
+  <div class="proj-hero-content container">
+    <div class="proj-hero-eyebrow">03 — Projects</div>
+    <h1>Geospatial Projects</h1>
+    <p>
+      Real-world GIS, Remote Sensing, and GeoAI projects built from satellite imagery,
+      field surveys, and open geospatial data — spanning flood mapping, LULC change
+      detection, machine learning, and interactive cartography.
+    </p>
+    <div class="proj-hero-stats">
+      <div class="proj-stat"><i class="fas fa-folder-open"></i> 12+ Projects</div>
+      <div class="proj-stat"><i class="fas fa-satellite"></i> Satellite & SAR Data</div>
+      <div class="proj-stat"><i class="fas fa-code-branch"></i> Open Source</div>
+      <div class="proj-stat"><i class="fas fa-earth-asia"></i> Pakistan & Global</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     STICKY FILTER BAR
+═══════════════════════════════════════════════ -->
+<div class="filter-section" id="filter-section">
+  <div class="container">
+    <div class="filter-inner">
+      <div class="filter-pills" id="filter-pills">
+        <button class="filter-pill active" data-filter="all">
+          <i class="fas fa-border-all"></i> All <span class="pill-count">(12)</span>
+        </button>
+        <button class="filter-pill" data-filter="gee">
+          <i class="fas fa-satellite-dish"></i> GEE <span class="pill-count">(4)</span>
+        </button>
+        <button class="filter-pill" data-filter="ml">
+          <i class="fas fa-brain"></i> ML / GeoAI <span class="pill-count">(3)</span>
+        </button>
+        <button class="filter-pill" data-filter="geo">
+          <i class="fas fa-map"></i> Geospatial <span class="pill-count">(5)</span>
+        </button>
+        <button class="filter-pill" data-filter="viz">
+          <i class="fas fa-chart-area"></i> Visualization <span class="pill-count">(3)</span>
+        </button>
+        <button class="filter-pill" data-filter="oss">
+          <i class="fab fa-github"></i> Open Source <span class="pill-count">(6)</span>
+        </button>
+      </div>
+      <div class="projects-count">Showing <span id="visible-count">12</span> projects</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     STATS BAR
+═══════════════════════════════════════════════ -->
+<div class="container" style="margin-top:48px">
+  <div class="proj-stats-bar">
+    <div class="proj-stats-item">
+      <div class="proj-stats-num">20<span>+</span></div>
+      <div class="proj-stats-label">Total Projects</div>
+    </div>
+    <div class="proj-stats-item">
+      <div class="proj-stats-num">100<span>+</span></div>
+      <div class="proj-stats-label">Maps Created</div>
+    </div>
+    <div class="proj-stats-item">
+      <div class="proj-stats-num">8<span>+</span></div>
+      <div class="proj-stats-label">GEE Scripts</div>
+    </div>
+    <div class="proj-stats-item">
+      <div class="proj-stats-num">5<span>+</span></div>
+      <div class="proj-stats-label">ML Models</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PROJECTS GRID
+═══════════════════════════════════════════════ -->
+<main class="container">
+
+  <!-- ── SECTION: Featured ── -->
+  <div class="proj-section-divider">
+    <div class="proj-section-label">Featured Projects</div>
+  </div>
+
+  <div class="projects-page-grid" id="projects-grid">
+
+    <!-- ══════════════════════════════════════
+         CARD 1 — 30 Day Map Challenge (FEATURED)
+    ══════════════════════════════════════ -->
+    <div class="proj-card proj-card-featured reveal" data-tags="gee viz oss">
+      <div class="proj-card-img">
+        <img src="../Project/30 Days.webp" alt="30 Day Map Challenge 2024" loading="eager">
+        <span class="proj-cat-badge badge-viz"><i class="fas fa-map"></i> Cartography</span>
+        <span class="proj-status-badge status-done"><span class="status-dot"></span> Completed</span>
+        <div class="proj-img-overlay">
+          <a href="https://github.com/naveedali786/30Day-Map-Challenge-2024-" target="_blank" rel="noopener" class="proj-btn proj-btn-github" style="font-size:.65rem;padding:6px 12px">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Nov 30, 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="QGIS"><i class="fas fa-map"></i></span>
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+            <span class="proj-tool-icon" title="Google Earth Engine"><i class="fas fa-satellite"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">30 Day Map Challenge 2024</h3>
+        <p class="proj-card-desc">
+          30 unique maps created in 30 days covering themes: points, lines, polygons, raster, animations,
+          3D terrain, and more. Uses QGIS, Python, GEE, and ArcGIS Pro. One of the largest annual
+          global cartography challenges on social media with over 1,000 participants worldwide.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">QGIS</span>
+          <span class="proj-tech-tag">Python</span>
+          <span class="proj-tech-tag">GEE</span>
+          <span class="proj-tech-tag">ArcGIS Pro</span>
+          <span class="proj-tech-tag">Cartography</span>
+          <span class="proj-tech-tag">Matplotlib</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://github.com/naveedali786/30Day-Map-Challenge-2024-" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://github.com/naveedali786/30Day-Map-Challenge-2024-/tree/main" target="_blank" rel="noopener" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Maps
+        </a>
+        <a href="https://github.com/naveedali786/30Day-Map-Challenge-2024-" target="_blank" rel="noopener" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> View Results
+        </a>
+        <a href="#" class="proj-btn proj-btn-demo proj-btn-disabled" title="Live demo not available">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 2 — GEE Projects (FEATURED)
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-1" data-tags="gee geo oss">
+      <div class="proj-card-img">
+        <img src="../Project/30 Days_Gee.webp" alt="Google Earth Engine Projects" loading="lazy">
+        <span class="proj-cat-badge badge-gee"><i class="fas fa-satellite-dish"></i> GEE</span>
+        <span class="proj-status-badge status-live"><span class="status-dot"></span> Active</span>
+        <div class="proj-img-overlay">
+          <a href="https://github.com/naveedali786/GEE_Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-github" style="font-size:.65rem;padding:6px 12px">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Dec 10, 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="Google Earth Engine"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="JavaScript"><i class="fab fa-js"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Google Earth Engine Projects</h3>
+        <p class="proj-card-desc">
+          A curated collection of GEE scripts covering NDVI time-series, flood extent mapping with
+          SAR Sentinel-1, LULC classification, and spectral indices. Deployed on the GEE cloud
+          platform for scalable geospatial analysis.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">JavaScript</span>
+          <span class="proj-tech-tag">Sentinel-1</span>
+          <span class="proj-tech-tag">Landsat</span>
+          <span class="proj-tech-tag">NDVI</span>
+          <span class="proj-tech-tag">SAR</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://code.earthengine.google.com/" target="_blank" rel="noopener" class="proj-btn proj-btn-demo">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786/GEE_Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://code.earthengine.google.com/" target="_blank" rel="noopener" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="https://github.com/naveedali786/GEE_Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 3 — ML & AI for GIS
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-2" data-tags="ml geo oss">
+      <div class="proj-card-img">
+        <img src="../Project/30 Days_ML.webp" alt="Machine Learning & AI for GIS" loading="lazy">
+        <span class="proj-cat-badge badge-ml"><i class="fas fa-brain"></i> GeoAI</span>
+        <span class="proj-status-badge status-live"><span class="status-dot"></span> Active</span>
+        <div class="proj-img-overlay">
+          <a href="https://github.com/naveedali786/ML-AI-Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-github" style="font-size:.65rem;padding:6px 12px">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Aug 20, 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+            <span class="proj-tool-icon" title="scikit-learn"><i class="fas fa-cogs"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Machine Learning &amp; AI for GIS</h3>
+        <p class="proj-card-desc">
+          End-to-end GeoAI workflows: Random Forest &amp; SVM for LULC classification, CNN-based
+          object detection on satellite imagery, and flood susceptibility modeling using
+          ensemble methods on multi-source spatial data.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Random Forest</span>
+          <span class="proj-tech-tag">SVM</span>
+          <span class="proj-tech-tag">CNN</span>
+          <span class="proj-tech-tag">scikit-learn</span>
+          <span class="proj-tech-tag">LULC</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="#" class="proj-btn proj-btn-demo proj-btn-disabled" title="Demo not available">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786/ML-AI-Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="#" class="proj-btn proj-btn-map proj-btn-disabled" title="Map not available">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="https://github.com/naveedali786/ML-AI-Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 4 — Python DataViz Challenge
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-1" data-tags="viz oss">
+      <div class="proj-card-img">
+        <img src="../Project/30 Days_python.webp" alt="30 Day Python DataViz Challenge" loading="lazy">
+        <span class="proj-cat-badge badge-viz"><i class="fas fa-chart-area"></i> Visualization</span>
+        <span class="proj-status-badge status-done"><span class="status-dot"></span> Completed</span>
+        <div class="proj-img-overlay">
+          <a href="https://github.com/naveedali786/30Day-Mapping-and-visualization-Challenge-with-Python" target="_blank" rel="noopener" class="proj-btn proj-btn-github" style="font-size:.65rem;padding:6px 12px">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Oct 30, 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+            <span class="proj-tool-icon" title="Matplotlib"><i class="fas fa-chart-line"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">30 Day Python DataViz Challenge</h3>
+        <p class="proj-card-desc">
+          30 geospatial visualizations using pure Python: animated choropleth maps, 3D terrain
+          renders, interactive Folium web maps, and statistical plots — all built with
+          Matplotlib, Seaborn, GeoPandas, and Folium.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Python</span>
+          <span class="proj-tech-tag">Matplotlib</span>
+          <span class="proj-tech-tag">Folium</span>
+          <span class="proj-tech-tag">GeoPandas</span>
+          <span class="proj-tech-tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="#" class="proj-btn proj-btn-demo proj-btn-disabled" title="Demo not available">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786/30Day-Mapping-and-visualization-Challenge-with-Python" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://github.com/naveedali786/30Day-Mapping-and-visualization-Challenge-with-Python" target="_blank" rel="noopener" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Maps
+        </a>
+        <a href="https://github.com/naveedali786/30Day-Mapping-and-visualization-Challenge-with-Python" target="_blank" rel="noopener" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 5 — GIS & Spatial Analysis Toolkit
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-2" data-tags="gee geo ml oss">
+      <div class="proj-card-img">
+        <img src="../Project/30 Days_gis.webp" alt="GIS & Spatial Analysis Toolkit" loading="lazy">
+        <span class="proj-cat-badge badge-geo"><i class="fas fa-layer-group"></i> Geospatial</span>
+        <span class="proj-status-badge status-live"><span class="status-dot"></span> Active</span>
+        <div class="proj-img-overlay">
+          <a href="https://github.com/naveedali786/GIS-and-Remote-Sensing-Analysis" target="_blank" rel="noopener" class="proj-btn proj-btn-github" style="font-size:.65rem;padding:6px 12px">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Dec 15, 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+            <span class="proj-tool-icon" title="GEE"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="QGIS"><i class="fas fa-map"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">GIS &amp; Spatial Analysis Toolkit</h3>
+        <p class="proj-card-desc">
+          A comprehensive toolkit of GIS and remote sensing analysis scripts: spatial statistics,
+          change detection, image classification, raster processing, and vector analysis —
+          all documented and ready for reuse.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Python</span>
+          <span class="proj-tech-tag">Rasterio</span>
+          <span class="proj-tech-tag">GeoPandas</span>
+          <span class="proj-tech-tag">GEE</span>
+          <span class="proj-tech-tag">QGIS</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="#" class="proj-btn proj-btn-demo proj-btn-disabled" title="Demo not available">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786/GIS-and-Remote-Sensing-Analysis" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://github.com/naveedali786/GIS-and-Remote-Sensing-Analysis" target="_blank" rel="noopener" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="https://github.com/naveedali786/GIS-and-Remote-Sensing-Analysis" target="_blank" rel="noopener" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 6 — Cartographic Map Collection
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-3" data-tags="viz geo oss">
+      <div class="proj-card-img">
+        <img src="../Project/30_map.webp" alt="Cartographic Map Collection" loading="lazy">
+        <span class="proj-cat-badge badge-viz"><i class="fas fa-drafting-compass"></i> Cartography</span>
+        <span class="proj-status-badge status-live"><span class="status-dot"></span> Active</span>
+        <div class="proj-img-overlay">
+          <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github" style="font-size:.65rem;padding:6px 12px">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Dec 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="QGIS"><i class="fas fa-map"></i></span>
+            <span class="proj-tool-icon" title="ArcGIS Pro"><i class="fas fa-layer-group"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Cartographic Map Collection</h3>
+        <p class="proj-card-desc">
+          A portfolio of professionally designed cartographic maps: thematic maps, choropleth,
+          dot density, isoline, 3D terrain, and atlas pages — designed with attention to
+          visual hierarchy, typography, and color theory.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">QGIS</span>
+          <span class="proj-tech-tag">ArcGIS Pro</span>
+          <span class="proj-tech-tag">Inkscape</span>
+          <span class="proj-tech-tag">Mapbox</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="#" class="proj-btn proj-btn-demo proj-btn-disabled" title="Demo not available">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Maps
+        </a>
+        <a href="#" class="proj-btn proj-btn-results proj-btn-disabled" title="Not available">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /projects-page-grid -->
+
+  <!-- ── SECTION: Research & Domain Projects ── -->
+  <div class="proj-section-divider" style="margin-top:16px">
+    <div class="proj-section-label">Research &amp; Domain Projects</div>
+  </div>
+
+  <div class="projects-page-grid" id="research-grid">
+
+    <!-- ══════════════════════════════════════
+         CARD 7 — Flood Mapping Pakistan 2022
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-1" data-tags="gee geo ml">
+      <div class="proj-card-img">
+        <img src="../Pages/Pakistan Floods 2022.webp" alt="Pakistan Floods 2022 Mapping" loading="lazy">
+        <span class="proj-cat-badge badge-gee"><i class="fas fa-water"></i> Flood Mapping</span>
+        <span class="proj-status-badge status-done"><span class="status-dot"></span> Completed</span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> 2023</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="GEE"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="SAR"><i class="fas fa-wave-square"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Pakistan Floods 2022 — SAR Flood Mapping</h3>
+        <p class="proj-card-desc">
+          Mapped the 2022 Pakistan catastrophic flood extent using Sentinel-1 SAR imagery
+          in GEE. Applied threshold-based water detection and change detection methods
+          to quantify inundated areas across Sindh and Balochistan provinces.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Sentinel-1</span>
+          <span class="proj-tech-tag">SAR</span>
+          <span class="proj-tech-tag">GEE</span>
+          <span class="proj-tech-tag">Change Detection</span>
+          <span class="proj-tech-tag">Flood Mapping</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://code.earthengine.google.com/" target="_blank" rel="noopener" class="proj-btn proj-btn-demo">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="Pages/Disastral_Management.html" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="Pages/Disastral_Management.html" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 8 — LULC Change Detection
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-2" data-tags="gee geo ml">
+      <div class="proj-card-img">
+        <img src="../Pages/lulc_cover_.webp" alt="LULC Change Detection" loading="lazy">
+        <span class="proj-cat-badge badge-ml"><i class="fas fa-layer-group"></i> LULC</span>
+        <span class="proj-status-badge status-done"><span class="status-dot"></span> Completed</span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="GEE"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">LULC Change Detection &amp; Classification</h3>
+        <p class="proj-card-desc">
+          Multi-temporal LULC classification using Landsat 8/9 and Sentinel-2 in GEE.
+          Applied Random Forest classifier achieving 92% OA. Analyzed change trajectories
+          across agricultural, urban, forest, and water classes from 2000–2024.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Landsat 8/9</span>
+          <span class="proj-tech-tag">Sentinel-2</span>
+          <span class="proj-tech-tag">Random Forest</span>
+          <span class="proj-tech-tag">GEE</span>
+          <span class="proj-tech-tag">Accuracy Assessment</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://code.earthengine.google.com/" target="_blank" rel="noopener" class="proj-btn proj-btn-demo">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786/GEE_Projects" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="Pages/urbanization.html" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="Pages/urbanization.html" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 9 — Climate Change Monitoring
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-3" data-tags="gee geo">
+      <div class="proj-card-img">
+        <img src="../Pages/Climate-Change.jpg" alt="Climate Change Monitoring" loading="lazy">
+        <span class="proj-cat-badge badge-gee"><i class="fas fa-temperature-high"></i> Climate</span>
+        <span class="proj-status-badge status-wip"><span class="status-dot"></span> In Progress</span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> 2024 — Present</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="GEE"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Climate Change Monitoring — Rawal Dam</h3>
+        <p class="proj-card-desc">
+          Analyzing hydrological and operational changes in Rawal Dam using MODIS NDWI
+          time-series, rainfall data, and land use change detection. Correlating climate
+          variables with dam water levels from 2000 to 2024.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">MODIS</span>
+          <span class="proj-tech-tag">NDWI</span>
+          <span class="proj-tech-tag">Time-series</span>
+          <span class="proj-tech-tag">Hydrology</span>
+          <span class="proj-tech-tag">GEE</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://code.earthengine.google.com/" target="_blank" rel="noopener" class="proj-btn proj-btn-demo">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="Pages/Climate_change.html" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="Pages/Climate_change.html" class="proj-btn proj-btn-report">
+          <i class="fas fa-file-alt"></i> Report
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 10 — Wetlands Mapping
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-1" data-tags="gee geo">
+      <div class="proj-card-img">
+        <img src="../Pages/wetlands_.webp" alt="Wetlands Mapping" loading="lazy">
+        <span class="proj-cat-badge badge-geo"><i class="fas fa-water"></i> Wetlands</span>
+        <span class="proj-status-badge status-done"><span class="status-dot"></span> Completed</span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> 2023</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="GEE"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="QGIS"><i class="fas fa-map"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Wetlands Mapping &amp; Nature Resource Analysis</h3>
+        <p class="proj-card-desc">
+          Mapped and monitored wetland extent and health using Sentinel-2 MNDWI, NDWI,
+          and spectral indices in GEE. Assessed seasonal dynamics and anthropogenic
+          pressures on wetland ecosystems across Pakistan.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Sentinel-2</span>
+          <span class="proj-tech-tag">MNDWI</span>
+          <span class="proj-tech-tag">GEE</span>
+          <span class="proj-tech-tag">QGIS</span>
+          <span class="proj-tech-tag">Ecology</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="#" class="proj-btn proj-btn-demo proj-btn-disabled" title="Demo not available">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="Pages/Nature_resoure.html" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="Pages/Nature_resoure.html" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 11 — Urban Growth Analysis
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-2" data-tags="gee geo ml">
+      <div class="proj-card-img">
+        <img src="../Media/Urban.png" alt="Urban Growth Analysis" loading="lazy">
+        <span class="proj-cat-badge badge-geo"><i class="fas fa-city"></i> Urbanization</span>
+        <span class="proj-status-badge status-done"><span class="status-dot"></span> Completed</span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> 2024</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="GEE"><i class="fas fa-satellite"></i></span>
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Urban Growth Monitoring &amp; Heat Island Analysis</h3>
+        <p class="proj-card-desc">
+          Analyzed 20-year urban expansion of Rawalpindi-Islamabad using Landsat time-series.
+          Quantified impervious surface growth, green space loss, and Urban Heat Island
+          (UHI) intensity using LST analysis and NDBI index.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Landsat</span>
+          <span class="proj-tech-tag">NDBI</span>
+          <span class="proj-tech-tag">UHI</span>
+          <span class="proj-tech-tag">LST</span>
+          <span class="proj-tech-tag">Urban Analysis</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://code.earthengine.google.com/" target="_blank" rel="noopener" class="proj-btn proj-btn-demo">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="Pages/urbanization.html" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="Pages/urbanization.html" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 12 — Open Source GIS Tools
+    ══════════════════════════════════════ -->
+    <div class="proj-card reveal stagger-3" data-tags="oss geo">
+      <div class="proj-card-img">
+        <img src="../Media/Open.png" alt="Open Source GIS Tools" loading="lazy">
+        <span class="proj-cat-badge badge-oss"><i class="fab fa-github"></i> Open Source</span>
+        <span class="proj-status-badge status-live"><span class="status-dot"></span> Active</span>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-card-meta">
+          <span class="proj-card-date"><i class="fas fa-calendar-alt" style="margin-right:4px"></i> Ongoing</span>
+          <div class="proj-card-tools">
+            <span class="proj-tool-icon" title="Python"><i class="fab fa-python"></i></span>
+            <span class="proj-tool-icon" title="GitHub"><i class="fab fa-github"></i></span>
+          </div>
+        </div>
+        <h3 class="proj-card-title">Open Source GIS &amp; Remote Sensing Tools</h3>
+        <p class="proj-card-desc">
+          A collection of open-source Python utilities and GEE scripts for the geospatial
+          community: batch raster processors, spatial data converters, automated
+          reporting tools, and interactive Streamlit dashboards.
+        </p>
+        <div class="proj-tech-tags">
+          <span class="proj-tech-tag">Python</span>
+          <span class="proj-tech-tag">Streamlit</span>
+          <span class="proj-tech-tag">Leafmap</span>
+          <span class="proj-tech-tag">Geemap</span>
+          <span class="proj-tech-tag">Open Source</span>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-demo">
+          <i class="fas fa-globe"></i> Live Demo
+        </a>
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="proj-btn proj-btn-github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="Pages/Open_sourec.html" class="proj-btn proj-btn-map">
+          <i class="fas fa-map-location-dot"></i> View Map
+        </a>
+        <a href="Pages/Open_sourec.html" class="proj-btn proj-btn-results">
+          <i class="fas fa-chart-bar"></i> Results
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /research-grid -->
+
+  <!-- ── GITHUB CTA BANNER ── -->
+  <div class="github-cta reveal">
+    <div class="github-cta-left">
+      <h3>More projects on GitHub</h3>
+      <p>Browse all repositories including GEE scripts, QGIS plugins, Python tools, and ongoing research.</p>
+    </div>
+    <div class="github-cta-right">
+      <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="btn btn-outline">
+        <i class="fab fa-github"></i> View GitHub Profile
+      </a>
+      <a href="https://www.fiverr.com/naveedali184" target="_blank" rel="noopener" class="btn btn-primary">
+        <i class="fas fa-briefcase"></i> Hire on Fiverr
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer style="background:var(--bg-surface);border-top:1px solid var(--border);padding:40px 0;margin-top:0">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <div>
+      <a href="../index.html" class="nav-logo" style="margin-bottom:6px;display:inline-flex">
+        <img src="../Logo.png" alt="M.Naveed" class="nav-logo-img">
+        <span class="nav-logo-text">M.Naveed</span>
+      </a>
+      <p style="font-size:.75rem;color:var(--text-faint);margin-top:4px">GIS &amp; Remote Sensing Expert · Geospatial Data Scientist</p>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="GitHub" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--border);border-radius:8px;color:var(--text-muted);transition:all var(--transition)">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/mnaveed186/" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="LinkedIn" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--border);border-radius:8px;color:var(--text-muted);transition:all var(--transition)">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="Medium" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--border);border-radius:8px;color:var(--text-muted);transition:all var(--transition)">
+        <i class="fab fa-medium"></i>
+      </a>
+    </div>
+    <p style="font-size:.72rem;color:var(--text-faint)">&copy; 2024 Muhammad Naveed. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
+<script>
+// ── Theme toggle ──────────────────────────────────
+const html        = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon   = document.getElementById('theme-icon');
+const mobileIcon  = document.getElementById('mobile-theme-icon');
+const mobileLabel = document.getElementById('mobile-theme-label');
+
+function applyTheme(t) {
+  html.setAttribute('data-theme', t);
+  localStorage.setItem('portfolio-theme', t);
+  const isDark = t === 'dark';
+  if (themeIcon)  { themeIcon.className  = isDark ? 'fas fa-moon' : 'fas fa-sun'; }
+  if (mobileIcon) { mobileIcon.className = isDark ? 'fas fa-moon' : 'fas fa-sun'; }
+  if (mobileLabel){ mobileLabel.textContent = isDark ? 'Dark Mode' : 'Light Mode'; }
+}
+
+applyTheme(localStorage.getItem('portfolio-theme') || 'dark');
+themeToggle && themeToggle.addEventListener('click', () => {
+  applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+// ── Navbar scroll ─────────────────────────────────
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  // scroll progress bar
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+// ── Hamburger ─────────────────────────────────────
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+hamburger && hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+function closeMobile() {
+  hamburger && hamburger.classList.remove('open');
+  mobileMenu && mobileMenu.classList.remove('open');
+}
+
+// ── Custom cursor ─────────────────────────────────
+const cursor     = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; cursorRing.style.opacity = '.6'; });
+document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; cursorRing.style.opacity = '0'; });
+
+(function animCursor() {
+  if (cursor) { cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; }
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
+  requestAnimationFrame(animCursor);
+})();
+
+// ── Back to top ───────────────────────────────────
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  if (backTop) backTop.classList.toggle('show', window.scrollY > 400);
+});
+
+// ── Scroll reveal ─────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ── Filter system ─────────────────────────────────
+const pills   = document.querySelectorAll('.filter-pill');
+const cards   = document.querySelectorAll('.proj-card');
+const counter = document.getElementById('visible-count');
+
+pills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    // update active pill
+    pills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+
+    const filter = pill.dataset.filter;
+    let visible = 0;
+
+    cards.forEach(card => {
+      const tags = (card.dataset.tags || '').split(' ');
+      const show = filter === 'all' || tags.includes(filter);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (counter) counter.textContent = visible;
+  });
+});
+
+// ── Keyboard shortcut: Escape closes mobile menu ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMobile();
+});
+</script>
+
+</body>
+</html>

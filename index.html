@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Naveed — GIS & Remote Sensing Expert</title>
+  <meta name="description" content="Muhammad Naveed — GIS & Remote Sensing Expert, Geospatial Data Scientist, and GeoAI researcher specializing in flood mapping, LULC change detection, and Earth observation.">
+  <meta name="author" content="Muhammad Naveed">
+  <meta name="keywords" content="GIS, Remote Sensing, Geospatial, GeoAI, Google Earth Engine, QGIS, Python, Flood Mapping, LULC, Machine Learning, Pakistan">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.webp">
+  <link rel="apple-touch-icon" href="logo.webp">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Muhammad Naveed — GIS & Remote Sensing Expert">
+  <meta property="og:description" content="GIS & Remote Sensing Expert | Geospatial Data Scientist | GeoAI | Google Earth Engine | Python | Pakistan">
+  <meta property="og:image"       content="Images/Pic_photo.png">
+  <meta property="og:url"         content="https://naveedali786.github.io/Portfolio_V1/">
+  <meta property="og:site_name"   content="M.Naveed Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@M_Naveed_786">
+  <meta name="twitter:creator"     content="@M_Naveed_786">
+  <meta name="twitter:title"       content="Muhammad Naveed — GIS & Remote Sensing Expert">
+  <meta name="twitter:description" content="GIS & Remote Sensing Expert | GeoAI | Google Earth Engine | Python | Pakistan">
+  <meta name="twitter:image"       content="Images/Pic_photo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/wowchemy.css">
+  <!-- Prevent theme flash: apply saved theme before first paint -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('portfolio-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ─── LOADING SCREEN ─── -->
+<div id="loader">
+  <div class="loader-logo">
+    <img src="logo.webp" alt="M.Naveed Logo">
+  </div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-pct" id="loader-pct">0%</div>
+</div>
+
+<!-- ─── SCROLL PROGRESS ─── -->
+<div id="progress-bar"></div>
+
+<!-- ─── PARTICLES ─── -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ─── CUSTOM CURSOR ─── -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ─── BACK TO TOP ─── -->
+<button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="logo.webp" alt="M.Naveed" class="nav-logo-img">
+    <span class="nav-logo-text">M.Naveed</span>
+  </a>
+
+  <div class="nav-links">
+    <a href="#about"                   class="nav-link">About</a>
+    <a href="#experience"              class="nav-link">Experience</a>
+    <a href="Pages/projects.html"      class="nav-link">Projects</a>
+    <!--<a href="#publication"   class="nav-link">Publications</a>   -->
+    <a href="#research"                class="nav-link">Research</a>
+    <a href="#visualization"           class="nav-link">Viz</a>
+    <a href="#cartographic-work"       class="nav-link">Gallery</a>
+    <a href="#contact"                 class="nav-link">Contact</a>
+  </div>
+
+  <div class="nav-right">
+    <!-- Search button -->
+    <button class="nav-icon-btn" id="search-toggle" aria-label="Search" data-tip="Search (Ctrl+K)">
+      <i class="fas fa-search"></i>
+    </button>
+
+    <!-- Dark / Light mode toggle -->
+    <button class="nav-icon-btn theme-toggle" id="theme-toggle" aria-label="Toggle theme" data-tip="Toggle theme">
+      <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+
+    <a href="Cv/M_Naveed_CV.pdf" download="M_Naveed_CV.pdf" class="nav-cv">
+      <i class="fas fa-download" style="font-size:.65rem"></i> CV
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about"                  onclick="closeMobile()">About</a>
+  <a href="#experience"             onclick="closeMobile()">Experience</a>
+  <a href="Pages/projects.html"     onclick="closeMobile()">Projects</a>
+  <!--<a href="#publication"   onclick="closeMobile()">Publications</a>  -->
+  <a href="#research"               onclick="closeMobile()">Research</a>
+  <a href="#visualization"          onclick="closeMobile()">Viz</a>
+  <a href="#cartographic-work"      onclick="closeMobile()">Gallery</a>
+  <a href="#contact"                onclick="closeMobile()">Contact</a>
+  <a href="Cv/M_Naveed_CV.pdf" download onclick="closeMobile()" style="color:var(--accent)">Download CV</a>
+  <div class="mobile-menu-divider"></div>
+  <button class="mobile-menu-search" onclick="closeMobile(); document.getElementById('search-toggle').click()">
+    <i class="fas fa-search"></i> Search
+  </button>
+  <div class="mobile-menu-theme">
+    <button onclick="document.getElementById('theme-toggle').click()" class="mobile-theme-btn">
+      <i class="fas fa-moon" id="mobile-theme-icon"></i>
+      <span id="mobile-theme-label">Dark Mode</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="terrain-canvas"></canvas>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="blink"></span>
+      Available for Research Collaboration
+    </div>
+
+    <p class="hero-eyebrow">Hello, I am</p>
+
+    <h1 class="hero-name">Muhammad<br>Naveed</h1>
+
+    <div class="hero-roles">
+      <span class="typed-text" id="typed"></span><span class="cursor-blink"></span>
+    </div>
+
+    <p class="hero-desc">
+      Turning satellite imagery and spatial data into beautiful maps, accurate models, and actionable intelligence
+    </p>
+
+    <div class="hero-cta">
+      <a href="#project" class="btn btn-primary">
+        View Projects <i class="fas fa-arrow-right"></i>
+      </a>
+      <a href="#contact" class="btn btn-outline">
+        Get in Touch <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">2<span>+</span></div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">20<span>+</span></div>
+        <div class="hero-stat-label">GIS & RS Projects</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3<span>+</span></div>
+        <div class="hero-stat-label">Organizations</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100<span>+</span></div>
+        <div class="hero-stat-label">Maps Created</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+  <!-- Floating tech badges -->
+  <div class="float-badge float-badge-1">🛰️ Google Earth Engine</div>
+  <div class="float-badge float-badge-2">🤖 GeoAI &amp; ML</div>
+  <div class="float-badge float-badge-3">🗺️ QGIS · ArcGIS Pro</div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="section-watermark">01</div>
+  <div class="container">
+    <div class="section-label reveal">01 — About Me</div>
+    <div class="about-grid">
+
+      <div>
+        <h3 class="section-title reveal stagger-1">GIS Specialist | &amp;<br> Geospatial Analyst</h3>
+        <div class="about-bio reveal stagger-2">
+          <p>
+            I hold a BS in <strong>Geo-informatics (GIS &amp; Remote Sensing)</strong> from Arid Agriculture University Rawalpindi,
+            with a focus on remote sensing, GIS, geospatial data science, and GeoAI for multidisciplinary applications.
+            I have over 2+ years of GIS industry experience across real-world projects spanning land records,
+            fiber network planning, drone surveys, and population analytics.
+          </p>
+          <p>
+            My ultimate goal is to develop new techniques to improve the accuracy and effectiveness of
+            climate change monitoring, flood hazard mapping, landslide risk assessment, and water resource management.
+            I am also passionate about building open-source AI models that solve real problems for the GIS community.
+          </p>
+          <p>
+            I am also a freelance geospatial consultant on
+            <a href="https://www.fiverr.com/naveedali184" target="_blank" rel="noopener">Fiverr</a>,
+            providing geospatial analysis, web mapping, data visualization, and Google Earth Engine services.
+          </p>
+        </div>
+
+        <div class="about-tags reveal stagger-3">
+          <span class="tag">Remote Sensing</span>
+          <span class="tag">GIS Analysis</span>
+          <span class="tag">Google Earth Engine</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Data science </span>
+          <span class="tag">GeoAI Enthusiast </span>
+          <span class="tag">Climate Change</span>
+          <span class="tag">Image Enhancement</span>
+        </div>
+
+      </div>
+
+      <div class="reveal-right">
+        <div class="about-photo-wrap">
+          <img src="Images/Pic_photo.png" alt="Muhammad Naveed">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     EDUCATION & CREDENTIALS
+════════════════════════════════════════════════════════════════ -->
+<section class="credentials-section section" id="credentials">
+  <div class="container">
+
+  <!-- SECTION HEADER -->
+  <div class="section-header">
+    <div class="section-kicker">Education • Recognition • Expertise</div>
+    <h2 class="section-title">Education &amp; Credentials</h2>
+    <p class="section-description">
+      Academic foundation, professional recognition, and technical
+      certifications in GIS, Remote Sensing, and spatial technologies.
+    </p>
+  </div>
+
+  <!-- CREDENTIALS GRID -->
+  <div class="credentials-grid">
+
+    <!-- EDUCATION CARD -->
+    <article class="credential-card education-card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3 class="card-title">Education</h3>
+      </div>
+      <div class="education-main">
+        <h4 class="degree">BS in Geo-informatics</h4>
+        <p class="degree-subtitle">GIS &amp; Remote Sensing</p>
+        <p class="university">Arid Agriculture University, Rawalpindi</p>
+        <p class="education-date">2020 — 2024</p>
+        <div class="cgpa-row">
+          <div class="cgpa-label">CGPA</div>
+          <div>
+            <span class="cgpa-number">3.11</span>
+            <span class="cgpa-total">/ 4.00</span>
+          </div>
+        </div>
+        <div class="progress">
+          <span style="width:80%;"></span>
+        </div>
+      </div>
+      <div class="sub-heading">Core Courses</div>
+      <div class="course-list">
+        <span class="course">GIS</span>
+        <span class="course">Remote Sensing</span>
+        <span class="course">Geo-statistics</span>
+        <span class="course">WebGIS</span>
+        <span class="course">GIS Programming</span>
+        <span class="course">Python</span>
+        <span class="course">SQL</span>
+        <span class="course">Photogrammetry</span>
+        <span class="course extra-course">Spatial Analysis</span>
+        <span class="course extra-course">Hydrology</span>
+      </div>
+      <button type="button" class="more-courses" id="coursesButton" aria-expanded="false">
+        + 2 more
+      </button>
+    </article>
+
+    <!-- AWARDS CARD -->
+    <article class="credential-card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-trophy"></i></div>
+        <h3 class="card-title">Awards</h3>
+      </div>
+      <div class="award-item">
+          <div class="award-icon">🎓</div>
+        <div>
+          <h4 class="award-title">Ehsaas Scholarship</h4>
+          <p class="award-description">Fully funded Government of Pakistan scholarship.</p>
+          <div class="award-year">2021 — 2024</div>
+        </div>
+      </div>
+
+      <div class="award-list">
+        <div class="award-item">
+          <div class="award-icon">🥉</div>
+          <div>
+            <h4 class="award-title">3rd Place — Final Year Research Project</h4>
+            <p class="award-description">Ranked 3rd out of 10 research groups — BS Geo-informatics batch.</p>
+            <div class="award-year">2024</div>
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">⭐</div>
+          <div>
+            <h4 class="award-title">Best Pro-Active Learner Award</h4>
+            <p class="award-description">Academic engagement and dedication.</p>
+            <div class="award-year">Arid Agriculture University</div>
+          </div>
+        </div>
+
+        <div class="award-item">
+          <div class="award-icon">🗺️</div>
+          <div>
+            <h4 class="award-title">30-Day Map Challenge</h4>
+            <p class="award-description">Outstanding cartography and map visualization performance.</p>
+            <div class="award-year">2024</div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="view-all" id="awardsButton">
+        View all awards <i class="fas fa-arrow-right"></i>
+      </button>
+    </article>
+
+    <!-- CERTIFICATIONS CARD -->
+    <article class="credential-card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-certificate"></i></div>
+        <h3 class="card-title">Certifications</h3>
+      </div>
+      <div class="certificate-list">
+        <a href="https://www.esri.com/en-us/training/TrainingRecord/Certificate/mnaveedwala/64c186c00667582da710696c/420" class="certificate-item" target="_blank" rel="noopener noreferrer">
+          <div class="certificate-logo"><i class="fas fa-layer-group"></i></div>
+          <div>
+            <h4 class="certificate-title">Spatial Data Science</h4>
+            <p class="certificate-provider">Esri</p>
+          </div>
+          <i class="fas fa-arrow-up-right-from-square certificate-arrow"></i>
+        </a>
+        <a href="https://www.esri.com/en-us/training/TrainingRecord/Certificate/mnaveedwala/6504793f5eba8652bea2da4f/420" class="certificate-item" target="_blank" rel="noopener noreferrer">
+          <div class="certificate-logo"><i class="fas fa-satellite"></i></div>
+          <div>
+            <h4 class="certificate-title">Imagery in Action</h4>
+            <p class="certificate-provider">Esri</p>
+          </div>
+          <i class="fas fa-arrow-up-right-from-square certificate-arrow"></i>
+        </a>
+        <a href="#" class="certificate-item" target="_blank" rel="noopener noreferrer">
+          <div class="certificate-logo"><i class="fas fa-earth-americas"></i></div>
+          <div>
+            <h4 class="certificate-title">Google Earth Engine</h4>
+            <p class="certificate-provider">UNU</p>
+          </div>
+          <i class="fas fa-arrow-up-right-from-square certificate-arrow"></i>
+        </a>
+        <a href="#" class="certificate-item" target="_blank" rel="noopener noreferrer">
+          <div class="certificate-logo"><i class="fab fa-python"></i></div>
+          <div>
+            <h4 class="certificate-title">GIS Programming</h4>
+            <p class="certificate-provider">University of Tennessee</p>
+          </div>
+          <i class="fas fa-arrow-up-right-from-square certificate-arrow"></i>
+        </a>
+        <a href="#" class="certificate-item extra-certificate" target="_blank" rel="noopener noreferrer">
+          <div class="certificate-logo"><i class="fas fa-code"></i></div>
+          <div>
+            <h4 class="certificate-title">Python for GIS</h4>
+            <p class="certificate-provider">Professional Training</p>
+          </div>
+          <i class="fas fa-arrow-up-right-from-square certificate-arrow"></i>
+        </a>
+      </div>
+    <a href="https://www.linkedin.com/in/mnaveed186/details/certifications/" target="_blank" rel="noopener noreferrer" class="view-all" id="certificatesButton">
+      View all certifications <i class="fas fa-arrow-right"></i>
+    </a>
+    </article>
+
+  </div>
+
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     SKILLS
+═══════════════════════════════════════════════ -->
+<section id="about-skills" class="section" style="padding-top:0">
+  <div class="container">
+
+    <!-- Skills Grid -->
+    <div class="skills-section">
+      <div class="section-label reveal">Technical Skills</div>
+      <div class="skills-grid">
+        <div class="skill-card reveal stagger-1">
+          <div class="skill-card-icon">🛰️</div>
+          <h4>Remote Sensing</h4>
+          <ul>
+            <li>Landsat / Sentinel / MODIS</li>
+            <li>SAR Processing (Sentinel-1)</li>
+            <li>Image Classification</li>
+            <li>LULC Change Detection</li>
+            <li>NDVI / NDWI / MNDWI</li>
+          </ul>
+        </div>
+        <div class="skill-card reveal stagger-2">
+          <div class="skill-card-icon">🗺️</div>
+          <h4>GIS Platforms</h4>
+          <ul>
+            <li>QGIS · ArcGIS Pro</li>
+            <li>ArcMap · ArcGIS Online</li>
+            <li>Google Earth Engine</li>
+            <li>Global Mapper</li>
+            <li>Terra Explore</li>
+          </ul>
+        </div>
+        <div class="skill-card reveal stagger-3">
+          <div class="skill-card-icon">🐍</div>
+          <h4>Programming</h4>
+          <ul>
+            <li>Python (NumPy, Pandas)</li>
+            <li>GeoPandas · Rasterio</li>
+            <li>Geemap · Leafmap</li>
+            <li>Html . Css .javascript</li>
+            <li>scikit-learn · PyTorch</li>
+          </ul>
+        </div>
+        <div class="skill-card reveal stagger-4">
+          <div class="skill-card-icon">🤖</div>
+          <h4>GeoAI &amp; ML</h4>
+          <ul>
+            <li>Machine Learning (RF, SVM)</li>
+            <li>Deep Learning (CNN, U-Net)</li>
+            <li>Flood Susceptibility Mapping</li>
+            <li>Object Detection (RS)</li>
+            <li>Ensemble Methods</li>
+          </ul>
+        </div>
+        <div class="skill-card reveal stagger-5">
+          <div class="skill-card-icon">🔎</div>
+          <h4>Research Skills</h4>
+          <ul>
+            <li>Spatial Statistical Analysis</li>
+            <li>Scientific Writing &amp; Reporting</li>
+            <li>Data Collection &amp; Ground Truthing</li>
+            <li>Cartographic Design</li>
+            <li>Prompt Engineering</li>
+          </ul>
+        </div>
+        <div class="skill-card reveal stagger-6">
+          <div class="skill-card-icon">📊</div>
+          <h4>Data Visualization</h4>
+          <ul>
+            <li>Static &amp; Animated Maps</li>
+            <li>Matplotlib · Seaborn</li>
+            <li>Folium </li>
+            <li>Dashboards (Streamlit)</li>
+            <li>3D Visualization</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Skill Proficiency Bars
+      <div class="skill-bars-section reveal" style="margin-top:48px">
+        <div class="section-label" style="margin-bottom:24px">Proficiency Levels</div>
+        <div class="skill-bars-grid">
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Google Earth Engine</span><span>92%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>QGIS &amp; ArcGIS Pro</span><span>90%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Python (Geospatial)</span><span>85%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Remote Sensing Analysis</span><span>88%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"></div></div>
+            </div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Machine Learning (GeoAI)</span><span>78%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Satellite Image Processing</span><span>86%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="86%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>WebGIS Development</span><span>72%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="72%"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-label"><span>Cartographic Design</span><span>82%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82%"></div></div>
+            </div>    -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     EXPERIENCE
+═══════════════════════════════════════════════ -->
+<section id="experience" class="section">
+  <div class="section-watermark">02</div>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="exp-section-header">
+      <div class="section-label reveal">02 — Experience</div>
+      <h2 class="section-title reveal stagger-1">Professional Journey</h2>
+      <p class="section-desc reveal stagger-2">
+        2+ years of hands-on GIS industry experience across government, private sector, and academic projects.
+      </p>
+      <!-- quick stats row -->
+      <div class="exp-stats reveal stagger-3">
+        <div class="exp-stat-pill"><i class="fas fa-briefcase"></i> 5 Roles</div>
+        <div class="exp-stat-pill"><i class="fas fa-clock"></i> 2+ Years</div>
+        <div class="exp-stat-pill"><i class="fas fa-building"></i> 4 Organizations</div>
+        <div class="exp-stat-pill"><i class="fas fa-map-marker-alt"></i> Pakistan</div>
+      </div>
+    </div>
+
+    <!-- Timeline grid -->
+    <div class="exp-timeline">
+
+      <!-- spine line -->
+      <div class="exp-spine"></div>
+
+      <!-- ── 1. Horizon Tech services ── -->
+      <div class="exp-entry reveal">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2026</div>
+        </div>
+        <div class="exp-block exp-block--active">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/Horizon.webp" alt="Hor">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">RS & GIS Engineer</h3>
+              <div class="exp-company">Horizon Tech services</div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--live"><span class="badge-dot"></span>Recent</span>
+              <span class="exp-badge exp-badge--type">Professional</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Nov 2025 – Present</span>
+            <span><i class="fas fa-map-marker-alt"></i> Islamabad, PK</span>
+          </div>
+          <p class="exp-block-desc">
+           Processed and analyzed multi-source Earth observation data for environmental, mining, and land-resource applications, applying remote sensing, geospatial modelling, and image-processing techniques. Developed interactive GIS dashboards and visualization solutions to support spatial analysis and data-driven decision-making
+          </p>
+          <div class="exp-tags">
+            <span>GIS Lab</span><span>Python</span><span>Teaching</span><span>Geospatial</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 2. Navttc ── -->
+      <div class="exp-entry reveal stagger-1">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2025</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/navttc.webp" alt="Tech-GIS">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">GIS INSTRUCTOR</h3>
+              <div class="exp-company"><a href="" target="_blank" rel="noopener">NATIONAL VOCATIONAL AND TECHNICAL TRAINING 
+COMMISSION</a></div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--type exp-badge--full">Full-time</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Feb 2025 – Oct 2025</span>
+            <span><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+          </div>
+          <p class="exp-block-desc">
+            Delivered hands-on GIS training covering ArcMap mapping, and basic Python, supported by workshops,and practical projects. 
+            Mentored students in problem-solving, portfolio development, career planning, freelancing, and pursuing advanced study and research in geospatial sciences.
+          </p>
+          <div class="exp-tags">
+            <span>ArcMap</span><span>QGIS</span><span>ArcGIS Pro</span><span>Python</span><span>Satellite Imagery Analysis</span>
+          </div>
+        </div>
+      </div>
+
+
+     <!-- ── 4. R2V ── -->
+      <div class="exp-entry reveal stagger-1">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2024</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/R2V.webp" alt="Tech-GIS">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">GIS ANALYST</h3>
+              <div class="exp-company"><a href="" target="_blank" rel="noopener">Tech-GIS</a></div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--type exp-badge--full">Full-time</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Aug 2024 – Jan 2025</span>
+            <span><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+          </div>
+          <p class="exp-block-desc">
+            Modernizing Pakistan's land record systems across Sargodha &amp; DK-Khan divisions.
+            Work involves mapping land parcels, processing satellite imagery, digitization,
+            georeferencing, vector &amp; database management.
+          </p>
+          <div class="exp-tags">
+            <span>ArcGIS</span><span>QGIS</span><span>Digitization</span><span>Land Records</span><span>Satellite Imagery</span>
+          </div>
+        </div>
+      </div>
+ 
+    <!-- ── 4. Tech-GIS ── -->
+      <div class="exp-entry reveal stagger-1">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2023</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/Techgis.png" alt="Tech-GIS">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">GIS Assistant</h3>
+              <div class="exp-company"><a href="https://tech-gis.com/" target="_blank" rel="noopener">Tech-GIS</a></div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--type exp-badge--full">Remote</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Jan 2023 – Jun 2024</span>
+            <span><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+          </div>
+          <p class="exp-block-desc">
+            Modernizing Pakistan's land record systems across Sargodha &amp; DK-Khan divisions.
+            Work involves mapping land parcels, processing satellite imagery, digitization,
+            georeferencing, vector &amp; database management.
+          </p>
+          <div class="exp-tags">
+            <span>ArcGIS</span><span>QGIS</span><span>Digitization</span><span>Land Records</span><span>Satellite Imagery</span>
+          </div>
+        </div>
+      </div>
+
+     
+
+      <!-- ── 5. Mindgenix ── -->
+      <div class="exp-entry reveal stagger-2">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2022</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/mindgenix.png" alt="Mindgenix">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">GIS Digitizer</h3>
+              <div class="exp-company"><a href="https://www.linkedin.com/company/mindgenix-solutions/" target="_blank" rel="noopener">Mindgenix Solutions</a></div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--type exp-badge--remote">Internship</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Jan 2022 – Jun 2022</span>
+            <span><i class="fas fa-map-marker-alt"></i> PK</span>
+          </div>
+          <p class="exp-block-desc">
+            FTTH planning project — coordinated surveyor data and created a detailed base map for fiber
+            network planning, managing attribute data to support design and distribution of fiber cables.
+          </p>
+          <div class="exp-tags">
+            <span>FTTH</span><span>Base Mapping</span><span>Attribute Data</span><span>Fiber Planning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 4. Regional Plan9 ── --
+      <div class="exp-entry reveal stagger-3">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2023</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/rp9.png" alt="Plan9">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">WebGIS Developer</h3>
+              <div class="exp-company"><a href="https://plan9.pitb.gov.pk/" target="_blank" rel="noopener">Regional Plan9</a></div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--type exp-badge--intern">Internship</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Jun 2023 – Jun 2024</span>
+            <span><i class="fas fa-map-marker-alt"></i> Punjab, PK</span>
+          </div>
+          <p class="exp-block-desc">
+            Worked on "Population Decline Countries" — data management, spatial analysis, and web mapping.
+            Focused on optimizing data visualization techniques and supporting key population studies.
+          </p>
+          <div class="exp-tags">
+            <span>WebGIS</span><span>Leaflet.js</span><span>Spatial Analysis</span><span>Population Data</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- (commented-out entry) -->
+
+      <!-- ── 6. Greenage ── -->
+      <div class="exp-entry reveal stagger-4">
+        <div class="exp-node">
+          <div class="exp-node-dot"></div>
+          <div class="exp-node-year">2021</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-block-top">
+            <div class="exp-logo-wrap">
+              <img src="Experienc_letter/Greenage.png" alt="Greenage">
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">GIS Technician</h3>
+              <div class="exp-company"><a href="https://www.linkedin.com/company/greenageservices/" target="_blank" rel="noopener">Greenage Services</a></div>
+            </div>
+            <div class="exp-badges">
+              <span class="exp-badge exp-badge--type exp-badge--hybrid">Internship</span>
+            </div>
+          </div>
+          <div class="exp-block-meta">
+            <span><i class="fas fa-calendar-alt"></i> Jul 2021 – Dec 2022</span>
+            <span><i class="fas fa-map-marker-alt"></i> Islamabad, PK</span>
+          </div>
+          <p class="exp-block-desc">
+            Conducted GPS/DGPS surveys to collect GCPs, collected &amp; preprocessed data from government
+            departments (BOP, SOP), managed drone imagery capture and processing using QGIS &amp; ArcMap.
+          </p>
+          <div class="exp-tags">
+            <span>GPS/DGPS</span><span>Drone Survey</span><span>QGIS</span><span>ArcMap</span><span>Field Work</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /exp-timeline -->
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     PROJECTS
+═══════════════════════════════════════════════ -->
+<section id="project" class="section">
+  <div class="section-watermark">03</div>
+  <div class="container">
+    <div class="section-label reveal">03 — Projects</div>
+    <div class="flex-between" style="align-items:flex-start;flex-wrap:wrap;gap:16px">
+      <div>
+        <h2 class="section-title reveal stagger-1">Selected Projects</h2>
+        <p class="section-desc reveal stagger-2">
+          GIS, remote sensing, machine learning, and GeoAI projects built from real satellite data.
+        </p>
+      </div>
+    </div>
+
+    <div class="filter-bar reveal stagger-3">
+      <button class="filter-btn active" data-filter="*">All</button>
+      <button class="filter-btn" data-filter="gee">GEE</button>
+      <button class="filter-btn" data-filter="geospatial">Geospatial</button>
+      <button class="filter-btn" data-filter="ml">Machine Learning</button>
+      <button class="filter-btn" data-filter="viz">Visualization</button>
+      <button class="filter-btn" data-filter="opensource">Open Source</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal stagger-1 card-shine" data-tags="gee geospatial opensource viz">
+        <div class="project-img">
+          <img src="Project/30 Days.webp" alt="30 Day Map Challenge 2024" loading="lazy">
+          <div class="project-img-overlay">
+            <a href="https://github.com/naveedali786/30Day-Map-Challenge-2024-" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-date">Updated Nov 30, 2024</div>
+          <h3 class="project-title">
+            <a href="https://github.com/naveedali786/30Day-Map-Challenge-2024-" target="_blank" rel="noopener">
+              30 Day Map Challenge 2024
+            </a>
+          </h3>
+          <div class="project-tags">
+            <span class="project-tag">GEE</span>
+            <span class="project-tag">Cartography</span>
+            <span class="project-tag">Open Source</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal stagger-2 card-shine" data-tags="gee geospatial opensource viz">
+        <div class="project-img">
+          <img src="Project/30 Days_python.webp" alt="Python Data Viz Challenge" loading="lazy">
+          <div class="project-img-overlay">
+            <a href="https://github.com/naveedali786/30Day-Mapping-and-visualization-Challenge-with-Python" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-date">Updated Oct 30, 2024</div>
+          <h3 class="project-title">
+            <a href="https://github.com/naveedali786/30Day-Mapping-and-visualization-Challenge-with-Python" target="_blank" rel="noopener">
+              30 Day Python DataViz Challenge
+            </a>
+          </h3>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Visualization</span>
+            <span class="project-tag">Open Source</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal stagger-3 card-shine" data-tags="gee geospatial opensource">
+        <div class="project-img">
+          <img src="Project/30 Days_Gee.webp" alt="Google Earth Engine Projects" loading="lazy">
+          <div class="project-img-overlay">
+            <a href="https://github.com/naveedali786/GEE_Projects" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-date">Updated Dec 10, 2024</div>
+          <h3 class="project-title">
+            <a href="https://github.com/naveedali786/GEE_Projects" target="_blank" rel="noopener">
+              Google Earth Engine Projects
+            </a>
+          </h3>
+          <div class="project-tags">
+            <span class="project-tag">GEE</span>
+            <span class="project-tag">Cloud Computing</span>
+            <span class="project-tag">Remote Sensing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal stagger-4 card-shine" data-tags="ml geospatial opensource">
+        <div class="project-img">
+          <img src="Project/30 Days_ML.webp" alt="ML AI Projects" loading="lazy">
+          <div class="project-img-overlay">
+            <a href="https://github.com/naveedali786/ML-AI-Projects" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-date">Updated Aug 20, 2024</div>
+          <h3 class="project-title">
+            <a href="https://github.com/naveedali786/ML-AI-Projects" target="_blank" rel="noopener">
+              Machine Learning &amp; AI for GIS
+            </a>
+          </h3>
+          <div class="project-tags">
+            <span class="project-tag">ML</span>
+            <span class="project-tag">LULC</span>
+            <span class="project-tag">GeoAI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal stagger-5 card-shine" data-tags="gee geospatial ml viz opensource">
+        <div class="project-img">
+          <img src="Project/30 Days_gis.webp" alt="Spatial Analysis" loading="lazy">
+          <div class="project-img-overlay">
+            <a href="https://github.com/naveedali786/GIS-and-Remote-Sensing-Analysis" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-date">Updated Dec 15, 2024</div>
+          <h3 class="project-title">
+            <a href="https://github.com/naveedali786/GIS-and-Remote-Sensing-Analysis" target="_blank" rel="noopener">
+              GIS &amp; Spatial Analysis Toolkit
+            </a>
+          </h3>
+          <div class="project-tags">
+            <span class="project-tag">Spatial Analysis</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">GEE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal stagger-6 card-shine" data-tags="gee geospatial viz">
+        <div class="project-img">
+          <img src="Project/30_map.webp" alt="30 Day Maps" loading="lazy">
+          <div class="project-img-overlay">
+            <a href="https://github.com/naveedali786" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-date">Updated Dec 2024</div>
+          <h3 class="project-title">
+            <a href="https://github.com/naveedali786" target="_blank" rel="noopener">
+              Cartographic Map Collection
+            </a>
+          </h3>
+          <div class="project-tags">
+            <span class="project-tag">Cartography</span>
+            <span class="project-tag">Maps</span>
+            <span class="project-tag">Visualization</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="btn btn-outline">
+        See All on GitHub <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     PUBLICATIONS
+═══════════════════════════════════════════════ --
+<section id="publication" class="section">
+  <div class="section-watermark">04</div>
+  <div class="container">
+    <div class="section-label reveal">04 — Publications</div>
+    <h2 class="section-title reveal stagger-1">Research Publications</h2>
+    <p class="section-desc reveal stagger-2">
+      Peer-reviewed research at the intersection of GIS, remote sensing, and climate science.
+    </p>
+
+    <div style="margin-top:40px">
+      <div class="pub-card reveal stagger-2">
+        <div class="pub-year">2025</div>
+        <div class="pub-content">
+          <h3><a href="#" style="cursor:default">
+            Analyzing Hydrological and Operational Changes in Rawal Dam Due to Climate and Land Use Variations
+          </a></h3>
+          <p class="pub-meta">Muhammad Naveed · Arid Agriculture University, Rawalpindi</p>
+          <div class="pub-badges">
+            <span class="pub-badge in-progress">⏳ In Progress</span>
+            <span class="pub-badge journal">Hydrology &amp; GIS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card reveal stagger-3">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <h3><a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener">
+            GeoAI Applications in Flood Susceptibility Mapping: A Review of Methods
+          </a></h3>
+          <p class="pub-meta">Muhammad Naveed · Working Paper</p>
+          <div class="pub-badges">
+            <span class="pub-badge in-progress">📝 Working Paper</span>
+            <span class="pub-badge journal">GeoAI · Flood Risk</span>
+          </div>
+        </div>
+      </div>
+      <!-- (commented-out publication section end) -->
+      <div style="text-align:center;margin-top:24px" class="reveal">
+        <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="btn btn-outline">
+          Read Articles on Medium <i class="fab fa-medium"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     RESEARCH TOPICS
+═══════════════════════════════════════════════ -->
+<section id="research" class="section">
+  <div class="section-watermark">05</div>
+  <div class="container">
+    <div class="section-label reveal">05 — Research</div>
+    <h2 class="section-title reveal stagger-1">Research Topics</h2>
+    <p class="section-desc reveal stagger-2">
+      Applying geospatial intelligence to solve real-world environmental and societal challenges.
+    </p>
+
+    <div class="research-grid">
+
+      <div class="research-card reveal stagger-1">
+        <div class="research-card-icon">🌊</div>
+        <div>
+          <h3>Disaster Management</h3>
+          <p>Flood hazard mapping, susceptibility assessment, and disaster risk reduction using
+          SAR imagery, GEE, and machine learning classification techniques.</p>
+          <a href="Pages/Disastral_Management.html" class="r-link">
+            Explore Research <i class="fas fa-arrow-right" style="font-size:.65rem"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="research-card reveal stagger-2">
+        <div class="research-card-icon">🏙️</div>
+        <div>
+          <h3>Urbanization</h3>
+          <p>Urban growth monitoring, LULC change detection, and impacts on ecosystem services
+          using multi-temporal Landsat and Sentinel-2 satellite data.</p>
+          <a href="Pages/urbanization.html" class="r-link">
+            Explore Research <i class="fas fa-arrow-right" style="font-size:.65rem"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="research-card reveal stagger-3">
+        <div class="research-card-icon">🌡️</div>
+        <div>
+          <h3>Climate Change</h3>
+          <p>Long-term climate trend analysis, hydrological impacts, and climate-driven LULC
+          change using remote sensing time-series and GEE cloud computing.</p>
+          <a href="Pages/Climate_change.html" class="r-link">
+            Explore Research <i class="fas fa-arrow-right" style="font-size:.65rem"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="research-card reveal stagger-4">
+        <div class="research-card-icon">🌿</div>
+        <div>
+          <h3>Natural Resources</h3>
+          <p>Wetland mapping, vegetation health monitoring, and surface water dynamics using
+          spectral indices (NDVI, NDWI) and change detection analysis.</p>
+          <a href="Pages/Nature_resoure.html" class="r-link">
+            Explore Research <i class="fas fa-arrow-right" style="font-size:.65rem"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="research-card reveal stagger-5">
+        <div class="research-card-icon">🔓</div>
+        <div>
+          <h3>Open Source Geospatial</h3>
+          <p>Building reproducible GIS pipelines using Python, QGIS, Leafmap, Geemap, and GEE
+          to democratize access to geospatial analysis tools.</p>
+          <a href="Pages/Open_sourec.html" class="r-link">
+            Explore Research <i class="fas fa-arrow-right" style="font-size:.65rem"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="research-card reveal stagger-6">
+        <div class="research-card-icon">🤖</div>
+        <div>
+          <h3>GeoAI</h3>
+          <p>Applying deep learning and machine learning to geospatial problems — land cover
+          classification, object detection, and spatial prediction modeling.</p>
+          <a href="Pages/GeoAI.html" class="r-link">
+            Explore Research <i class="fas fa-arrow-right" style="font-size:.65rem"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     DATA VISUALIZATION GALLERY
+═══════════════════════════════════════════════ -->
+<section id="visualization" class="section">
+  <div class="section-watermark">06</div>
+  <div class="container">
+    <div class="section-label reveal">06 — Visualizations</div>
+    <h2 class="section-title reveal stagger-1">Data Visualization Gallery</h2>
+    <p class="section-desc reveal stagger-2">
+      Thematic maps, satellite analysis outputs, and data visualizations across GIS domains.
+    </p>
+
+    <div class="viz-grid">
+
+      <div class="viz-card reveal stagger-1">
+        <img src="Media/Urban.png" alt="Urbanization Analysis" loading="lazy">
+        <div class="viz-overlay">
+          <div class="viz-view-btn"><i class="fas fa-expand-alt"></i> View</div>
+          <div class="viz-meta">
+            <div class="viz-title">Urbanization &amp; LULC</div>
+            <div class="viz-type">Remote Sensing · GEE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="viz-card reveal stagger-2">
+        <img src="Media/Static.png" alt="Statistical Visualization" loading="lazy">
+        <div class="viz-overlay">
+          <div class="viz-view-btn"><i class="fas fa-expand-alt"></i> View</div>
+          <div class="viz-meta">
+            <div class="viz-title">Statistical Data Visualization</div>
+            <div class="viz-type">Python · Matplotlib</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="viz-card reveal stagger-3">
+        <img src="Media/Animate.png" alt="Animation Visualization" loading="lazy">
+        <div class="viz-overlay">
+          <div class="viz-view-btn"><i class="fas fa-expand-alt"></i> View</div>
+          <div class="viz-meta">
+            <div class="viz-title">Animation &amp; 3D Viz</div>
+            <div class="viz-type">Python · 3D Mapping</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="viz-card reveal stagger-4">
+        <img src="Media/Cartographic.png" alt="Cartographic Maps" loading="lazy">
+        <div class="viz-overlay">
+          <div class="viz-view-btn"><i class="fas fa-expand-alt"></i> View</div>
+          <div class="viz-meta">
+            <div class="viz-title">Cartographic Design</div>
+            <div class="viz-type">QGIS · ArcGIS Pro</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="viz-card reveal stagger-5">
+        <img src="Media/Climate change.png" alt="Climate Change" loading="lazy">
+        <div class="viz-overlay">
+          <div class="viz-view-btn"><i class="fas fa-expand-alt"></i> View</div>
+          <div class="viz-meta">
+            <div class="viz-title">Climate Change Analysis</div>
+            <div class="viz-type">GEE · Remote Sensing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="viz-card reveal stagger-6">
+        <img src="Gallerys/aspect_swat_basin_publication_ready.webp" alt="WebGIS Dashboard" loading="lazy">
+        <div class="viz-overlay">
+          <div class="viz-view-btn"><i class="fas fa-expand-alt"></i> View</div>
+          <div class="viz-meta">
+            <div class="viz-title">WebGIS &amp; Dashboard</div>
+            <div class="viz-type">Leaflet · Streamlit</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:32px" class="reveal">
+      <a href="https://github.com/naveedali786/Statistical-Data-Visualization" target="_blank" rel="noopener" class="btn btn-outline">
+        Explore All Visualizations <i class="fas fa-chart-area"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<section class="cg-section" id="cartographic-work" aria-labelledby="cg-title">
+  <div class="section-watermark">07</div>
+  <div class="cg-container">
+
+    <!-- Header -->
+    <header class="cg-header">
+      <div>
+        <div class="cg-kicker">
+          <span class="cg-kicker-num">07.</span>
+          <span class="cg-kicker-line"></span>
+          <span>Selected Visual Work</span>
+        </div>
+        <h2 class="cg-title" id="cg-title">
+          Cartographic <span>Work</span>
+        </h2>
+        <p class="cg-desc">
+          Thematic maps, spatial visualizations, remote sensing outputs,
+          and geospatial data visualizations created for research,
+          professional projects, and cartographic experiments.
+        </p>
+      </div>
+      <a class="cg-view-all" href="https://github.com/naveedali786" target="_blank" rel="noopener"
+         aria-label="View all cartographic work on GitHub">
+        View all <span aria-hidden="true">→</span>
+      </a>
+    </header>
+
+    <!-- Filters -->
+    <div class="cg-filter-wrap" aria-label="Gallery categories">
+      <div class="cg-filter-scroll" role="tablist" aria-label="Filter cartographic projects">
+        <button class="cg-filter-btn active" type="button" role="tab" aria-selected="true"  data-cg-filter="all">All</button>
+        <button class="cg-filter-btn" type="button" role="tab" aria-selected="false" data-cg-filter="thematic-maps">Thematic Maps</button>
+        <button class="cg-filter-btn" type="button" role="tab" aria-selected="false" data-cg-filter="remote-sensing">Remote Sensing</button>
+        <button class="cg-filter-btn" type="button" role="tab" aria-selected="false" data-cg-filter="gis-analysis">GIS Analysis</button>
+        <button class="cg-filter-btn" type="button" role="tab" aria-selected="false" data-cg-filter="3d-visualization">3D Visualization</button>
+        <button class="cg-filter-btn" type="button" role="tab" aria-selected="false" data-cg-filter="webgis">WebGIS</button>
+        <button class="cg-filter-btn" type="button" role="tab" aria-selected="false" data-cg-filter="cartography">Cartography</button>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="cg-grid" id="cgGrid" aria-live="polite"></div>
+    <div class="cg-empty" id="cgEmpty">No projects found in this category.</div>
+
+  </div>
+</section>
+
+<!-- Cartographic Lightbox -->
+<div class="cg-lightbox" id="cgLightbox" role="dialog" aria-modal="true"
+     aria-labelledby="cgLbTitle" aria-hidden="true">
+  <div class="cg-lb-content">
+    <button class="cg-lb-close" id="cgLbClose" type="button" aria-label="Close project preview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="cg-lb-prev" id="cgLbPrev" type="button" aria-label="Previous project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="cg-lb-next" id="cgLbNext" type="button" aria-label="Next project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="cg-lb-img-area">
+      <img class="cg-lb-img" id="cgLbImage" src="" alt="">
+    </div>
+    <div class="cg-lb-info">
+      <div class="cg-lb-cat"  id="cgLbCategory"></div>
+      <h3  class="cg-lb-title" id="cgLbTitle"></h3>
+      <p   class="cg-lb-desc"  id="cgLbDesc"></p>
+      <div class="cg-lb-tags"  id="cgLbTags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Data ─────────────────────────────────────────────── */
+  var cgData = [
+    {
+      id: 1,
+      title: "Swat Basin Aspect Analysis",
+      category: "GIS Analysis", filter: "gis-analysis",
+      description: "Slope aspect analysis of the Swat Basin using a 30m DEM — publication-ready cartographic output highlighting terrain orientation for hydrological and hazard studies.",
+      image: "Gallerys/aspect_swat_basin_publication_ready.webp",
+      alt: "Slope aspect map of Swat Basin, Pakistan",
+      tags: ["ArcGIS Pro","DEM","Terrain Analysis","Hydrology"]
+    },
+    {
+      id: 2,
+      title: "Evaporative Stress Index — Punjab",
+      category: "Remote Sensing", filter: "remote-sensing",
+      description: "Spatial mapping of the Evaporative Stress Index across Punjab using MODIS land surface temperature and vegetation data to assess agricultural drought conditions.",
+      image: "Gallerys/Evaporative_Stress_Index_Punjab_Compact.webp",
+      alt: "Evaporative Stress Index map of Punjab, Pakistan",
+      tags: ["GEE","MODIS","Drought Monitoring","ESI"]
+    },
+    {
+      id: 3,
+      title: "Geological Map — Potohar Plateau",
+      category: "Cartography", filter: "cartography",
+      description: "Detailed geological map of the Potohar Plateau showing rock formations, faults, and structural geology — designed to publication standards for academic use.",
+      image: "Gallerys/Geological_Potohar_Map_Compact.webp",
+      alt: "Geological map of Potohar Plateau, Pakistan",
+      tags: ["ArcGIS Pro","Cartography","Geology","Structural Mapping"]
+    },
+    {
+      id: 4,
+      title: "Kriging Rainfall Interpolation 2010",
+      category: "GIS Analysis", filter: "gis-analysis",
+      description: "Spatial interpolation of annual rainfall (2010) across Pakistan using Ordinary Kriging — geostatistical surface generated from gauge station data for climate analysis.",
+      image: "Gallerys/kriging_rainfall_2010_publication_ready.webp",
+      alt: "Kriging interpolated rainfall map of Pakistan 2010",
+      tags: ["QGIS","Kriging","Geostatistics","Climate Data"]
+    },
+    {
+      id: 5,
+      title: "Swat Basin Elevation Map",
+      category: "Thematic Maps", filter: "thematic-maps",
+      description: "High-resolution digital elevation model of the Swat Basin visualized as a publication-ready hypsometric tint map, showing elevation zones from valley floor to alpine peaks.",
+      image: "Gallerys/Swat_Basin_Elevation_Map_Publication_Ready.webp",
+      alt: "Digital elevation map of Swat Basin, Pakistan",
+      tags: ["ArcGIS Pro","DEM","SRTM","Hypsometric Tint"]
+    },
+    {
+      id: 6,
+      title: "Wheat Grain Zinc Deficiency Mapping",
+      category: "Thematic Maps", filter: "thematic-maps",
+      description: "Spatial distribution of zinc concentration in wheat grain across Punjab — geostatistical analysis supporting precision agriculture and soil micronutrient management.",
+      image: "Gallerys/wheat_grain_zinc_publication_ready.webp",
+      alt: "Wheat grain zinc concentration spatial map, Punjab",
+      tags: ["QGIS","Geostatistics","Precision Agriculture","Soil Science"]
+    }
+  ];
+
+  /* ── DOM ─────────────────────────────────────────────── */
+  var grid      = document.getElementById('cgGrid');
+  var emptyEl   = document.getElementById('cgEmpty');
+  var filterBtns = document.querySelectorAll('.cg-filter-btn');
+  var lightbox  = document.getElementById('cgLightbox');
+  var lbImg     = document.getElementById('cgLbImage');
+  var lbTitle   = document.getElementById('cgLbTitle');
+  var lbCat     = document.getElementById('cgLbCategory');
+  var lbDesc    = document.getElementById('cgLbDesc');
+  var lbTags    = document.getElementById('cgLbTags');
+  var lbClose   = document.getElementById('cgLbClose');
+  var lbPrev    = document.getElementById('cgLbPrev');
+  var lbNext    = document.getElementById('cgLbNext');
+
+  /* ── State ───────────────────────────────────────────── */
+  var activeFilter   = 'all';
+  var visibleItems   = cgData.slice();
+  var currentIndex   = 0;
+  var lastFocused    = null;
+
+  /* ── Arrow icon ──────────────────────────────────────── */
+  var arrowSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h13"/><path d="m13 6 6 6-6 6"/></svg>';
+
+  /* ── Create card ─────────────────────────────────────── */
+  function createCard(project, index) {
+    var el = document.createElement('article');
+    el.className = 'cg-card';
+    el.tabIndex  = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', 'Open ' + project.title);
+    el.dataset.cgId = project.id;
+    el.innerHTML =
+      '<div class="cg-img-wrap">' +
+        '<img class="cg-img" src="' + project.image + '" alt="' + project.alt + '"' +
+          ' loading="' + (index < 3 ? 'eager' : 'lazy') + '" decoding="async">' +
+      '</div>' +
+      '<div class="cg-overlay">' +
+        '<div class="cg-content">' +
+          '<span class="cg-cat">' + project.category + '</span>' +
+          '<h3 class="cg-card-title">' + project.title + '</h3>' +
+          '<p class="cg-card-desc">' + project.description + '</p>' +
+          '<div class="cg-tags">' +
+            project.tags.map(function(t){ return '<span class="cg-tag">' + t + '</span>'; }).join('') +
+          '</div>' +
+        '</div>' +
+        '<span class="cg-arrow" aria-hidden="true">' + arrowSVG + '</span>' +
+      '</div>';
+    el.addEventListener('click', function () { openLightbox(project.id); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(project.id); }
+    });
+    return el;
+  }
+
+  /* ── Render ──────────────────────────────────────────── */
+  function renderGallery(filter) {
+    grid.innerHTML = '';
+    activeFilter   = filter || 'all';
+    visibleItems   = activeFilter === 'all'
+      ? cgData.slice()
+      : cgData.filter(function(p){ return p.filter === activeFilter; });
+
+    if (!visibleItems.length) { emptyEl.classList.add('show'); return; }
+    emptyEl.classList.remove('show');
+
+    visibleItems.forEach(function (project, i) {
+      var card = createCard(project, i);
+      grid.appendChild(card);
+      requestAnimationFrame(function () {
+        setTimeout(function () { card.classList.add('cg-visible'); }, i * 65);
+      });
+    });
+  }
+
+  /* ── Filters ─────────────────────────────────────────── */
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) {
+        var active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active);
+      });
+      renderGallery(btn.dataset.cgFilter);
+    });
+  });
+
+  /* ── Lightbox ────────────────────────────────────────── */
+  function openLightbox(projectId) {
+    var idx = cgData.findIndex(function(p){ return p.id === projectId; });
+    if (idx === -1) return;
+    currentIndex = idx;
+    lastFocused  = document.activeElement;
+    updateLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('cg-lightbox-open');
+    requestAnimationFrame(function () { lbClose.focus(); });
+  }
+
+  function updateLightbox() {
+    var p = cgData[currentIndex];
+    lbImg.src            = p.image;
+    lbImg.alt            = p.alt;
+    lbTitle.textContent  = p.title;
+    lbCat.textContent    = p.category;
+    lbDesc.textContent   = p.description;
+    lbTags.innerHTML     = p.tags.map(function(t){ return '<span class="cg-lb-tag">' + t + '</span>'; }).join('');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cg-lightbox-open');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  function showPrev() {
+    currentIndex = currentIndex <= 0 ? cgData.length - 1 : currentIndex - 1;
+    updateLightbox();
+  }
+  function showNext() {
+    currentIndex = currentIndex >= cgData.length - 1 ? 0 : currentIndex + 1;
+    updateLightbox();
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', showPrev);
+  lbNext.addEventListener('click', showNext);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+
+  /* ── Image error fallback ────────────────────────────── */
+  document.addEventListener('error', function (e) {
+    if (e.target.matches && e.target.matches('.cg-img')) {
+      e.target.style.background = 'linear-gradient(135deg,#071426,#0b2035)';
+    }
+  }, true);
+
+  /* ── Init ────────────────────────────────────────────── */
+  renderGallery('all');
+}());
+</script>
+
+<div class="glow-divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="section-watermark">08</div>
+  <div class="container">
+    <div class="section-label reveal">08 — Contact</div>
+
+    <div class="contact-inner">
+      <div>
+        <h2 class="contact-tagline reveal stagger-1">
+          Let's build something<br><em>meaningful</em> together.
+        </h2>
+        <p class="contact-body reveal stagger-2">
+          I am open to research collaborations, GIS consulting, freelance projects, and graduate
+          research opportunities. Whether you have a spatial problem to solve or just want to
+          connect — reach out.
+        </p>
+        <a href="mailto:naveedali786aziz@gmail.com" class="btn btn-primary reveal stagger-3" style="display:inline-flex;margin-bottom:32px">
+          Say Hello <i class="fas fa-paper-plane"></i>
+        </a>
+
+        <div class="contact-links reveal stagger-4">
+          <a href="mailto:naveedali786aziz@gmail.com" class="contact-link-item">
+            <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-link-info">
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">naveedali786aziz@gmail.com</div>
+            </div>
+            <i class="fas fa-arrow-right" style="color:var(--text-faint);margin-left:auto;font-size:.75rem"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/muhammadnaveed-gis" target="_blank" rel="noopener" class="contact-link-item">
+            <div class="contact-link-icon"><i class="fab fa-linkedin"></i></div>
+            <div class="contact-link-info">
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">linkedin.com/in/muhammadnaveed-gis</div>
+            </div>
+            <i class="fas fa-arrow-right" style="color:var(--text-faint);margin-left:auto;font-size:.75rem"></i>
+          </a>
+          <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="contact-link-item">
+            <div class="contact-link-icon"><i class="fab fa-github"></i></div>
+            <div class="contact-link-info">
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-value">github.com/naveedali786</div>
+            </div>
+            <i class="fas fa-arrow-right" style="color:var(--text-faint);margin-left:auto;font-size:.75rem"></i>
+          </a>
+          <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="contact-link-item">
+            <div class="contact-link-icon"><i class="fab fa-medium"></i></div>
+            <div class="contact-link-info">
+              <div class="contact-link-label">Medium</div>
+              <div class="contact-link-value">@naveedali786aziz</div>
+            </div>
+            <i class="fas fa-arrow-right" style="color:var(--text-faint);margin-left:auto;font-size:.75rem"></i>
+          </a>
+        </div>
+
+        <!-- Contact Form -->
+        <form id="contact-form" class="contact-form reveal stagger-5" novalidate>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" placeholder="Your name" required autocomplete="name">
+            </div>
+            <div class="cf-field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" placeholder="your@email.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf-subject">Subject</label>
+            <input type="text" id="cf-subject" name="subject" placeholder="Research collaboration / Consulting / Other">
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="4" placeholder="Tell me about your project or research idea…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary cf-submit" id="cf-submit">
+            <span id="cf-btn-text">Send Message</span>
+            <i class="fas fa-paper-plane" id="cf-btn-icon"></i>
+          </button>
+          <div id="cf-status" class="cf-status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="reveal-right">
+        <div class="contact-open-to">
+          <h4>Open To</h4>
+          <div class="open-to-list">
+            <div class="open-to-item">Research Collaborations</div>
+            <div class="open-to-item">GIS &amp; Remote Sensing Projects</div>
+            <div class="open-to-item">GeoAI &amp; ML Applications</div>
+            <div class="open-to-item">WebGIS Development</div>
+            <div class="open-to-item">Graduate Research Opportunities</div>
+            <div class="open-to-item">Geospatial Consulting (Fiverr)</div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;padding:24px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card)">
+          <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-faint);margin-bottom:16px">
+            Also find me on
+          </div>
+          <div class="footer-socials">
+            <a href="https://x.com/M_Naveed_786" target="_blank" rel="noopener" class="social-btn" title="Twitter/X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/mnaveed.jutt.9406" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="http://wa.me/923485202984" target="_blank" rel="noopener" class="social-btn" title="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.fiverr.com/naveedali184" target="_blank" rel="noopener" class="social-btn" title="Fiverr">
+              <i class="fas fa-briefcase"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" style="margin-bottom:12px;display:inline-flex">
+          <img src="logo.webp" alt="M.Naveed" class="nav-logo-img">
+          <span class="nav-logo-text">M.Naveed</span>
+        </a>
+        <p>GIS &amp; Remote Sensing Expert. Building geospatial intelligence for a better world.</p>
+        <div class="footer-socials" style="margin-top:16px">
+          <a href="https://www.linkedin.com/in/muhammadnaveed-gis" target="_blank" rel="noopener" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/naveedali786" target="_blank" rel="noopener" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://medium.com/@naveedali786aziz" target="_blank" rel="noopener" class="social-btn" title="Medium"><i class="fab fa-medium"></i></a>
+          <a href="https://x.com/M_Naveed_786" target="_blank" rel="noopener" class="social-btn" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.fiverr.com/naveedali184" target="_blank" rel="noopener" class="social-btn" title="Fiverr"><i class="fas fa-briefcase"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#project">Projects</a></li>
+          <!--<li><a href="#publication">Publications</a></li> -->
+          <li><a href="#research">Research</a></li>
+          <li><a href="#visualization">Visualizations</a></li>
+          <li><a href="#cartographic-work">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Research Domains</h5>
+        <ul>
+          <li><a href="Pages/Disastral_Management.html">Disaster Management</a></li>
+          <li><a href="Pages/urbanization.html">Urbanization</a></li>
+          <li><a href="Pages/Climate_change.html">Climate Change</a></li>
+          <li><a href="Pages/Nature_resoure.html">Natural Resources</a></li>
+          <li><a href="Pages/Open_sourec.html">Open Source GIS</a></li>
+          <li><a href="Pages/GeoAI.html">GeoAI</a></li>
+        </ul>
+      </div>
+
+      <div>
+       
+        <div style="margin-top:20px">
+          <a href="Cv/M_Naveed_CV.pdf" download="M_Naveed_CV.pdf" class="btn btn-outline" style="font-size:.72rem;padding:10px 20px">
+            <i class="fas fa-download"></i> Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Muhammad Naveed · GIS &amp; Remote Sensing Expert</p>
+      <p>Built with <span style="color:var(--accent)">♥</span> for geospatial science ·
+        <a href="https://github.com/naveedali786" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     SEARCH OVERLAY
+═══════════════════════════════════════════════ -->
+<div id="search-overlay" aria-modal="true" role="dialog" aria-label="Search">
+  <div id="search-box">
+    <div id="search-input-wrap">
+      <i class="fas fa-search" id="search-input-icon"></i>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search projects, research, skills…"
+        autocomplete="off"
+        spellcheck="false"
+      >
+      <kbd id="search-esc-hint">ESC</kbd>
+    </div>
+    <div id="search-results"></div>
+    <div id="search-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+      <span><kbd>↵</kbd> Open</span>
+      <span><kbd>ESC</kbd> Close</span>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="Js/wowchemy.js" defer></script>
+
+<!-- ─── VIZ LIGHTBOX ─── -->
+<div id="viz-lightbox" class="viz-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="vlb-backdrop"></div>
+  <div class="vlb-container">
+    <img id="vlb-img" src="" alt="" class="vlb-image" draggable="false">
+  </div>
+  <div class="vlb-toolbar">
+    <button class="vlb-btn" id="vlb-zoom-in"  aria-label="Zoom in">  <i class="fas fa-search-plus"></i>  </button>
+    <span   class="vlb-zoom-level" id="vlb-zoom-label">100%</span>
+    <button class="vlb-btn" id="vlb-zoom-out" aria-label="Zoom out"> <i class="fas fa-search-minus"></i> </button>
+    <button class="vlb-btn" id="vlb-zoom-reset" aria-label="Reset zoom"><i class="fas fa-compress-arrows-alt"></i></button>
+    <button class="vlb-btn vlb-close" id="vlb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="vlb-caption" id="vlb-caption"></div>
+</div>
+
+<!-- ─── VIZ LIGHTBOX SCRIPT ─── -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── state ── */
+  var scale     = 1;
+  var minScale  = 0.5;
+  var maxScale  = 4;
+  var step      = 0.25;
+  var isDragging = false;
+  var dragStartX, dragStartY, imgLeft = 0, imgTop = 0;
+
+  /* ── elements ── */
+  var lb       = document.getElementById('viz-lightbox');
+  var img      = document.getElementById('vlb-img');
+  var label    = document.getElementById('vlb-zoom-label');
+  var caption  = document.getElementById('vlb-caption');
+
+  /* ── helpers ── */
+  function setScale(s) {
+    scale = Math.min(maxScale, Math.max(minScale, s));
+    img.style.transform = 'translate(' + imgLeft + 'px, ' + imgTop + 'px) scale(' + scale + ')';
+    label.textContent   = Math.round(scale * 100) + '%';
+  }
+
+  function resetTransform() {
+    scale = 1; imgLeft = 0; imgTop = 0;
+    img.style.transform = 'none';
+    label.textContent   = '100%';
+  }
+
+  function open(src, alt) {
+    resetTransform();
+    img.src            = src;
+    img.alt            = alt;
+    caption.textContent = alt;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    img.focus();
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  /* ── open on viz-card click ── */
+  document.querySelectorAll('.viz-card').forEach(function (card) {
+    card.style.cursor = 'default';
+
+    function openCard() {
+      var i   = card.querySelector('img');
+      var ov  = card.querySelector('.viz-title');
+      /* Use naturalSrc so the browser loads the full-res version */
+      var src = i ? i.currentSrc || i.src : '';
+      open(src, ov ? ov.textContent.trim() : (i ? i.alt : ''));
+    }
+
+    /* clicking the "View" button */
+    var btn = card.querySelector('.viz-view-btn');
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openCard();
+      });
+    }
+
+    /* clicking anywhere on the card also works */
+    card.addEventListener('click', openCard);
+  });
+
+  /* ── toolbar buttons ── */
+  document.getElementById('vlb-zoom-in').addEventListener('click',    function () { setScale(scale + step); });
+  document.getElementById('vlb-zoom-out').addEventListener('click',   function () { setScale(scale - step); });
+  document.getElementById('vlb-zoom-reset').addEventListener('click', resetTransform);
+  document.getElementById('vlb-close').addEventListener('click',      close);
+
+  /* ── backdrop click closes ── */
+  document.querySelector('.vlb-backdrop').addEventListener('click', close);
+
+  /* ── keyboard ── */
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === '+' || e.key === '=') setScale(scale + step);
+    if (e.key === '-')          setScale(scale - step);
+    if (e.key === '0')          resetTransform();
+  });
+
+  /* ── mouse-wheel zoom ── */
+  img.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    setScale(scale + (e.deltaY < 0 ? step : -step));
+  }, { passive: false });
+
+  /* ── drag to pan (when zoomed in) ── */
+  img.addEventListener('mousedown', function (e) {
+    if (scale <= 1) return;
+    isDragging = true;
+    dragStartX = e.clientX - imgLeft;
+    dragStartY = e.clientY - imgTop;
+    img.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (!isDragging) return;
+    imgLeft = e.clientX - dragStartX;
+    imgTop  = e.clientY - dragStartY;
+    img.style.transform = 'translate(' + imgLeft + 'px, ' + imgTop + 'px) scale(' + scale + ')';
+  });
+
+  document.addEventListener('mouseup', function () {
+    if (isDragging) {
+      isDragging = false;
+      img.style.cursor = scale > 1 ? 'grab' : 'default';
+    }
+  });
+
+  /* ── touch pinch-to-zoom ── */
+  var initDist = 0, initScale = 1;
+  img.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 2) {
+      initDist  = Math.hypot(e.touches[1].clientX - e.touches[0].clientX,
+                             e.touches[1].clientY - e.touches[0].clientY);
+      initScale = scale;
+    }
+  }, { passive: true });
+  img.addEventListener('touchmove', function (e) {
+    if (e.touches.length === 2) {
+      var d = Math.hypot(e.touches[1].clientX - e.touches[0].clientX,
+                         e.touches[1].clientY - e.touches[0].clientY);
+      setScale(initScale * (d / initDist));
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+})();
+</script>
+
+</body>
+</html>
