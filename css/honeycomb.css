@@ -1,0 +1,653 @@
+/* ============================================================
+   HONEYCOMB PROJECT GALLERY
+   Hexagonal Grid Layout with Hover Effects
+   ============================================================ */
+
+/* ── CSS VARIABLES ── */
+:root {
+  --hex-size: 200px;           /* Base hexagon size */
+  --hex-gap: 16px;             /* Gap between hexagons */
+  --hex-border: 4px;           /* Border width on hover */
+  --overlay-opacity: 0.5;      /* Default dimming */
+  --accent: #00d4ff;           /* Cyan accent color */
+  --bg: #0a0e27;               /* Dark background */
+  --bg-blur: rgba(10,14,39,0.85); /* Background with transparency */
+  --text: #ffffff;             /* Light text */
+  --text-muted: #99ccff;       /* Muted text */
+  --border: rgba(0,212,255,.08);
+  --transition: 0.3s ease;
+}
+
+/* ── RESET & BASE ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Background pattern */
+body::before {
+  display: none; /* Removed grid pattern for cleaner look */
+}
+
+/* ═══════════════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════════════ */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg-blur);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  transition: transform var(--transition);
+}
+
+.top-bar-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.back-home {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.back-home:hover {
+  background: rgba(20,184,166,.1);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateX(-3px);
+}
+
+.back-home i {
+  font-size: 0.85rem;
+}
+
+/* Dropdown Container */
+.dropdown-container {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: rgba(0,212,255,.12);
+  border: 2px solid rgba(0,212,255,.3);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.dropdown-btn:hover {
+  background: rgba(0,212,255,.18);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,212,255,.2);
+}
+
+.dropdown-btn i {
+  font-size: 0.8rem;
+  transition: transform var(--transition);
+}
+
+.dropdown-btn.active i {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  background: rgba(13,15,19,.98);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0,212,255,.2);
+  border-radius: 12px;
+  padding: 8px;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: all var(--transition);
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  z-index: 100;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-muted);
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.dropdown-menu button:hover {
+  background: rgba(0,212,255,.1);
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.spacer {
+  flex: 0 0 auto;
+  width: 140px; /* Match back button width for centering */
+}
+
+/* ═══════════════════════════════════════════════
+   HONEYCOMB GRID
+═══════════════════════════════════════════════ */
+.honeycomb-container {
+  position: relative;
+  padding: 120px 20px 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--hex-gap);
+  z-index: 1;
+}
+
+/* Hexagon Item */
+.hex-item {
+  position: relative;
+  width: var(--hex-size);
+  height: calc(var(--hex-size) * 1.1547); /* height = width × √3/1.5 for perfect hexagon */
+  transition: all var(--transition);
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation delay */
+.hex-item:nth-child(1) { animation-delay: 0.05s; }
+.hex-item:nth-child(2) { animation-delay: 0.1s; }
+.hex-item:nth-child(3) { animation-delay: 0.15s; }
+.hex-item:nth-child(4) { animation-delay: 0.2s; }
+.hex-item:nth-child(5) { animation-delay: 0.25s; }
+.hex-item:nth-child(6) { animation-delay: 0.3s; }
+.hex-item:nth-child(n+7) { animation-delay: 0.35s; }
+
+/* Offset every other row for honeycomb pattern */
+.hex-item:nth-child(7n + 5),
+.hex-item:nth-child(7n + 6),
+.hex-item:nth-child(7n + 7) {
+  margin-top: calc(var(--hex-size) * 0.577); /* Offset by √3/3 */
+}
+
+/* Hexagon Link */
+.hex-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Hexagon Shape */
+.hex-shape {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+/* Hexagon Image */
+.hex-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+/* Dark Overlay (default state) */
+.hex-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0, var(--overlay-opacity));
+  transition: all var(--transition);
+  pointer-events: none;
+}
+
+/* Hexagon Border (shown on hover) */
+.hex-border {
+  position: absolute;
+  inset: calc(var(--hex-border) * -1);
+  clip-path: polygon(
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+  background: var(--accent);
+  opacity: 0;
+  transition: all var(--transition);
+  z-index: -1;
+}
+
+/* Hexagon Title Tooltip */
+.hex-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.9);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 90%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition);
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0,0,0,.5);
+}
+
+/* HOVER STATE */
+.hex-item:hover {
+  transform: scale(1.1);
+  z-index: 100;
+}
+
+.hex-item:hover .hex-overlay {
+  opacity: 0;
+}
+
+.hex-item:hover .hex-image {
+  transform: scale(1.05);
+}
+
+.hex-item:hover .hex-border {
+  opacity: 1;
+}
+
+.hex-item:hover .hex-title {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* HIDDEN STATE (for filtering) */
+.hex-item.hidden {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLL TO TOP BUTTON
+═══════════════════════════════════════════════ */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(0,212,255,.3);
+  z-index: 999;
+}
+
+.scroll-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: #0d9488;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,212,255,.4);
+}
+
+.scroll-top-btn:active {
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════
+   LOADING INDICATOR
+═══════════════════════════════════════════════ */
+.loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.loading.hide {
+  opacity: 0;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(20,184,166,.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE DESIGN
+═══════════════════════════════════════════════ */
+
+/* Desktop Large (1200px+) - 6 per row */
+@media (min-width: 1200px) {
+  :root {
+    --hex-size: 200px;
+    --hex-gap: 16px;
+  }
+  
+  .honeycomb-container {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+}
+
+/* Laptop/Tablet (768px - 1199px) - 4 per row */
+@media (min-width: 768px) and (max-width: 1199px) {
+  :root {
+    --hex-size: 180px;
+    --hex-gap: 14px;
+  }
+  
+  .top-bar {
+    padding: 14px 20px;
+  }
+  
+  .back-home span {
+    display: none;
+  }
+  
+  .spacer {
+    width: 50px;
+  }
+}
+
+/* Tablet Small (600px - 767px) - 3 per row */
+@media (min-width: 600px) and (max-width: 767px) {
+  :root {
+    --hex-size: 160px;
+    --hex-gap: 12px;
+  }
+  
+  .top-bar {
+    padding: 12px 16px;
+  }
+  
+  .top-bar-content {
+    justify-content: center;
+  }
+  
+  .back-home {
+    position: absolute;
+    left: 16px;
+    padding: 10px 14px;
+  }
+  
+  .back-home span {
+    display: none;
+  }
+  
+  .spacer {
+    display: none;
+  }
+  
+  .dropdown-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .honeycomb-container {
+    padding-top: 100px;
+  }
+}
+
+/* Mobile (below 600px) - 2 per row */
+@media (max-width: 599px) {
+  :root {
+    --hex-size: 42vw;
+    --hex-gap: 3vw;
+  }
+  
+  .top-bar {
+    padding: 10px 14px;
+  }
+  
+  .top-bar-content {
+    justify-content: center;
+  }
+  
+  .back-home {
+    position: absolute;
+    left: 14px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .back-home span {
+    display: none;
+  }
+  
+  .spacer {
+    display: none;
+  }
+  
+  .dropdown-btn {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+  
+  .dropdown-menu {
+    min-width: 180px;
+    left: auto;
+    right: 0;
+    transform: translateX(0) translateY(-10px);
+  }
+  
+  .dropdown-menu.show {
+    transform: translateX(0) translateY(0);
+  }
+  
+  .dropdown-menu button {
+    font-size: 0.85rem;
+    padding: 9px 14px;
+  }
+  
+  .honeycomb-container {
+    padding: 90px 10px 60px;
+    gap: calc(var(--hex-gap) * 0.8);
+  }
+  
+  .hex-title {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+    white-space: normal;
+    max-width: 85%;
+  }
+  
+  .scroll-top-btn {
+    width: 45px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1rem;
+  }
+  
+  /* Touch devices: show title on tap */
+  .hex-item.touched .hex-overlay {
+    opacity: 0;
+  }
+  
+  .hex-item.touched .hex-title {
+    opacity: 1;
+  }
+  
+  .hex-item.touched .hex-border {
+    opacity: 1;
+  }
+}
+
+/* Very Small Mobile (below 400px) */
+@media (max-width: 399px) {
+  :root {
+    --hex-size: 44vw;
+    --hex-gap: 2vw;
+  }
+  
+  .dropdown-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  
+  .back-home {
+    padding: 7px 10px;
+  }
+  
+  .hex-title {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   ACCESSIBILITY
+═══════════════════════════════════════════════ */
+
+/* Focus styles for keyboard navigation */
+.hex-link:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.dropdown-btn:focus,
+.dropdown-menu button:focus,
+.back-home:focus,
+.scroll-top-btn:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --overlay-opacity: 0.7;
+    --border: rgba(255,255,255,.2);
+  }
+  
+  .hex-border {
+    background: #fff;
+  }
+}

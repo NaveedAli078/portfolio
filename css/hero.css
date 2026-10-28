@@ -1,0 +1,336 @@
+/* ============================================
+   GIS PORTFOLIO — HERO (hero.css)
+   Dark green + neon green | Text left, Earth right
+   Every class is prefixed "gh-" so no other
+   stylesheet on your site can clash with it.
+============================================ */
+
+.gh-hero,
+.gh-hero *,
+.gh-hero *::before,
+.gh-hero *::after {
+  box-sizing: border-box;
+}
+
+.gh-hero {
+  --gh-bg: #0a0e27;
+  --gh-ink: #ffffff;
+  --gh-muted: #99ccff;
+  --gh-neon: #00d4ff;
+  --gh-neon-ink: #0a0e27;
+  --gh-line: rgba(0, 212, 255, 0.16);
+
+  color-scheme: dark;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  background: var(--gh-bg);
+  color: var(--gh-ink);
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html { scroll-behavior: smooth; }
+
+body { margin: 0; background: #0a0e27; }
+
+.gh-hero a { color: inherit; text-decoration: none; }
+
+/* ---------- Grid ---------- */
+
+.gh-grid {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(36px, 6vh, 64px) clamp(28px, 4vw, 58px);
+}
+
+/* ---------- Left content ---------- */
+
+.gh-copy {
+  width: 100%;
+  max-width: 600px;
+  min-width: 0;
+  animation: gh-reveal-up 0.9s ease-out both;
+}
+
+.gh-hero .gh-hello {
+  margin: 0 0 18px;
+  color: var(--gh-muted);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.gh-hero .gh-name {
+  margin: 0;
+  color: var(--gh-ink);
+  font-size: clamp(56px, 7.4vw, 100px);
+  font-weight: 750;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-transform: none;
+}
+
+.gh-name-cursor,
+.gh-role-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--gh-neon);
+  font-weight: 300;
+  animation: gh-blink 1s step-end infinite;
+}
+
+.gh-hero .gh-role {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  min-height: 2.8em;
+  margin: 10px 0 0;
+  padding: 0;
+
+  color: var(--gh-ink);
+  font-size: clamp(19px, 2.1vw, 29px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  overflow-wrap: break-word;
+}
+
+.gh-hero .gh-role code {
+  margin-right: 8px;
+  padding: 0;
+  background: transparent;
+  color: var(--gh-neon);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+#gh-typed-text { color: var(--gh-ink); font-weight: 600; }
+
+@keyframes gh-blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ---------- Stats ---------- */
+
+.gh-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(10px, 1.6vw, 22px);
+
+  width: 100%;
+  max-width: 540px;
+  margin-top: 12px;
+  padding-top: 32px;
+  border-top: 1px solid var(--gh-line);
+}
+
+.gh-stat { min-width: 0; text-align: center; }
+
+.gh-hero .gh-num {
+  margin-bottom: 6px;
+  color: var(--gh-neon);
+  font-size: clamp(27px, 3.5vw, 42px);
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.gh-hero .gh-plus { font-weight: 600; }
+
+.gh-hero .gh-label {
+  color: var(--gh-muted);
+  font-size: clamp(10px, 0.95vw, 13px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+/* ---------- Earth video ---------- */
+
+.gh-visual {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.gh-visual::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: min(115%, 540px);
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 212, 255, 0.12) 0%,
+    rgba(0, 153, 204, 0.07) 35%,
+    transparent 72%
+  );
+  filter: blur(30px);
+  animation: gh-glow 5s ease-in-out infinite alternate;
+}
+
+/* Cyan/blue theme - adjusted filter for cyan tones */
+.gh-visual video {
+  display: block;
+  width: min(100%, 480px);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: transparent;
+
+  filter: hue-rotate(-80deg) saturate(1.3) contrast(1.1) brightness(0.95);
+  mix-blend-mode: screen;
+
+  -webkit-mask-image: radial-gradient(circle at 50% 50%,
+    #000 50%, rgba(0, 0, 0, 0.9) 59%, transparent 73%);
+  mask-image: radial-gradient(circle at 50% 50%,
+    #000 50%, rgba(0, 0, 0, 0.9) 59%, transparent 73%);
+
+  animation: gh-earth-in 1.2s ease-out both;
+  transition: filter 0.3s ease;
+}
+
+.gh-visual video:hover {
+  filter: hue-rotate(-80deg) saturate(1.4) contrast(1.12) brightness(1);
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes gh-reveal-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gh-earth-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes gh-glow {
+  from { opacity: 0.65; transform: translate(-50%, -50%) scale(0.94); }
+  to   { opacity: 1;    transform: translate(-50%, -50%) scale(1.06); }
+}
+
+/* ---------- Optional extras (use if you add the HTML) ---------- */
+
+.gh-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin: 24px 0 38px; }
+
+.gh-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 30px;
+  border: 1px solid var(--gh-neon); border-radius: 999px;
+  background: var(--gh-neon); color: var(--gh-neon-ink);
+  font-size: 16px; font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.gh-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
+
+.gh-scroll {
+  position: absolute; z-index: 3; left: 50%; bottom: 22px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  transform: translateX(-50%); color: var(--gh-muted); font-size: 13px;
+}
+.gh-scroll::after {
+  content: ""; width: 1px; height: 34px;
+  background: linear-gradient(var(--gh-neon), transparent);
+  transform-origin: top;
+  animation: gh-drop 1.8s ease-in-out infinite;
+}
+@keyframes gh-drop {
+  0%   { transform: scaleY(0); }
+  50%  { transform: scaleY(1); }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (min-width: 1200px) {
+  .gh-grid { gap: clamp(24px, 3vw, 42px); padding-left: 4vw; padding-right: 4vw; }
+  .gh-visual { transform: translateY(8px); }
+  .gh-visual video { width: min(100%, 500px); }
+}
+
+@media (min-width: 861px) and (max-width: 1199px) {
+  .gh-grid { gap: 24px; padding-left: 32px; padding-right: 32px; }
+  .gh-hero .gh-name { font-size: clamp(52px, 6.4vw, 78px); }
+  .gh-hero .gh-role { font-size: clamp(19px, 2.1vw, 25px); }
+  .gh-visual video { width: min(100%, 430px); }
+  .gh-stats { gap: 12px; }
+  .gh-hero .gh-label { font-size: 11px; }
+}
+
+@media (max-width: 860px) {
+  .gh-grid { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 30px 24px 56px; }
+  .gh-visual { order: -1; margin: -6px 0 -20px; }
+  .gh-visual video { width: min(76%, 360px); }
+  .gh-visual::before { width: min(100%, 400px); }
+  .gh-copy { max-width: 620px; margin: 0 auto; }
+  .gh-hero .gh-hello { margin-bottom: 14px; }
+  .gh-hero .gh-name { font-size: clamp(54px, 11vw, 82px); }
+  .gh-hero .gh-role { max-width: 100%; font-size: clamp(19px, 3.5vw, 25px); }
+  .gh-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; max-width: 100%; padding-top: 26px; }
+  .gh-hero .gh-label { white-space: normal; }
+}
+
+@media (max-width: 480px) {
+  .gh-grid { gap: 12px; padding: 24px 18px 40px; }
+  .gh-visual { margin: 0 0 -10px; }
+  .gh-visual video { width: min(88%, 300px); }
+  .gh-hero .gh-hello { margin-bottom: 12px; font-size: 17px; }
+  .gh-hero .gh-name { font-size: clamp(46px, 13vw, 62px); }
+  .gh-hero .gh-role { margin-top: 10px; font-size: 18px; min-height: 3em; }
+  .gh-stats { gap: 20px 12px; padding-top: 24px; }
+  .gh-hero .gh-num { font-size: clamp(27px, 7vw, 33px); }
+  .gh-hero .gh-label { font-size: 11px; }
+  .gh-btn { min-height: 46px; padding: 0 20px; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gh-copy, .gh-name-cursor, .gh-role-cursor,
+  .gh-visual video, .gh-visual::before, .gh-scroll::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
